@@ -5,13 +5,18 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public int platformsOnStart, platformRouteStartAmount;
-    public float falloffHeight, gravity,
-        cameraFollowHeight, cameraFollowHorizontal, cameraPositioningTime, cameraStartAccelerationSpeed, cameraAccumulatingSpeed;
+    public float falloffHeight = 40f,
+        gravity = -40f,
+        cameraFollowHorizontal = 15f,
+        cameraPositioningTime = 0.04f,
+        cameraStartAccelerationSpeed = 200f,
+        cameraAccumulatingSpeed = 0.05f,
+        cameraOffsetZ = -60f,
+        cameraOffsetY = 10f,
+        cameraSpeedToOffsetDistanceY = 100f;
     private float t;
     public PlatformRouteSpawner platformRouteSpawner;
     private Vector3 currentPlayerPosition, startingPosition;
-    //private Spawner spawner;
-    //private List<Spawner> spawnerList;
     public PlayerSpawner playerSpawner;
     private GameObject player;
     public GameObject platform;
@@ -19,8 +24,6 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     private Camera mainCamera;
     private CameraType cameraState;
-
-    private bool cameraMoving = false;
 
     enum CameraType
     {
@@ -61,23 +64,6 @@ public class GameController : MonoBehaviour
                 Debug.Log(mainCamera.transform.position.y);
                 Destroy(player);
             }
-            /*
-            if(getPlayerCurrentPosition().y > 50 && newRoute)
-            {
-                SpawnRoute(platform.name);
-                newRoute = false;
-            }
-            if (getPlayerCurrentPosition().y > 100 && newRoute1)
-            {
-                SpawnRoute(platform.name);
-                newRoute1 = false;
-            }
-            if (getPlayerCurrentPosition().y > 150 && newRoute2)
-            {
-                SpawnRoute(platform.name);
-                newRoute2 = false;
-            }
-            */
         }
     }
 
@@ -97,9 +83,9 @@ public class GameController : MonoBehaviour
                 float distanceFromBallHorizontal;
 
                 // Camera follow y axis
-                if (playerPosition.y > cameraPosition.y - cameraFollowHeight)
+                if (playerPosition.y > cameraPosition.y - cameraOffsetY)
                 {
-                    mainCamera.transform.position = new Vector3(cameraPosition.x, playerPosition.y + cameraFollowHeight, cameraPosition.z);
+                    mainCamera.transform.position = new Vector3(cameraPosition.x, playerPosition.y + cameraOffsetY, cameraPosition.z);
                 }
 
                 distanceFromBallHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
@@ -127,10 +113,10 @@ public class GameController : MonoBehaviour
             }
             if (cameraState == CameraType.Accelerating)
             {
-                Debug.Log("Camera is set to Accelerating");
                 float distanceFromPlayerHorizontal;
                 float newCameraXPosition = cameraPosition.x;
-                float newCameraYPosition = Time.deltaTime * (cameraStartAccelerationSpeed += cameraAccumulatingSpeed);
+                float newCameraYPosition = cameraPosition.y + Time.deltaTime * (cameraStartAccelerationSpeed += cameraAccumulatingSpeed);
+                float newCameraZPosition = cameraOffsetZ - cameraStartAccelerationSpeed / cameraSpeedToOffsetDistanceY;
 
                 distanceFromPlayerHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
 
@@ -143,7 +129,7 @@ public class GameController : MonoBehaviour
                     }
                     newCameraXPosition = cameraPosition.x + distanceFromPlayerHorizontal;
                 }
-                desiredPosition = new Vector3(newCameraXPosition, cameraPosition.y + newCameraYPosition, cameraPosition.z);
+                desiredPosition = new Vector3(newCameraXPosition, newCameraYPosition, newCameraZPosition);
                 Vector3 smootherPosition = Vector3.Lerp(cameraPosition, desiredPosition, t);
                 mainCamera.transform.position = smootherPosition;
             }
