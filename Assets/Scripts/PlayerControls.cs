@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public float bounceVelocity, maxMovementSpeed, movementAcceleration,
-        cameraFollowHeight, cameraFollowHorizontal, cameraPositioningTime;
+    public float bounceVelocity, maxMovementSpeed, movementAcceleration;
 
     public string velocity = "";
 
-    private float ballMaxHeight, t;
     private bool bounce;
 
 
-    private Camera mainCamera;
     private Rigidbody rb;
-    private GameObject lastBouncedOn;
 
     public AudioSource audioSource;
 
@@ -23,44 +19,7 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        mainCamera = FindObjectOfType<Camera>();
         audioSource = GetComponent<AudioSource>();
-    }
-
-    private void FixedUpdate()
-    {
-        float distanceFromBall;
-
-        // Camera follow y axis
-        if (transform.position.y > mainCamera.transform.position.y - cameraFollowHeight)
-        {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, transform.position.y + cameraFollowHeight, mainCamera.transform.position.z);
-        }
-
-        distanceFromBall = Mathf.Abs(transform.position.x - mainCamera.transform.position.x);
-
-        // Camera follow x axis
-        if (distanceFromBall > cameraFollowHorizontal)
-        {
-            t = cameraPositioningTime;
-            t -= Time.deltaTime;
-            if(t > 0)
-            {
-                Vector3 desiredPosition = new Vector3(transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
-                if (transform.position.x > mainCamera.transform.position.x)
-                {
-                    desiredPosition.x -= cameraFollowHorizontal;
-                }
-                else
-                {
-                    desiredPosition.x += cameraFollowHorizontal;
-
-                }
-
-                Vector3 smootherPosition = Vector3.Lerp(mainCamera.transform.position, desiredPosition, t);
-                mainCamera.transform.position = smootherPosition;
-            }
-         }
     }
 
     // Update is called once per frame
