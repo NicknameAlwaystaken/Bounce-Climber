@@ -6,17 +6,18 @@ public class GameController : MonoBehaviour
 {
     public int platformsOnStart, platformRouteStartAmount;
     public float falloffHeight = 40f,
-        gravity = -40f,
+        gravity = -10f,
         cameraFollowHorizontal = 15f,
         cameraPositioningTime = 0.04f,
-        cameraStartAccelerationSpeed = 200f,
+        cameraAccelerationSpeed = 200f,
         cameraAccumulatingSpeed = 0.05f,
         cameraOffsetZ = -60f,
         cameraOffsetY = 10f,
-        cameraSpeedToOffsetDistanceY = 100f;
+        cameraSpeedOffsetRatioY = 100f,
+        platformSpeedOffsetRatioX = 100f,
+        platformSpeedOffsetRatioY = 100f;
     private float t;
     public PlatformRouteSpawner platformRouteSpawner;
-    private Vector3 currentPlayerPosition, startingPosition;
     public PlayerSpawner playerSpawner;
     private GameObject player;
     public GameObject platform;
@@ -30,6 +31,11 @@ public class GameController : MonoBehaviour
         None = 0,
         Following = 1,
         Accelerating = 2
+    }
+    enum GameMode
+    {
+        None = 0,
+        No_Breaks = 1
     }
 
     private void Awake()
@@ -48,8 +54,7 @@ public class GameController : MonoBehaviour
     private void StartGame(int cameraMode = 1)
     {
         SetCameraMode(cameraMode);
-        startingPosition = new Vector3();
-        currentPlayerPosition = startingPosition;
+        SetGameModeSettings(platform.name, (int)GameMode.No_Breaks);
         SpawnRoutes(platform.name);
     }
 
@@ -115,8 +120,8 @@ public class GameController : MonoBehaviour
             {
                 float distanceFromPlayerHorizontal;
                 float newCameraXPosition = cameraPosition.x;
-                float newCameraYPosition = cameraPosition.y + Time.deltaTime * (cameraStartAccelerationSpeed += cameraAccumulatingSpeed);
-                float newCameraZPosition = cameraOffsetZ - cameraStartAccelerationSpeed / cameraSpeedToOffsetDistanceY;
+                float newCameraYPosition = cameraPosition.y + Time.deltaTime * (cameraAccelerationSpeed += cameraAccumulatingSpeed);
+                float newCameraZPosition = cameraOffsetZ - cameraAccelerationSpeed / cameraSpeedOffsetRatioY;
 
                 distanceFromPlayerHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
 
@@ -144,19 +149,32 @@ public class GameController : MonoBehaviour
 
     private void SpawnRoutes(string objectName)
     {
-        platformRouteSpawner.SetupRoutes(objectName, platformsOnStart, platformRouteStartAmount, currentPlayerPosition);
-        Debug.Log("Routes setup in GameController");
+        platformRouteSpawner.SpawnRoutes();
     }
     private void SpawnRoute(string objectName)
     {
-        platformRouteSpawner.SpawnRoute(objectName, platformsOnStart, getPlayerCurrentPosition());
-    }
-    private Vector3 getPlayerCurrentPosition()
-    {
-        return currentPlayerPosition = player.transform.position;
+        platformRouteSpawner.SpawnRoute();
     }
     private void SetCameraMode(int mode)
     {
         cameraState = (CameraType)mode;
+    }
+    private void SetSettingsForRoutes(float newPlatformRangeX, float newPlatformRangeY)
+    {
+        platformRouteSpawner.SetPlatformRanges(newPlatformRangeX, newPlatformRangeY);
+    }
+    private void SetGameModeSettings(string objectName, int gameMode)
+    {
+        if(gameMode == (int)GameMode.No_Breaks)
+        {
+            float platformRangeX = 20f, 
+                platformRangeY = 10f,
+                platformRangeIncrement = 1.01f;
+
+            platformRouteSpawner.Setup(objectName, player.transform.position,
+                platformRangeX, platformRangeY, platformsOnStart,
+                platformRouteStartAmount);
+            platformRouteSpawner.SpecialSetup(platformRangeIncrement);
+        }
     }
 }

@@ -4,87 +4,61 @@ using UnityEngine;
 
 public class PlatformRouteSpawner : MonoBehaviour
 {
-    private int currentRouteAmount;
+    private int currentRouteAmount, routeLength;
     public float startingPointOffsetY, newRouteMaxDistance, platformDespawnDistance, maxDistance, minDistance, maxHeight, minHeight;
+    private float platformRangeX = 20,
+        platformRangeY = 10,
+        platformRangeIncrement = 1;
     private bool setupDone = false;
     public string prefabsPath = "Prefabs/";
-    private string completePath;
+    private string completePath, objectName;
     private Vector3 newRoutePosition;
 
-    //private Platform platform;
-    //private PlatformRoute platformRoute;
     private List<GameObject> platformRoute;
     private List<List<GameObject>> platformRouteList;
     private Camera mainCamera;
+
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
     }
-
-    public void SetupRoutes(string objectName, int routeStartLength, int routeAmount, Vector3 playerPosition)
+    public void Setup(string newObjectName, Vector3 startingPoint, float newPlatformRangeX, float newPlatformRangeY, int newRouteLength, int routeAmount)
     {
         platformRouteList = new List<List<GameObject>>();
-        //platformRoute = GetComponent<PlatformRoute>();
+        objectName = newObjectName;
         currentRouteAmount = routeAmount;
-        //playerPosition.y += startingPointOffsetY;
-        for (int i = 0; i < currentRouteAmount; i++)
-        {
-            //Debug.Log("Setting up routes");
-            SpawnRoute(objectName, routeStartLength, playerPosition);
-            //Debug.Log("Done setting up routes");
-        }
+        routeLength = newRouteLength;
+        newRoutePosition = startingPoint;
+        SetPlatformRanges(newPlatformRangeX, newPlatformRangeY);
         setupDone = true;
-        /*
-        platformRouteListNew = new List<PlatformRoute>();
-        platformRouteListNew.Add(GetComponent<PlatformRoute>());
-        platformRouteListNew.Add(GetComponent<PlatformRoute>());
-        platformRouteListNew[0].Setup(objectName, 2);
-        platformRouteListNew[1].Setup(objectName, 2);
-        for(int i = 0; i < 50; i++)
-        {
-            platformRouteListNew[i%2].SpawnPlatform("Platform");
-        }
-        */
     }
-    public void SpawnRoute(string objectName, int routeStartLength, Vector3 playerPosition)
+    public void SpecialSetup(float newRangeIncrement = 1)
+    {
+        platformRangeIncrement = newRangeIncrement;
+    }
+    public void SetPlatformRanges(float newPlatformRangeX, float newPlatformRangeY)
+    {
+        platformRangeX = newPlatformRangeX;
+        platformRangeY = newPlatformRangeY;
+    }
+    public void SpawnRoutes()
+    {
+        for(int i = 0; i < currentRouteAmount; i++)
+        {
+            SpawnRoute();
+        }
+    }
+    public void SpawnRoute()
     {
         platformRoute = new List<GameObject>();
-        float minX = playerPosition.x - newRouteMaxDistance;
-        float maxX = playerPosition.x + newRouteMaxDistance;
-        Vector3 startingPoint = new Vector3(Random.Range(minX, maxX), playerPosition.y - startingPointOffsetY);
+        float minX = newRoutePosition.x - newRouteMaxDistance;
+        float maxX = newRoutePosition.x + newRouteMaxDistance;
+        Vector3 startingPoint = new Vector3(Random.Range(minX, maxX), newRoutePosition.y - startingPointOffsetY);
         newRoutePosition = startingPoint;
-        //Debug.Log("list to platformRouteList");
+
         platformRouteList.Add( new List<GameObject>());
-        //Debug.Log("list to platformRouteList done");
-        AddPlatformToRouteList(platformRoute, objectName, routeStartLength);
-        //Debug.Log("platformRouteList.Count: " + platformRouteList.Count);
-        /*
-        foreach (List<GameObject> list in platformRouteList)
-        {
-            Debug.Log("List: " + list);
-            foreach(GameObject obj in list)
-            {
-                Debug.Log("Obj: " + obj);
-            }
-        }*/
-        //platformRouteList.Add(new PlatformRoute());
-        //Debug.Log("Spawning Route2");
-        //platformRouteList.Add(GetComponent<PlatformRoute>());
-        //Debug.Log("Spawning Route3");
-        //platformRouteList[platformRouteList.Count-1].Setup(objectName, routeStartLength, maxDistance, minDistance, maxHeight, minHeight, startingPoint);
-        //Debug.Log("Spawning Route4");
-        /*
-        platformRouteListNew = new List<PlatformRoute>();
-        platformRouteListNew.Add(GetComponent<PlatformRoute>());
-        platformRouteListNew.Add(GetComponent<PlatformRoute>());
-        platformRouteListNew[0].Setup(objectName, 2);
-        platformRouteListNew[1].Setup(objectName, 2);
-        for(int i = 0; i < 50; i++)
-        {
-            platformRouteListNew[i%2].SpawnPlatform("Platform");
-        }
-        */
+        AddPlatformToRouteList(platformRoute, routeLength, true);
     }
 
     private Vector3 GetNextSpawnLocation(List<GameObject> fromRoute)
@@ -100,10 +74,10 @@ public class PlatformRouteSpawner : MonoBehaviour
         }
         Vector3 newSpawnPosition = new Vector3();
 
-        float minPointX = lastSpawnPosition.x - minDistance;
-        float maxPointX = lastSpawnPosition.x + maxDistance;
-        float minPointY = lastSpawnPosition.y + minHeight;
-        float maxPointY = lastSpawnPosition.y + maxHeight;
+        float minPointX = lastSpawnPosition.x - platformRangeX / 2;
+        float maxPointX = lastSpawnPosition.x + platformRangeX / 2;
+        float minPointY = lastSpawnPosition.y + platformRangeY / 0.6f;
+        float maxPointY = lastSpawnPosition.y + platformRangeY;
 
         newSpawnPosition.x = Random.Range(minPointX, maxPointX);
         newSpawnPosition.y = Random.Range(minPointY, maxPointY);
@@ -121,45 +95,22 @@ public class PlatformRouteSpawner : MonoBehaviour
                 GameObject lowestPlatform = getLowestPlatform(itemList);
                 if (lowestPlatform != null)
                 {
-                    Debug.Log("lowestPlatform: " + lowestPlatform.transform.position.y);
                     Vector3 lowestPlatformPosition = lowestPlatform.transform.position;
                     if (lowestPlatformPosition.y < mainCamera.transform.position.y - platformDespawnDistance)
                     {
-                        //Debug.Log("Destroying platform");
-                        AddPlatformToRouteList(itemList, "Platform");
+                        AddPlatformToRouteList(itemList);
+                        Debug.Log("PlatformRangeX: " + platformRangeX);
+                        Debug.Log("PlatformRangeY: " + platformRangeY);
                         Destroy(lowestPlatform);
                         break;
                     }
                 }
             }
-            /*
-            for (int i = 0; i < platformRouteList.Count; i++)
-            {
-                Debug.Log("Crash1");
-                List<GameObject> itemList = platformRouteList[i];
-                Debug.Log("Crash2");
-                GameObject lowestPlatform = getLowestPlatform(itemList);
-                Debug.Log("Crash3");
-                if (lowestPlatform != null)
-                {
-                    Debug.Log("lowestPlatform: " + lowestPlatform.transform.position.y);
-                    Vector3 lowestPlatformPosition = lowestPlatform.transform.position;
-                    Debug.Log("Crash4");
-                    if (lowestPlatformPosition.y < mainCamera.transform.position.y - platformDespawnDistance)
-                    {
-                        Debug.Log("Destroying platform");
-                        AddPlatformToRouteList(itemList, "Platform", getHighestPlatform(itemList).transform.position);
-                        Destroy(lowestPlatform);
-                    }
-                }
-            }
-            */
         }
     }
     public GameObject getLowestPlatform(List<GameObject> fromRoute)
     {
         GameObject lowestPlatform = GetComponent<GameObject>();
-        //Debug.Log("Lowest Platform: " + lowestPlatform + "Lowest Platform Y: " + lowestPlatform.transform.position.y);
         foreach (GameObject obj in fromRoute)
         {
             if (obj == null)
@@ -197,31 +148,31 @@ public class PlatformRouteSpawner : MonoBehaviour
         }
         return highestPlatform;
     }
-    public void AddPlatformToRouteList(List<GameObject> list, string objectName, int platformAmount = 1)
+    public void AddPlatformToRouteList(List<GameObject> route, int platformAmount = 1, bool newRoute = false)
     {
+        // clean up, function doing multiple things
         for(int i = 0; i < platformAmount; i++)
         {
-            GameObject newPlatform = CreatePlatform(objectName, GetNextSpawnLocation(list));
-            //int index = platformRouteList.IndexOf(list);
-            //Debug.Log("Adding platform to list index: " + index);
-            //Debug.Log("Count: " + route.Count);
-            list.Add(newPlatform);
+            GameObject newPlatform = CreatePlatform(objectName, GetNextSpawnLocation(route));
+            IncrementPlatformRange();
+            route.Add(newPlatform);
         }
-        if(platformAmount > 1)
+        // if making multiple platforms at once, it assumes it is a route.
+        if(newRoute)
         {
-            platformRouteList.Add(platformRoute);
+            platformRouteList.Add(route);
         }
-        //Debug.Log("Adding platform(s) to list done");
     }
     public GameObject CreatePlatform(string objectName, Vector3 location)
     {
-        //Debug.Log("CreatePlatform location: " + location);
         completePath = prefabsPath + objectName;
         GameObject newplatform = Resources.Load(completePath) as GameObject;
         GameObject platform = Instantiate(newplatform, location, new Quaternion());
-        //Debug.Log("Adding to list");
-        //route.Add(newPlatform);
-        //Debug.Log("Adding to list done");
         return platform;
+    }
+    private void IncrementPlatformRange()
+    {
+        platformRangeX *= platformRangeIncrement;
+        platformRangeY *= platformRangeIncrement;
     }
 }
