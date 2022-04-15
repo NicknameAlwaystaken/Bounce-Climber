@@ -497,13 +497,15 @@ MonoBehaviour:
   gravity: -40
   cameraFollowHorizontal: 15
   cameraPositioningTime: 0.04
-  cameraAccelerationSpeed: 100
+  cameraAccelerationSpeed: 200
   cameraAccumulatingSpeed: 0.05
   cameraOffsetZ: -60
   cameraOffsetY: 10
-  cameraSpeedOffsetRatioY: 5
-  platformSpeedOffsetRatioX: 100
-  platformSpeedOffsetRatioY: 100
+  cameraSpeedRatioY: 5
+  platformSpeedRatioX: 100
+  platformSpeedRatioY: 100
+  startingBounceVelocity: 30
+  bounceSpeedRatio: 35
   platformRouteSpawner: {fileID: 540127568}
   playerSpawner: {fileID: 540127565}
   platform: {fileID: 343690378514341082, guid: eb5d9ac737447b3478828d58e7d604b4, type: 3}

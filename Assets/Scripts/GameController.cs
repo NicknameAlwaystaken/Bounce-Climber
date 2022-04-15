@@ -6,18 +6,18 @@ public class GameController : MonoBehaviour
 {
     public int platformsOnStart, platformRouteStartAmount;
     public float falloffHeight = 40f,
-        gravity = -10f,
+        gravity = -40f,
         cameraFollowHorizontal = 15f,
         cameraPositioningTime = 0.04f,
         cameraAccelerationSpeed = 200f,
         cameraAccumulatingSpeed = 0.05f,
         cameraOffsetZ = -60f,
         cameraOffsetY = 10f,
-        cameraSpeedOffsetRatioY = 100f,
+        cameraSpeedRatioY = 5f,
         platformSpeedRatioX = 100f,
         platformSpeedRatioY = 100f,
-        startingBounceVelocity = 30,
-        bounceSpeedRatio = 100;
+        startingBounceVelocity = 30f,
+        bounceSpeedRatio = 35f;
     private float t;
     private PlayerControls playerControls;
     public PlatformRouteSpawner platformRouteSpawner;
@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
     {
         SetCameraMode(2);
         SetGameModeSettings(platform.name, (int)GameMode.No_Breaks);
-        SpawnRoutes(platform.name);
+        SpawnRoutes();
     }
 
     // Update is called once per frame
@@ -70,8 +70,6 @@ public class GameController : MonoBehaviour
         {
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
-                Debug.Log("Player died.");
-                Debug.Log(mainCamera.transform.position.y);
                 Destroy(player);
             }
         }
@@ -124,19 +122,21 @@ public class GameController : MonoBehaviour
             if (cameraState == CameraType.Accelerating)
             {
                 playerControls.SetBounceVelocity(startingBounceVelocity + cameraAccelerationSpeed / bounceSpeedRatio);
+                cameraAccelerationSpeed += cameraAccumulatingSpeed;
                 float distanceFromPlayerHorizontal;
                 float newCameraXPosition = cameraPosition.x;
-                float newCameraYPosition = cameraPosition.y + Time.deltaTime * (cameraAccelerationSpeed += cameraAccumulatingSpeed);
-                float newCameraZPosition = cameraOffsetZ - cameraAccelerationSpeed / cameraSpeedOffsetRatioY;
+                float newCameraYPosition = cameraPosition.y + Time.deltaTime * cameraAccelerationSpeed;
+                float newCameraZPosition = cameraOffsetZ - cameraAccelerationSpeed / cameraSpeedRatioY;
 
                 distanceFromPlayerHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
 
                 // Camera follow x axis
                 if (distanceFromPlayerHorizontal > cameraFollowHorizontal)
                 {
+                    //check direction player is from the camera
                     if (playerPosition.x < cameraPosition.x)
                     {
-                        distanceFromPlayerHorizontal *= -1;
+                        distanceFromPlayerHorizontal *= -1; //swap distance to negative if the player is in -X axis of camera position
                     }
                     newCameraXPosition = cameraPosition.x + distanceFromPlayerHorizontal;
                 }
@@ -153,7 +153,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void SpawnRoutes(string objectName)
+    private void SpawnRoutes()
     {
         platformRouteSpawner.SpawnRoutes();
     }
@@ -173,13 +173,13 @@ public class GameController : MonoBehaviour
     {
         if(gameMode == (int)GameMode.No_Breaks)
         {
-            float platformRangeX = 20f, 
+            float platformRangeX = 80f,
                 platformRangeY = 10f,
                 platformRangeIncrement = 1.01f,
                 bounceVelocity = 30,
                 maxMovementSpeed = 25,
                 gravityUpChange = 0.6f,
-                gravityDownChange = 1.4f;
+                gravityDownChange = 2.0f;
 
             playerControls.SetGravityChange(gravityUpChange, gravityDownChange);
             playerControls.SetBounceVelocity(bounceVelocity);

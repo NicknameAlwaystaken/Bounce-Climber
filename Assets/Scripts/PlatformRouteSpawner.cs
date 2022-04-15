@@ -54,7 +54,8 @@ public class PlatformRouteSpawner : MonoBehaviour
         platformRoute = new List<GameObject>();
         float minX = newRoutePosition.x - newRouteMaxDistance;
         float maxX = newRoutePosition.x + newRouteMaxDistance;
-        Vector3 startingPoint = new Vector3(Random.Range(minX, maxX), newRoutePosition.y - startingPointOffsetY);
+        newRoutePosition.x = Random.Range(minX, maxX);
+        Vector3 startingPoint = new Vector3(newRoutePosition.x, newRoutePosition.y - startingPointOffsetY);
         newRoutePosition = startingPoint;
 
         platformRouteList.Add( new List<GameObject>());
@@ -66,7 +67,7 @@ public class PlatformRouteSpawner : MonoBehaviour
         Vector3 lastSpawnPosition = new Vector3();
         if (fromRoute.Count > 0)
         {
-            lastSpawnPosition = getHighestPlatform(fromRoute).transform.position;
+            lastSpawnPosition = GetHighestPlatform(fromRoute).transform.position;
         }
         else
         {
@@ -81,9 +82,9 @@ public class PlatformRouteSpawner : MonoBehaviour
 
         newSpawnPosition.x = Random.Range(minPointX, maxPointX);
         newSpawnPosition.y = Random.Range(minPointY, maxPointY);
-        Debug.Log("Highest platform: " + newSpawnPosition.y);
         return newSpawnPosition;
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -92,15 +93,13 @@ public class PlatformRouteSpawner : MonoBehaviour
             foreach (List<GameObject> list in platformRouteList.ToArray())
             {
                 var itemList = list;
-                GameObject lowestPlatform = getLowestPlatform(itemList);
+                GameObject lowestPlatform = GetLowestPlatform(itemList);
                 if (lowestPlatform != null)
                 {
                     Vector3 lowestPlatformPosition = lowestPlatform.transform.position;
                     if (lowestPlatformPosition.y < mainCamera.transform.position.y - platformDespawnDistance)
                     {
                         AddPlatformToRouteList(itemList);
-                        Debug.Log("PlatformRangeX: " + platformRangeX);
-                        Debug.Log("PlatformRangeY: " + platformRangeY);
                         Destroy(lowestPlatform);
                         break;
                     }
@@ -108,7 +107,7 @@ public class PlatformRouteSpawner : MonoBehaviour
             }
         }
     }
-    public GameObject getLowestPlatform(List<GameObject> fromRoute)
+    public GameObject GetLowestPlatform(List<GameObject> fromRoute)
     {
         GameObject lowestPlatform = GetComponent<GameObject>();
         foreach (GameObject obj in fromRoute)
@@ -128,7 +127,7 @@ public class PlatformRouteSpawner : MonoBehaviour
         }
         return lowestPlatform;
     }
-    public GameObject getHighestPlatform(List<GameObject> fromRoute)
+    public GameObject GetHighestPlatform(List<GameObject> fromRoute)
     {
         GameObject highestPlatform = GetComponent<GameObject>();
         foreach (GameObject obj in fromRoute)

@@ -9,8 +9,6 @@ public class PlayerControls : MonoBehaviour
         gravityUpChange = 0.8f,
         gravityDownChange = 1.2f;
 
-    private string velocity = "";
-
     private bool bounce;
     private Vector3 originalGravity;
 
@@ -61,6 +59,7 @@ public class PlayerControls : MonoBehaviour
             audioSource.Play();
             bounce = false;
             Vector3 upVelocity = Vector3.up * bounceVelocity;
+            Debug.Log("Bounce Velocity: " + bounceVelocity);
             rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
         }
     }
