@@ -14,9 +14,12 @@ public class GameController : MonoBehaviour
         cameraOffsetZ = -60f,
         cameraOffsetY = 10f,
         cameraSpeedOffsetRatioY = 100f,
-        platformSpeedOffsetRatioX = 100f,
-        platformSpeedOffsetRatioY = 100f;
+        platformSpeedRatioX = 100f,
+        platformSpeedRatioY = 100f,
+        startingBounceVelocity = 30,
+        bounceSpeedRatio = 100;
     private float t;
+    private PlayerControls playerControls;
     public PlatformRouteSpawner platformRouteSpawner;
     public PlayerSpawner playerSpawner;
     private GameObject player;
@@ -46,14 +49,16 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics.gravity = new Vector3(0, gravity, 0);
         mainCamera = FindObjectOfType<Camera>();
         player = playerSpawner.SpawnPlayer();
-        Physics.gravity = new Vector3(0, gravity, 0);
-        StartGame(2);
+        playerControls = player.GetComponent<PlayerControls>();
+        int cameraMode = 1;
+        StartGame(cameraMode);
     }
     private void StartGame(int cameraMode = 1)
     {
-        SetCameraMode(cameraMode);
+        SetCameraMode(2);
         SetGameModeSettings(platform.name, (int)GameMode.No_Breaks);
         SpawnRoutes(platform.name);
     }
@@ -118,6 +123,7 @@ public class GameController : MonoBehaviour
             }
             if (cameraState == CameraType.Accelerating)
             {
+                playerControls.SetBounceVelocity(startingBounceVelocity + cameraAccelerationSpeed / bounceSpeedRatio);
                 float distanceFromPlayerHorizontal;
                 float newCameraXPosition = cameraPosition.x;
                 float newCameraYPosition = cameraPosition.y + Time.deltaTime * (cameraAccelerationSpeed += cameraAccumulatingSpeed);
@@ -169,7 +175,15 @@ public class GameController : MonoBehaviour
         {
             float platformRangeX = 20f, 
                 platformRangeY = 10f,
-                platformRangeIncrement = 1.01f;
+                platformRangeIncrement = 1.01f,
+                bounceVelocity = 30,
+                maxMovementSpeed = 25,
+                gravityUpChange = 0.6f,
+                gravityDownChange = 1.4f;
+
+            playerControls.SetGravityChange(gravityUpChange, gravityDownChange);
+            playerControls.SetBounceVelocity(bounceVelocity);
+            playerControls.SetMaxVelocity(maxMovementSpeed);
 
             platformRouteSpawner.Setup(objectName, player.transform.position,
                 platformRangeX, platformRangeY, platformsOnStart,

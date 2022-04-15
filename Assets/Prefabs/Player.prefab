@@ -129,9 +129,8 @@ MonoBehaviour:
   bounceVelocity: 30
   maxMovementSpeed: 25
   movementAcceleration: 2
-  cameraFollowHeight: 5
-  cameraFollowHorizontal: 5
-  cameraPositioningTime: 0.08
+  gravityUpChange: 0.8
+  gravityDownChange: 1.2
   velocity: 
   audioSource: {fileID: 0}
 --- !u!82 &6710888533890768973
