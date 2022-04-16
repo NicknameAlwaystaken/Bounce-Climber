@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlatformRouteSpawner : MonoBehaviour
 {
-    private int currentRouteAmount, routeLength;
+    private int currentRouteAmount, routeLength, currentGameMode;
     public float startingPointOffsetY, newRouteMaxDistance, platformDespawnDistance, maxDistance, minDistance, maxHeight, minHeight;
-    private float platformRangeX = 20,
-        platformRangeY = 10,
-        platformRangeIncrement = 1;
+    private float t,
+        platformRangeX = 20f,
+        platformRangeY = 10f,
+        platformRangeIncrement = 1f,
+        platformSpeed = 5f,
+        platformSpawnIntervalMin = 0.5f,
+        platformSpawnIntervalMax = 2.0f;
     private bool setupDone = false;
     public string prefabsPath = "Prefabs/";
     private string completePath, objectName;
-    private Vector3 newRoutePosition;
+    private Vector3 newRoutePosition, platformSpawnPoint;
 
     private List<GameObject> platformRoute;
     private List<List<GameObject>> platformRouteList;
@@ -33,9 +37,25 @@ public class PlatformRouteSpawner : MonoBehaviour
         SetPlatformRanges(newPlatformRangeX, newPlatformRangeY);
         setupDone = true;
     }
-    public void SpecialSetup(float newRangeIncrement = 1)
+    public void SpecialSetup(int gameMode, float newPlatformSpeed = 0f, float newPlatformSpawnPointY = 0, float newRangeIncrement = 1,
+        float newPlatformSpawnIntervalMin = 0.5f, float newplatformSpawnIntervalMax = 2.0f)
     {
-        platformRangeIncrement = newRangeIncrement;
+        currentGameMode = gameMode;
+        if(currentGameMode == 1)
+        {
+            platformRangeIncrement = newRangeIncrement;
+        }
+        if (currentGameMode == 2)
+        {
+            platformSpeed = newPlatformSpeed;
+            platformSpawnPoint = new Vector3
+            {
+                y = newPlatformSpawnPointY
+            };
+            platformSpawnIntervalMin = newPlatformSpawnIntervalMin;
+            platformSpawnIntervalMax = newplatformSpawnIntervalMax;
+            t = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+        }
     }
     public void SetPlatformRanges(float newPlatformRangeX, float newPlatformRangeY)
     {
@@ -64,7 +84,8 @@ public class PlatformRouteSpawner : MonoBehaviour
 
     private Vector3 GetNextSpawnLocation(List<GameObject> fromRoute)
     {
-        Vector3 lastSpawnPosition = new Vector3();
+        Vector3 newSpawnPosition = new Vector3();
+        Vector3 lastSpawnPosition;
         if (fromRoute.Count > 0)
         {
             lastSpawnPosition = GetHighestPlatform(fromRoute).transform.position;
@@ -73,7 +94,6 @@ public class PlatformRouteSpawner : MonoBehaviour
         {
             lastSpawnPosition = newRoutePosition;
         }
-        Vector3 newSpawnPosition = new Vector3();
 
         float minPointX = lastSpawnPosition.x - platformRangeX / 2;
         float maxPointX = lastSpawnPosition.x + platformRangeX / 2;
@@ -84,24 +104,67 @@ public class PlatformRouteSpawner : MonoBehaviour
         newSpawnPosition.y = Random.Range(minPointY, maxPointY);
         return newSpawnPosition;
     }
+    private Vector3 SetNextSpawnLocation(Vector3 newSpawnPoint)
+    {
+        Vector3 newSpawnPosition = new Vector3();
+        float minPointX = newSpawnPoint.x - platformRangeX / 2;
+        float maxPointX = newSpawnPoint.x + platformRangeX / 2;
+        float minPointY = newSpawnPoint.y + platformRangeY / 0.6f;
+        float maxPointY = newSpawnPoint.y + platformRangeY;
+
+        newSpawnPosition.x = Random.Range(minPointX, maxPointX);
+        newSpawnPosition.y = Random.Range(minPointY, maxPointY);
+
+        return newSpawnPosition;
+
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if(setupDone)
         {
-            foreach (List<GameObject> list in platformRouteList.ToArray())
+            if (currentGameMode == 2)
             {
-                var itemList = list;
-                GameObject lowestPlatform = GetLowestPlatform(itemList);
-                if (lowestPlatform != null)
+                t -= Time.deltaTime;
+                foreach (List<GameObject> route in platformRouteList.ToArray())
                 {
-                    Vector3 lowestPlatformPosition = lowestPlatform.transform.position;
-                    if (lowestPlatformPosition.y < mainCamera.transform.position.y - platformDespawnDistance)
+                    var itemRoute = route;
+                    if (t <= 0)
                     {
-                        AddPlatformToRouteList(itemList);
-                        Destroy(lowestPlatform);
-                        break;
+                        AddPlatformToRouteList(itemRoute);
+                        t = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+                    }
+                    foreach(GameObject item in itemRoute)
+                    {
+                        var platform = item;
+                        if(platform != null)
+                        {
+                            platform.transform.position += Vector3.down * platformSpeed * Time.deltaTime;
+                            if(platform.transform.position.y <= 0)
+                            {
+                                Destroy(platform);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+
+                foreach (List<GameObject> route in platformRouteList.ToArray())
+                {
+                    var itemRoute = route;
+                    GameObject lowestPlatform = GetLowestPlatform(itemRoute);
+                    if (lowestPlatform != null)
+                    {
+                        Vector3 lowestPlatformPosition = lowestPlatform.transform.position;
+                        if (lowestPlatformPosition.y < mainCamera.transform.position.y - platformDespawnDistance)
+                        {
+                            AddPlatformToRouteList(itemRoute);
+                            Destroy(lowestPlatform);
+                            break;
+                        }
                     }
                 }
             }
@@ -152,7 +215,16 @@ public class PlatformRouteSpawner : MonoBehaviour
         // clean up, function doing multiple things
         for(int i = 0; i < platformAmount; i++)
         {
-            GameObject newPlatform = CreatePlatform(objectName, GetNextSpawnLocation(route));
+            Vector3 location;
+            if(currentGameMode == 2)
+            {
+                location = SetNextSpawnLocation(platformSpawnPoint);
+            }
+            else
+            {
+                location = GetNextSpawnLocation(route);
+            }
+            GameObject newPlatform = CreatePlatform(objectName, location);
             IncrementPlatformRange();
             route.Add(newPlatform);
         }
@@ -168,6 +240,10 @@ public class PlatformRouteSpawner : MonoBehaviour
         GameObject newplatform = Resources.Load(completePath) as GameObject;
         GameObject platform = Instantiate(newplatform, location, new Quaternion());
         return platform;
+    }
+    public void DestroyPlatform(GameObject platformToDestroy)
+    {
+        Destroy(platformToDestroy);
     }
     private void IncrementPlatformRange()
     {

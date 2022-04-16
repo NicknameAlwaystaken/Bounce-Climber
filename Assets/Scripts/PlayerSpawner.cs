@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public float playerHeightSpawn;
-
+    public Vector3 spawnPoint;
     public GameObject player;
 
-    public GameObject SpawnPlayer()
+    public GameObject SpawnPlayer(Vector3 newSpawnPoint = new Vector3())
     {
-        Vector3 spawnPosition = new Vector3(0f, playerHeightSpawn, 0f);
+        Vector3 spawnPosition = newSpawnPoint;
         GameObject obj = Instantiate(player, spawnPosition, new Quaternion());
         return obj;
     }

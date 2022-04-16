@@ -113,7 +113,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &6728209367372926292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,12 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadd1d7be9134f94d9ba83add1b34843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceVelocity: 30
-  maxMovementSpeed: 25
-  movementAcceleration: 2
-  gravityUpChange: 0.8
-  gravityDownChange: 1.2
-  velocity: 
   audioSource: {fileID: 0}
 --- !u!82 &6710888533890768973
 AudioSource:

@@ -31,14 +31,16 @@ public class GameController : MonoBehaviour
 
     enum CameraType
     {
-        None = 0,
+        Static = 0,
         Following = 1,
         Accelerating = 2
     }
     enum GameMode
     {
         None = 0,
-        No_Breaks = 1
+        No_Breaks = 1,
+        Platform_Smasher = 2
+
     }
 
     private void Awake()
@@ -51,16 +53,12 @@ public class GameController : MonoBehaviour
     {
         Physics.gravity = new Vector3(0, gravity, 0);
         mainCamera = FindObjectOfType<Camera>();
-        player = playerSpawner.SpawnPlayer();
-        playerControls = player.GetComponent<PlayerControls>();
         int cameraMode = 1;
         StartGame(cameraMode);
     }
     private void StartGame(int cameraMode = 1)
     {
-        SetCameraMode(2);
-        SetGameModeSettings(platform.name, (int)GameMode.No_Breaks);
-        SpawnRoutes();
+        SetGameModeSettings(platform.name, (int)GameMode.Platform_Smasher);
     }
 
     // Update is called once per frame
@@ -70,7 +68,7 @@ public class GameController : MonoBehaviour
         {
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
-                Destroy(player);
+                //Destroy(player);
             }
         }
     }
@@ -161,9 +159,20 @@ public class GameController : MonoBehaviour
     {
         platformRouteSpawner.SpawnRoute();
     }
+    public void DestroyPlatform(GameObject platformToDestroy)
+    {
+        platformRouteSpawner.DestroyPlatform(platformToDestroy);
+    }
     private void SetCameraMode(int mode)
     {
         cameraState = (CameraType)mode;
+        if(cameraState == CameraType.Static)
+        {
+            float newCameraPosX = 0f;
+            float newCameraPosY = 50f;
+            float newCameraPosZ = -50f;
+            mainCamera.transform.position = new Vector3(newCameraPosX, newCameraPosY, newCameraPosZ);
+        }
     }
     private void SetSettingsForRoutes(float newPlatformRangeX, float newPlatformRangeY)
     {
@@ -171,7 +180,7 @@ public class GameController : MonoBehaviour
     }
     private void SetGameModeSettings(string objectName, int gameMode)
     {
-        if(gameMode == (int)GameMode.No_Breaks)
+        if (gameMode == (int)GameMode.No_Breaks)
         {
             float platformRangeX = 80f,
                 platformRangeY = 10f,
@@ -181,14 +190,49 @@ public class GameController : MonoBehaviour
                 gravityUpChange = 0.6f,
                 gravityDownChange = 2.0f;
 
+            player = playerSpawner.SpawnPlayer();
+            playerControls = player.GetComponent<PlayerControls>();
+            SetCameraMode(2);
+
             playerControls.SetGravityChange(gravityUpChange, gravityDownChange);
             playerControls.SetBounceVelocity(bounceVelocity);
-            playerControls.SetMaxVelocity(maxMovementSpeed);
+            playerControls.SetMaxMovementSpeed(maxMovementSpeed);
 
             platformRouteSpawner.Setup(objectName, player.transform.position,
                 platformRangeX, platformRangeY, platformsOnStart,
                 platformRouteStartAmount);
-            platformRouteSpawner.SpecialSetup(platformRangeIncrement);
+            platformRouteSpawner.SpecialSetup(gameMode, platformRangeIncrement);
+            SpawnRoutes();
+        }
+
+        if (gameMode == (int)GameMode.Platform_Smasher)
+        {
+            float platformRangeX = 90f,
+                platformRangeY = 0f,
+                platformRangeIncrement = 1.0f,
+                returnVelocity = 70f,
+                maxMovementSpeed = 50f,
+                gravityUpChange = 0.6f,
+                gravityDownChange = 2.0f,
+                platformSpeed = 15f,
+                platformSpawnY = 85f,
+                platformSpawnIntervalMin = 0.5f,
+                platformSpawnIntervalMax = 2.0f;
+
+            platformsOnStart = 1;
+            SetCameraMode(0);
+            player = playerSpawner.SpawnPlayer(new Vector3(0f, 60f, 0f));
+            playerControls = player.GetComponent<PlayerControls>();
+            playerControls.SetGravityChange(gravityUpChange, gravityDownChange);
+            playerControls.SetReturnVelocity(returnVelocity);
+            playerControls.SetMaxMovementSpeed(maxMovementSpeed);
+
+            platformRouteSpawner.Setup("Platform_Thick", player.transform.position,
+                platformRangeX, platformRangeY, platformsOnStart,
+                platformRouteStartAmount);
+            platformRouteSpawner.SpecialSetup(gameMode, platformSpeed, platformSpawnY, platformRangeIncrement, platformSpawnIntervalMin, platformSpawnIntervalMax);
+            playerControls.SetGameMode(gameMode);
+            SpawnRoutes();
         }
     }
 }
