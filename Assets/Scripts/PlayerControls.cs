@@ -10,8 +10,11 @@ public class PlayerControls : MonoBehaviour
         maxMovementSpeed = 15f,
         gravityUpChange = 0.8f,
         gravityDownChange = 1.2f,
-        maxDropSpeed = 75f;
+        maxDropSpeed = 75f,
+        diveCooldownCounter = 0f,
+        diveCooldown = 0.5f;
     private int gameMode;
+    private PlayerState playerState;
 
     private bool bounce, playerStarted, playerDiving, playerReturned;
     private Vector3 originalGravity, originalPlayerPosition;
@@ -20,6 +23,14 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody rb;
 
     public AudioSource audioSource;
+
+    enum PlayerState
+    {
+        None = 0,
+        Started = 1,
+        Returned = 2,
+        Diving = 3
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +45,7 @@ public class PlayerControls : MonoBehaviour
     {
         float inputHorizontal = Input.GetAxis("Horizontal");
         float inputVertical = Input.GetAxis("Vertical");
+        diveCooldownCounter -= Time.deltaTime;
 
         // going left or right
         if (inputHorizontal != 0)
@@ -51,16 +63,16 @@ public class PlayerControls : MonoBehaviour
                     transform.GetComponent<Collider>().enabled = true;
                     playerStarted = true;
                 }
-                if (!playerDiving)
+                if (!playerDiving && diveCooldownCounter <= 0)
                 {
                     Vector3 movement = Vector3.down * maxDropSpeed;
                     rb.velocity = new Vector3(rb.velocity.x, movement.y);
+                    diveCooldownCounter = diveCooldown;
                     playerDiving = true;
                 }
             }
             if (playerStarted)
             {
-                // applying velocity upwards, if allowed
                 if (bounce)
                 {
                     audioSource.Play();
@@ -68,6 +80,7 @@ public class PlayerControls : MonoBehaviour
                     playerReturned = false;
                     bounce = false;
                 }
+                // applying velocity upwards, if allowed
                 if (!playerDiving && !playerReturned && transform.position.y < returnHeight)
                 {
                     Vector3 upVelocity = Vector3.up * Mathf.Max(returnVelocity * (1 - (Mathf.Max(transform.position.y, 1f)) / returnHeight), 20f);

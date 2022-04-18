@@ -6,7 +6,7 @@ public class PlatformRouteSpawner : MonoBehaviour
 {
     private int currentRouteAmount, routeLength, currentGameMode;
     public float startingPointOffsetY, newRouteMaxDistance, platformDespawnDistance, maxDistance, minDistance, maxHeight, minHeight;
-    private float t,
+    private float spawnTimer,
         platformRangeX = 20f,
         platformRangeY = 10f,
         platformRangeIncrement = 1f,
@@ -54,7 +54,7 @@ public class PlatformRouteSpawner : MonoBehaviour
             };
             platformSpawnIntervalMin = newPlatformSpawnIntervalMin;
             platformSpawnIntervalMax = newplatformSpawnIntervalMax;
-            t = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+            spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
         }
     }
     public void SetPlatformRanges(float newPlatformRangeX, float newPlatformRangeY)
@@ -126,14 +126,14 @@ public class PlatformRouteSpawner : MonoBehaviour
         {
             if (currentGameMode == 2)
             {
-                t -= Time.deltaTime;
+                spawnTimer -= Time.deltaTime;
                 foreach (List<GameObject> route in platformRouteList.ToArray())
                 {
                     var itemRoute = route;
-                    if (t <= 0)
+                    if (spawnTimer <= 0)
                     {
                         AddPlatformToRouteList(itemRoute);
-                        t = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+                        spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
                     }
                     foreach(GameObject item in itemRoute)
                     {

@@ -211,13 +211,13 @@ public class GameController : MonoBehaviour
                 platformRangeY = 0f,
                 platformRangeIncrement = 1.0f,
                 returnVelocity = 70f,
-                maxMovementSpeed = 50f,
+                maxMovementSpeed = 75f,
                 gravityUpChange = 0.6f,
                 gravityDownChange = 2.0f,
                 platformSpeed = 15f,
                 platformSpawnY = 85f,
-                platformSpawnIntervalMin = 0.5f,
-                platformSpawnIntervalMax = 2.0f;
+                platformSpawnIntervalMin = 0.7f,
+                platformSpawnIntervalMax = 1.7f;
 
             platformsOnStart = 1;
             SetCameraMode(0);
@@ -227,7 +227,7 @@ public class GameController : MonoBehaviour
             playerControls.SetReturnVelocity(returnVelocity);
             playerControls.SetMaxMovementSpeed(maxMovementSpeed);
 
-            platformRouteSpawner.Setup("Platform_Thick", player.transform.position,
+            platformRouteSpawner.Setup("Platform_ThickAndWide", player.transform.position,
                 platformRangeX, platformRangeY, platformsOnStart,
                 platformRouteStartAmount);
             platformRouteSpawner.SpecialSetup(gameMode, platformSpeed, platformSpawnY, platformRangeIncrement, platformSpawnIntervalMin, platformSpawnIntervalMax);
