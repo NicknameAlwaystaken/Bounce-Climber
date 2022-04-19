@@ -13,14 +13,13 @@ public class GameController : MonoBehaviour
         cameraAccumulatingSpeed = 0.05f,
         cameraOffsetZ = -60f,
         cameraOffsetY = 10f,
-        cameraSpeedRatioY = 5f,
-        platformSpeedRatioX = 100f,
-        platformSpeedRatioY = 100f,
+        cameraSpeedToDistanceRatioZ = 5f,
         startingBounceVelocity = 30f,
         bounceSpeedRatio = 35f;
     private float t;
     private PlayerControls playerControls;
     public PlatformRouteSpawner platformRouteSpawner;
+    public GameModeManager gameModeManager;
     public PlayerSpawner playerSpawner;
     private GameObject player;
     public GameObject platform;
@@ -55,6 +54,7 @@ public class GameController : MonoBehaviour
         mainCamera = FindObjectOfType<Camera>();
         int cameraMode = 1;
         StartGame(cameraMode);
+        gameModeManager.OutputJSON();
     }
     private void StartGame(int cameraMode = 1)
     {
@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour
                 float distanceFromPlayerHorizontal;
                 float newCameraXPosition = cameraPosition.x;
                 float newCameraYPosition = cameraPosition.y + Time.deltaTime * cameraAccelerationSpeed;
-                float newCameraZPosition = cameraOffsetZ - cameraAccelerationSpeed / cameraSpeedRatioY;
+                float newCameraZPosition = cameraOffsetZ - cameraAccelerationSpeed / cameraSpeedToDistanceRatioZ;
 
                 distanceFromPlayerHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
 
