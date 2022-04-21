@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     private float t;
     private PlayerControls playerControls;
     public PlatformRouteSpawner platformRouteSpawner;
-    public GameModeManager gameModeManager;
+    private GameModeManager gameModeManager;
     public PlayerSpawner playerSpawner;
     private GameObject player;
     public GameObject platform;
@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
         mainCamera = FindObjectOfType<Camera>();
         int cameraMode = 1;
         StartGame(cameraMode);
+        gameModeManager = new GameModeManager();
         gameModeManager.OutputJSON();
     }
     private void StartGame(int cameraMode = 1)
