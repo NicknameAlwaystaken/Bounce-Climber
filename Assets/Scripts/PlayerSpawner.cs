@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public Vector3 spawnPoint;
     public GameObject player;
 
     public GameObject SpawnPlayer(Vector3 newSpawnPoint = new Vector3())

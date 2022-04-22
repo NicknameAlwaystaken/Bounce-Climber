@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    private float bounceVelocity = 30f,
-        returnVelocity = 30f,
-        returnHeight = 75f,
-        maxMovementSpeed = 15f,
-        gravityUpChange = 0.8f,
-        gravityDownChange = 1.2f,
-        maxDropSpeed = 75f,
-        diveCooldownCounter = 0f,
-        diveCooldown = 0.5f;
+    private float bounceVelocity,
+        returnVelocity,
+        returnHeight,
+        maxMovementSpeed,
+        gravityUpChange,
+        gravityDownChange,
+        maxDropSpeed,
+        diveCooldownCounter,
+        diveCooldown;
     private int gameMode;
     private PlayerState playerState;
 
@@ -39,6 +39,10 @@ public class PlayerControls : MonoBehaviour
         bounceVelocity = playerSettings.startingBounceVelocity;
         maxMovementSpeed = playerSettings.maxMovementSpeed;
         returnVelocity = playerSettings.returnVelocity;
+        returnHeight = playerSettings.returnHeight;
+        maxDropSpeed = playerSettings.maxDropSpeed;
+        diveCooldownCounter = playerSettings.diveCooldownCounter;
+        diveCooldown = playerSettings.diveCooldown;
         SetGameMode(playerSettings);
     }
 
@@ -60,8 +64,35 @@ public class PlayerControls : MonoBehaviour
         // going left or right
         if (inputHorizontal != 0)
         {
-            Vector3 movement = transform.right * inputHorizontal * maxMovementSpeed;
+            Vector3 movement = inputHorizontal * maxMovementSpeed * transform.right;
             rb.velocity = new Vector3(movement.x, rb.velocity.y);
+        }
+        if (gameMode == 1)
+        {
+            // pressing up or down
+            if (inputVertical != 0)
+            {
+                if (inputVertical < 0)
+                {
+                    Physics.gravity = new Vector3(0f, originalGravity.y * gravityDownChange, 0f);
+                }
+                else
+                {
+                    Physics.gravity = new Vector3(0f, originalGravity.y * gravityUpChange, 0f);
+                }
+            }
+            else
+            {
+                Physics.gravity = originalGravity;
+            }
+            // applying velocity upwards, if allowed
+            if (bounce)
+            {
+                audioSource.Play();
+                bounce = false;
+                Vector3 upVelocity = Vector3.up * bounceVelocity;
+                rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
+            }
         }
         if (gameMode == 2)
         {
@@ -102,34 +133,6 @@ public class PlayerControls : MonoBehaviour
                     rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
                     playerReturned = true;
                 }
-            }
-        }
-        else
-        {
-            // pressing up or down
-            if (inputVertical != 0)
-            {
-                if (inputVertical < 0)
-                {
-                    Physics.gravity = new Vector3(0f, originalGravity.y * gravityDownChange, 0f);
-                }
-                else
-                {
-                    Physics.gravity = new Vector3(0f, originalGravity.y * gravityUpChange, 0f);
-                }
-            }
-            else
-            {
-                Physics.gravity = originalGravity;
-            }
-            // applying velocity upwards, if allowed
-            if (bounce)
-            {
-                audioSource.Play();
-                bounce = false;
-                Vector3 upVelocity = Vector3.up * bounceVelocity;
-                Debug.Log("Bounce Velocity: " + bounceVelocity);
-                rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
             }
         }
     }
@@ -184,12 +187,12 @@ public class PlayerControls : MonoBehaviour
     }
     public void SetGameMode(GameModeManager newSettings)
     {
+        originalPlayerPosition = transform.position;
+        originalGravity = newSettings.gravity;
         gameMode = newSettings.gamemodeID;
         if(gameMode == 2)
         {
             Physics.gravity = new Vector3(0f, 0f, 0f);
-            originalGravity = newSettings.gravity;
-            originalPlayerPosition = transform.position;
             transform.GetComponent<Collider>().enabled = false;
             playerStarted = false;
         }

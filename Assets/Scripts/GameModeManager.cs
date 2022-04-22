@@ -5,8 +5,8 @@ using System.IO;
 using Newtonsoft.Json;
 
 /*
- * Gamemodemanager checks if file exists or creates it with default values of gamemodes.
- * GameModeManager loads from txt gamemode settings and returns it to caller;
+ * Gamemodemanager checks if file exists or creates it with default values of gamemodes. --DONE--
+ * GameModeManager loads from GameModeSettings.txt and returns it to caller. --DONE--
  */
 public class GameModeManager
 {
@@ -15,11 +15,10 @@ public class GameModeManager
 
     private readonly List<GameModeManager> gamemodeList = new List<GameModeManager>();
 
-    public int gamemodeID;
     public string gamemodeName,
         objectName,
         prefabsPath;
-    public Vector3 platformGenerateStartPoint,
+    public Vector3 platformStartPoint,
         playerSpawnLocation,
         cameraStartLocation,
         gravity;
@@ -40,35 +39,32 @@ public class GameModeManager
         platformSpeedRatioX,
         platformSpeedRatioY,
         platformSpeed,
-        platformSpawnY,
         cameraAccelerationSpeed,
         cameraAccumulatingSpeed,
         cameraSpeedToDistanceRatioZ,
         startingBounceVelocity,
-        bounceSpeedRatio;
-    public int platformsOnStart,
+        bounceSpeedRatio,
+        returnHeight,
+        maxDropSpeed,
+        diveCooldownCounter,
+        diveCooldown,
+        startingPointOffsetY,
+        newRouteMaxDistance,
+        platformDespawnDistance,
+        maxDistance,
+        minDistance,
+        maxHeight,
+        minHeight;
+    public int gamemodeID,
+        platformsOnStart,
         platformRouteAmount,
         cameraMode;
 
-    public bool CheckIfFileExists()
+    public bool CheckIfFileValid()
     {
         if(!File.Exists(Application.dataPath + "/GameModeSettings.txt"))
         {
-            string strOutput = "";
-            platformSmasher = new PlatformSmasher();
-            platformClimber = new PlatformClimber();
-
-            
-            // object name has to be exact with the name of the class
-            strOutput += "{";
-            strOutput += "\"" + "platformSmasher" + "\"" + ": [" + JsonUtility.ToJson(platformSmasher) + "]," + "\n";
-            strOutput += "\"" + "platformClimber" + "\"" + ": [" + JsonUtility.ToJson(platformClimber) + "]\n";
-            strOutput += "}";
-            
-
-
-            File.WriteAllText(Application.dataPath + "/GameModeSettings.txt", strOutput);
-            Debug.Log("File written.");
+            CreateFile();
             return true;
         }
         else
@@ -76,6 +72,26 @@ public class GameModeManager
             return true;
         }
     }
+
+    private void CreateFile()
+    {
+        string strOutput = "";
+        platformSmasher = new PlatformSmasher();
+        platformClimber = new PlatformClimber();
+
+
+        // object name has to be exact with the name of the class
+        strOutput += "{";
+        strOutput += "\"" + "platformSmasher" + "\"" + ": [" + JsonUtility.ToJson(platformSmasher) + "]," + "\n";
+        strOutput += "\"" + "platformClimber" + "\"" + ": [" + JsonUtility.ToJson(platformClimber) + "]\n";
+        strOutput += "}";
+
+
+
+        File.WriteAllText(Application.dataPath + "/GameModeSettings.txt", strOutput);
+        Debug.Log("File didn't exist. File written.");
+    }
+
     public GameModeManager LoadGamemodeSettings(int id)
     {
         Load();
@@ -86,7 +102,7 @@ public class GameModeManager
                 if (gamemode.gamemodeID == id)
                 {
                     var gamemodeSettings = gamemode;
-                    Debug.Log("Successful load: " + gamemode);
+                    Debug.Log("Successful gamemode load: " + gamemode);
                     return gamemodeSettings;
                 }
             }
@@ -97,12 +113,9 @@ public class GameModeManager
     {
         //List<List<GameModeManager>> newList = new List<List<GameModeManager>>();
         string JsonString = File.ReadAllText(Application.dataPath + "/GameModeSettings.txt");
-        Debug.Log("JsonString: " + JsonString);
         //newList = JsonUtility.FromJson<List<List<GameModeManager>>>(JsonString);
         platformSmasher = JsonUtility.FromJson<PlatformSmasher>(JsonString);
         platformClimber = JsonUtility.FromJson<PlatformClimber>(JsonString);
-        Debug.Log("platformSmasher.gamemodeName: " + platformSmasher.gamemodeName);
-        Debug.Log("platformClimber.gamemodeName: " + platformClimber.gamemodeName);
         gamemodeList.Add(platformSmasher);
         gamemodeList.Add(platformClimber);
     }

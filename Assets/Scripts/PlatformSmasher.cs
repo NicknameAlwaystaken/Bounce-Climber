@@ -7,10 +7,13 @@ public class PlatformSmasher : GameModeManager
     public PlatformSmasher()
     {
         this.gamemodeID = 2;
+        this.cameraMode = 0;
         this.gamemodeName = "Platform Smasher";
         this.objectName = "Platform_ThickAndWide";
         this.prefabsPath = "Prefabs/";
-        this.platformGenerateStartPoint = new Vector3();
+        this.platformStartPoint = new Vector3(0f, 85f, 0f);
+        this.playerSpawnLocation = new Vector3(0f, 60f, 0f);
+        this.cameraStartLocation = new Vector3(0f, 50f, -50f);
         this.platformRangeX = 90f;
         this.platformRangeY = 0f;
         this.platformRangeIncrement = 1.0f;
@@ -19,7 +22,6 @@ public class PlatformSmasher : GameModeManager
         this.gravityUpChange = 0.6f;
         this.gravityDownChange = 2.0f;
         this.platformSpeed = 15f;
-        this.platformSpawnY = 85f;
         this.platformSpawnIntervalMin = 0.7f;
         this.platformSpawnIntervalMax = 1.7f;
         this.falloffHeight = 40f;
@@ -31,10 +33,23 @@ public class PlatformSmasher : GameModeManager
         this.cameraSpeedToDistanceRatioZ = 5f;
         this.startingBounceVelocity = 30f;
         this.bounceSpeedRatio = 35f;
+        this.cameraOffsetZ = -60f;
+        this.cameraOffsetY = 10f;
+        this.platformSpeedRatioX = 100f;
+        this.platformSpeedRatioY = 100f;
         this.platformsOnStart = 1;
         this.platformRouteAmount = 1;
-        this.cameraMode = 0;
-        this.playerSpawnLocation = new Vector3(0f, 60f, 0f);
-        this.cameraStartLocation = new Vector3(0f, 50f, -50f);
+        this.returnHeight = 75f;
+        this.maxDropSpeed = 75f;
+        this.diveCooldownCounter = 0f;
+        this.diveCooldown = 0.5f;
+        this.startingPointOffsetY = 20f;
+        this.newRouteMaxDistance = 20f;
+        this.platformDespawnDistance = 50f;
+        this.maxDistance = 20f;
+        this.minDistance = 10f;
+        this.maxHeight = 10f;
+        this.minHeight = 8f;
+        this.bounceSpeedRatio = 35f;
     }
 }

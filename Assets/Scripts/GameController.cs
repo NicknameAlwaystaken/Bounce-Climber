@@ -3,25 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * GameController calls GameModeManager to check if there is file to load
- * GameController calls GameModeManager to give gamesettings from one gamemode on start as object
- * GameController intializes PlayerController, PlatformRouteSpawner and PlayerSpawner with loaded settings
+ * GameController calls GameModeManager to check if there is file to load --DONE--
+ * GameController calls GameModeManager to give gamesettings from one gamemode on start as object --DONE--
+ * GameController intializes PlayerController, PlatformRouteSpawner and PlayerSpawner with loaded settings --DONE--
  * */
 
 public class GameController : MonoBehaviour
 {
-    public int platformsOnStart, platformRouteStartAmount;
-    public float falloffHeight = 40f,
-        gravity = -40f,
-        cameraFollowHorizontal = 15f,
-        cameraPositioningTime = 0.04f,
-        cameraAccelerationSpeed = 200f,
-        cameraAccumulatingSpeed = 0.05f,
-        cameraOffsetZ = -60f,
-        cameraOffsetY = 10f,
-        cameraSpeedToDistanceRatioZ = 5f,
-        startingBounceVelocity = 30f,
-        bounceSpeedRatio = 35f;
+    private float falloffHeight,
+        cameraFollowHorizontal,
+        cameraPositioningTime,
+        cameraAccelerationSpeed,
+        cameraAccumulatingSpeed,
+        cameraOffsetZ,
+        cameraOffsetY,
+        cameraSpeedToDistanceRatioZ,
+        startingBounceVelocity,
+        bounceSpeedRatio;
     private float t;
     private PlayerControls playerControls;
     public PlatformRouteSpawner platformRouteSpawner;
@@ -34,6 +32,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     private Camera mainCamera;
     private CameraType cameraState;
+    private bool setupDone;
 
     enum CameraType
     {
@@ -43,10 +42,9 @@ public class GameController : MonoBehaviour
     }
     enum GameMode
     {
-        None = 0,
+        Freeplay = 0,
         No_Breaks = 1,
         Platform_Smasher = 2
-
     }
 
     private void Awake()
@@ -59,9 +57,8 @@ public class GameController : MonoBehaviour
     {
         mainCamera = FindObjectOfType<Camera>();
         gamemodeManager = new GameModeManager();
-        gamemodeManager.CheckIfFileExists();
+        gamemodeManager.CheckIfFileValid();
         gamemodeSettings = gamemodeManager.LoadGamemodeSettings((int)GameMode.Platform_Smasher);
-        Physics.gravity = gamemodeSettings.gravity;
         StartGame();
     }
     private void StartGame()
@@ -76,6 +73,7 @@ public class GameController : MonoBehaviour
         {
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
+                Debug.Log("Attempting to destroy player");
                 //Destroy(player);
             }
         }
@@ -83,72 +81,75 @@ public class GameController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player != null)
+        if(setupDone)
         {
-            Vector3 playerPosition = player.transform.position;
-            Vector3 cameraPosition = mainCamera.transform.position;
-            Vector3 desiredPosition;
-            t = cameraPositioningTime;
-            t -= Time.deltaTime;
-
-            if (gamemodeSettings.cameraMode == (int)CameraType.Following)
+            if (player != null)
             {
-                Debug.Log("Camera is set to following");
-                float distanceFromBallHorizontal;
+                Vector3 playerPosition = player.transform.position;
+                Vector3 cameraPosition = mainCamera.transform.position;
+                Vector3 desiredPosition;
+                t = cameraPositioningTime;
+                t -= Time.deltaTime;
 
-                // Camera follow y axis
-                if (playerPosition.y > cameraPosition.y - cameraOffsetY)
+                if (gamemodeSettings.cameraMode == (int)CameraType.Following)
                 {
-                    mainCamera.transform.position = new Vector3(cameraPosition.x, playerPosition.y + cameraOffsetY, cameraPosition.z);
-                }
+                    Debug.Log("Camera is set to following");
+                    float distanceFromBallHorizontal;
 
-                distanceFromBallHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
-
-                // Camera follow x axis
-                if (distanceFromBallHorizontal > cameraFollowHorizontal)
-                {
-                    if (t > 0)
+                    // Camera follow y axis
+                    if (playerPosition.y > cameraPosition.y - cameraOffsetY)
                     {
-                        desiredPosition = new Vector3(playerPosition.x, cameraPosition.y, cameraPosition.z);
-                        if (playerPosition.x > cameraPosition.x)
-                        {
-                            desiredPosition.x -= cameraFollowHorizontal;
-                        }
-                        else
-                        {
-                            desiredPosition.x += cameraFollowHorizontal;
+                        mainCamera.transform.position = new Vector3(cameraPosition.x, playerPosition.y + cameraOffsetY, cameraPosition.z);
+                    }
 
-                        }
+                    distanceFromBallHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
 
-                        Vector3 smootherPosition = Vector3.Lerp(cameraPosition, desiredPosition, t);
-                        mainCamera.transform.position = smootherPosition;
+                    // Camera follow x axis
+                    if (distanceFromBallHorizontal > cameraFollowHorizontal)
+                    {
+                        if (t > 0)
+                        {
+                            desiredPosition = new Vector3(playerPosition.x, cameraPosition.y, cameraPosition.z);
+                            if (playerPosition.x > cameraPosition.x)
+                            {
+                                desiredPosition.x -= cameraFollowHorizontal;
+                            }
+                            else
+                            {
+                                desiredPosition.x += cameraFollowHorizontal;
+
+                            }
+
+                            Vector3 smootherPosition = Vector3.Lerp(cameraPosition, desiredPosition, t);
+                            mainCamera.transform.position = smootherPosition;
+                        }
                     }
                 }
-            }
-            if (gamemodeSettings.cameraMode == (int)CameraType.Accelerating)
-            {
-                playerControls.SetBounceVelocity(startingBounceVelocity + cameraAccelerationSpeed / bounceSpeedRatio);
-                cameraAccelerationSpeed += cameraAccumulatingSpeed;
-                float distanceFromPlayerHorizontal;
-                float newCameraXPosition = cameraPosition.x;
-                float newCameraYPosition = cameraPosition.y + Time.deltaTime * cameraAccelerationSpeed;
-                float newCameraZPosition = cameraOffsetZ - cameraAccelerationSpeed / cameraSpeedToDistanceRatioZ;
-
-                distanceFromPlayerHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
-
-                // Camera follow x axis
-                if (distanceFromPlayerHorizontal > cameraFollowHorizontal)
+                if (gamemodeSettings.cameraMode == (int)CameraType.Accelerating)
                 {
-                    //check direction player is from the camera
-                    if (playerPosition.x < cameraPosition.x)
+                    playerControls.SetBounceVelocity(startingBounceVelocity + cameraAccelerationSpeed / bounceSpeedRatio);
+                    cameraAccelerationSpeed += cameraAccumulatingSpeed;
+                    float distanceFromPlayerHorizontal;
+                    float newCameraXPosition = cameraPosition.x;
+                    float newCameraYPosition = cameraPosition.y + Time.deltaTime * cameraAccelerationSpeed;
+                    float newCameraZPosition = cameraOffsetZ - cameraAccelerationSpeed / cameraSpeedToDistanceRatioZ;
+
+                    distanceFromPlayerHorizontal = Mathf.Abs(playerPosition.x - cameraPosition.x);
+
+                    // Camera follow x axis
+                    if (distanceFromPlayerHorizontal > cameraFollowHorizontal)
                     {
-                        distanceFromPlayerHorizontal *= -1; //swap distance to negative if the player is in -X axis of camera position
+                        //check direction player is from the camera
+                        if (playerPosition.x < cameraPosition.x)
+                        {
+                            distanceFromPlayerHorizontal *= -1; //swap distance to negative if the player is in -X axis of camera position
+                        }
+                        newCameraXPosition = cameraPosition.x + distanceFromPlayerHorizontal;
                     }
-                    newCameraXPosition = cameraPosition.x + distanceFromPlayerHorizontal;
+                    desiredPosition = new Vector3(newCameraXPosition, newCameraYPosition, newCameraZPosition);
+                    Vector3 smootherPosition = Vector3.Lerp(cameraPosition, desiredPosition, t);
+                    mainCamera.transform.position = smootherPosition;
                 }
-                desiredPosition = new Vector3(newCameraXPosition, newCameraYPosition, newCameraZPosition);
-                Vector3 smootherPosition = Vector3.Lerp(cameraPosition, desiredPosition, t);
-                mainCamera.transform.position = smootherPosition;
             }
         }
     }
@@ -175,12 +176,35 @@ public class GameController : MonoBehaviour
     }
     private void SetGameModeSettings()
     {
-        SetCamera(gamemodeSettings.cameraStartLocation);
+
+        GameControllerSetup();
+        CameraSettings();
         player = playerSpawner.SpawnPlayer(gamemodeSettings.playerSpawnLocation);
         playerControls = player.GetComponent<PlayerControls>();
 
         playerControls.SetPlayerSettings(gamemodeSettings);
         platformRouteSpawner.GameSettings(gamemodeSettings);
         platformRouteSpawner.SpawnRoutes();
+        setupDone = true;
+    }
+
+    private void GameControllerSetup()
+    {
+        Physics.gravity = gamemodeSettings.gravity;
+        falloffHeight = gamemodeSettings.falloffHeight;
+        startingBounceVelocity = gamemodeSettings.startingBounceVelocity;
+        bounceSpeedRatio = gamemodeSettings.bounceSpeedRatio;
+    }
+
+    private void CameraSettings()
+    {
+        cameraFollowHorizontal = gamemodeSettings.cameraFollowHorizontal;
+        cameraPositioningTime = gamemodeSettings.cameraPositioningTime;
+        cameraAccelerationSpeed = gamemodeSettings.cameraAccelerationSpeed;
+        cameraAccumulatingSpeed = gamemodeSettings.cameraAccumulatingSpeed;
+        cameraOffsetZ = gamemodeSettings.cameraOffsetZ;
+        cameraOffsetY = gamemodeSettings.cameraOffsetY;
+        cameraSpeedToDistanceRatioZ = gamemodeSettings.cameraSpeedToDistanceRatioZ;
+        SetCamera(gamemodeSettings.cameraStartLocation);
     }
 }

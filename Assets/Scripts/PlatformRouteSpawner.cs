@@ -5,17 +5,18 @@ using UnityEngine;
 public class PlatformRouteSpawner : MonoBehaviour
 {
     private int currentRouteAmount, routeLength, currentGameMode;
-    public float startingPointOffsetY, newRouteMaxDistance, platformDespawnDistance, maxDistance, minDistance, maxHeight, minHeight;
+    private float startingPointOffsetY, newRouteMaxDistance, platformDespawnDistance, maxDistance, minDistance, maxHeight, minHeight;
     private float spawnTimer,
-        platformRangeX = 20f,
-        platformRangeY = 10f,
-        platformRangeIncrement = 1f,
-        platformSpeed = 5f,
-        platformSpawnIntervalMin = 0.5f,
-        platformSpawnIntervalMax = 2.0f;
+        platformRangeX,
+        platformRangeY,
+        platformRangeIncrement,
+        platformSpeed,
+        platformSpawnIntervalMin,
+        platformSpawnIntervalMax;
     private bool setupDone = false;
-    public string prefabsPath = "Prefabs/";
-    private string completePath, objectName;
+    private string completePath,
+        objectName,
+        prefabsPath;
     private Vector3 newRoutePosition, platformSpawnPoint;
 
     private List<GameObject> platformRoute;
@@ -33,20 +34,28 @@ public class PlatformRouteSpawner : MonoBehaviour
         objectName = newSettings.objectName;
         currentRouteAmount = newSettings.platformRouteAmount;
         routeLength = newSettings.platformsOnStart;
-        newRoutePosition = newSettings.platformGenerateStartPoint;
+        newRoutePosition = newSettings.platformStartPoint;
         SetPlatformRanges(newSettings.platformRangeX, newSettings.platformRangeY);
 
         currentGameMode = newSettings.gamemodeID;
 
         platformRangeIncrement = newSettings.platformRangeIncrement;
         platformSpeed = newSettings.platformSpeed;
-        platformSpawnPoint = new Vector3
-        {
-            y = newSettings.platformSpawnY
-        };
+        platformSpawnPoint = newRoutePosition;
         platformSpawnIntervalMin = newSettings.platformSpawnIntervalMin;
         platformSpawnIntervalMax = newSettings.platformSpawnIntervalMax;
         spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+
+
+        startingPointOffsetY = newSettings.startingPointOffsetY;
+        newRouteMaxDistance = newSettings.newRouteMaxDistance;
+        platformDespawnDistance = newSettings.platformDespawnDistance;
+        maxDistance = newSettings.maxDistance;
+        minDistance = newSettings.minDistance;
+        maxHeight = newSettings.maxHeight;
+        minHeight = newSettings.minHeight;
+
+        prefabsPath = newSettings.prefabsPath;
 
         setupDone = true;
     }
