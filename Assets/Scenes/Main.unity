@@ -472,9 +472,6 @@ GameObject:
   - component: {fileID: 540127563}
   - component: {fileID: 540127565}
   - component: {fileID: 540127568}
-  - component: {fileID: 540127566}
-  - component: {fileID: 540127569}
-  - component: {fileID: 540127567}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -508,7 +505,6 @@ MonoBehaviour:
   startingBounceVelocity: 30
   bounceSpeedRatio: 35
   platformRouteSpawner: {fileID: 540127568}
-  gameModeManager: {fileID: 540127566}
   playerSpawner: {fileID: 540127565}
   platform: {fileID: 343690378514341082, guid: eb5d9ac737447b3478828d58e7d604b4, type: 3}
 --- !u!4 &540127564
@@ -539,55 +535,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0, y: 0, z: 0}
   player: {fileID: 6728209367372926302, guid: e3e62072bed9df245b3f6413ea556259, type: 3}
---- !u!114 &540127566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 540127562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bbfce07a9b9488488ba14bec80406dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformSmasher: {fileID: 540127569}
-  platformClimber: {fileID: 540127567}
---- !u!114 &540127567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 540127562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e032c26ae030154ab6f85e6212817f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamemodeName: Platform Climber
-  objectName: Platform
-  prefabsPath: Prefabs/
-  platformGenerateStartPoint: {x: 0, y: 0, z: 0}
-  platformRangeX: 80
-  platformRangeY: 10
-  platformRangeIncrement: 1.01
-  returnVelocity: 70
-  maxMovementSpeed: 30
-  gravityUpChange: 0.6
-  gravityDownChange: 2
-  platformSpawnIntervalMin: 0.7
-  platformSpawnIntervalMax: 1.7
-  falloffHeight: 40
-  gravity: -40
-  cameraFollowHorizontal: 15
-  cameraPositioningTime: 0.04
-  cameraOffsetZ: -60
-  cameraOffsetY: 10
-  platformSpeedRatioX: 100
-  platformSpeedRatioY: 100
-  platformsOnStart: 1
-  platformRouteAmount: 1
 --- !u!114 &540127568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,44 +555,6 @@ MonoBehaviour:
   maxHeight: 10
   minHeight: 8
   prefabsPath: Prefabs/
---- !u!114 &540127569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 540127562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7fcaeb81e6ef70469d010f2306bb836, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamemodeName: Platform Smasher
-  objectName: Platform_ThickAndWide
-  prefabsPath: Prefabs/
-  platformGenerateStartPoint: {x: 0, y: 0, z: 0}
-  platformRangeX: 90
-  platformRangeY: 0
-  platformRangeIncrement: 1
-  returnVelocity: 70
-  maxMovementSpeed: 75
-  gravityUpChange: 0.6
-  gravityDownChange: 2
-  platformSpeed: 15
-  platformSpawnY: 85
-  platformSpawnIntervalMin: 0.7
-  platformSpawnIntervalMax: 1.7
-  falloffHeight: 40
-  gravity: -40
-  cameraFollowHorizontal: 15
-  cameraPositioningTime: 0.04
-  cameraAccelerationSpeed: 200
-  cameraAccumulatingSpeed: 0.05
-  cameraSpeedToDistanceRatioZ: 5
-  startingBounceVelocity: 30
-  bounceSpeedRatio: 35
-  platformsOnStart: 1
-  platformRouteAmount: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

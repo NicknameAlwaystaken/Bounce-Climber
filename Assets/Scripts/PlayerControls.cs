@@ -32,6 +32,16 @@ public class PlayerControls : MonoBehaviour
         Diving = 3
     }
 
+    public void SetPlayerSettings(GameModeManager playerSettings)
+    {
+        gravityUpChange = playerSettings.gravityUpChange;
+        gravityDownChange = playerSettings.gravityDownChange;
+        bounceVelocity = playerSettings.startingBounceVelocity;
+        maxMovementSpeed = playerSettings.maxMovementSpeed;
+        returnVelocity = playerSettings.returnVelocity;
+        SetGameMode(playerSettings);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -172,13 +182,13 @@ public class PlayerControls : MonoBehaviour
     {
         returnVelocity = newVelocity;
     }
-    public void SetGameMode(int newGameMode)
+    public void SetGameMode(GameModeManager newSettings)
     {
-        gameMode = newGameMode;
+        gameMode = newSettings.gamemodeID;
         if(gameMode == 2)
         {
             Physics.gravity = new Vector3(0f, 0f, 0f);
-            originalGravity = new Vector3(0f, -40f, 0f);
+            originalGravity = newSettings.gravity;
             originalPlayerPosition = transform.position;
             transform.GetComponent<Collider>().enabled = false;
             playerStarted = false;

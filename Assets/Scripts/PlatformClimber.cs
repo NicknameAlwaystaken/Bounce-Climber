@@ -4,28 +4,34 @@ using UnityEngine;
 
 public class PlatformClimber : GameModeManager
 {
-    public int gamemodeID;
-    public string gamemodeName = "Platform Climber",
-        objectName = "Platform",
-        prefabsPath = "Prefabs/";
-    public Vector3 platformGenerateStartPoint;
-    public float platformRangeX = 80f,
-        platformRangeY = 10f,
-        platformRangeIncrement = 1.01f,
-        returnVelocity = 70f,
-        maxMovementSpeed = 30f,
-        gravityUpChange = 0.6f,
-        gravityDownChange = 2.0f,
-        platformSpawnIntervalMin = 0.7f,
-        platformSpawnIntervalMax = 1.7f,
-        falloffHeight = 40f,
-        gravity = -40f,
-        cameraFollowHorizontal = 15f,
-        cameraPositioningTime = 0.04f,
-        cameraOffsetZ = -60f,
-        cameraOffsetY = 10f,
-        platformSpeedRatioX = 100f,
-        platformSpeedRatioY = 100f;
-    public int platformsOnStart = 1,
-        platformRouteAmount = 1;
+    public PlatformClimber()
+    {
+        this.gamemodeID = 1;
+        this.gamemodeName = "Platform Climber";
+        this.objectName = "Platform";
+        this.prefabsPath = "Prefabs/";
+        this.platformGenerateStartPoint = new Vector3();
+        this.platformRangeX = 80f;
+        this.platformRangeY = 10f;
+        this.platformRangeIncrement = 1.01f;
+        this.returnVelocity = 70f;
+        this.maxMovementSpeed = 30f;
+        this.gravityUpChange = 0.6f;
+        this.gravityDownChange = 2.0f;
+        this.platformSpawnIntervalMin = 0.7f;
+        this.platformSpawnIntervalMax = 1.7f;
+        this.falloffHeight = 40f;
+        this.gravity = new Vector3(0f, -40f, 0f);
+        this.cameraFollowHorizontal = 15f;
+        this.cameraPositioningTime = 0.04f;
+        this.cameraOffsetZ = -60f;
+        this.cameraOffsetY = 10f;
+        this.platformSpeedRatioX = 100f;
+        this.platformSpeedRatioY = 100f;
+        this.platformsOnStart = 1;
+        this.platformRouteAmount = 1;
+        this.cameraMode = 2;
+        this.playerSpawnLocation = new Vector3(0f, 3f, 0f);
+        this.cameraStartLocation = new Vector3(0f, 50f, -50f);
+    }
 }

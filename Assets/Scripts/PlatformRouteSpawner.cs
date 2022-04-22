@@ -27,35 +27,28 @@ public class PlatformRouteSpawner : MonoBehaviour
     {
         mainCamera = FindObjectOfType<Camera>();
     }
-    public void Setup(string newObjectName, Vector3 startingPoint, float newPlatformRangeX, float newPlatformRangeY, int newRouteLength, int routeAmount)
+    public void GameSettings(GameModeManager newSettings)
     {
         platformRouteList = new List<List<GameObject>>();
-        objectName = newObjectName;
-        currentRouteAmount = routeAmount;
-        routeLength = newRouteLength;
-        newRoutePosition = startingPoint;
-        SetPlatformRanges(newPlatformRangeX, newPlatformRangeY);
+        objectName = newSettings.objectName;
+        currentRouteAmount = newSettings.platformRouteAmount;
+        routeLength = newSettings.platformsOnStart;
+        newRoutePosition = newSettings.platformGenerateStartPoint;
+        SetPlatformRanges(newSettings.platformRangeX, newSettings.platformRangeY);
+
+        currentGameMode = newSettings.gamemodeID;
+
+        platformRangeIncrement = newSettings.platformRangeIncrement;
+        platformSpeed = newSettings.platformSpeed;
+        platformSpawnPoint = new Vector3
+        {
+            y = newSettings.platformSpawnY
+        };
+        platformSpawnIntervalMin = newSettings.platformSpawnIntervalMin;
+        platformSpawnIntervalMax = newSettings.platformSpawnIntervalMax;
+        spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+
         setupDone = true;
-    }
-    public void SpecialSetup(int gameMode, float newPlatformSpeed = 0f, float newPlatformSpawnPointY = 0, float newRangeIncrement = 1,
-        float newPlatformSpawnIntervalMin = 0.5f, float newplatformSpawnIntervalMax = 2.0f)
-    {
-        currentGameMode = gameMode;
-        if(currentGameMode == 1)
-        {
-            platformRangeIncrement = newRangeIncrement;
-        }
-        if (currentGameMode == 2)
-        {
-            platformSpeed = newPlatformSpeed;
-            platformSpawnPoint = new Vector3
-            {
-                y = newPlatformSpawnPointY
-            };
-            platformSpawnIntervalMin = newPlatformSpawnIntervalMin;
-            platformSpawnIntervalMax = newplatformSpawnIntervalMax;
-            spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
-        }
     }
     public void SetPlatformRanges(float newPlatformRangeX, float newPlatformRangeY)
     {
