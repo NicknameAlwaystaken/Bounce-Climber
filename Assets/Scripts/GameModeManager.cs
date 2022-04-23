@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using Newtonsoft.Json;
 
 /*
  * Gamemodemanager checks if file exists or creates it with default values of gamemodes. --DONE--
