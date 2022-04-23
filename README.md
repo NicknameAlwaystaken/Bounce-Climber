@@ -3,5 +3,8 @@ My first unity game, I hope you enjoy it! :)
 
 
 
-TO-DO-LIST
-[Bling blang]
+### To-do-list
+
+- [ ]Polishing game with graphics and sounds
+- [ ]Using state machines
+- [ ]Implementing classes to platforms
