@@ -77,6 +77,7 @@ public class GameController : MonoBehaviour
                 Debug.Log("Attempting to destroy player");
                 //Destroy(player);
             }
+            platformRouteSpawner.SetPlayerPosition(player.transform.position);
         }
     }
 
@@ -166,6 +167,7 @@ public class GameController : MonoBehaviour
     public void DestroyPlatform(GameObject platformToDestroy)
     {
         platformRouteSpawner.DestroyPlatform(platformToDestroy);
+        Destroy(platformToDestroy);
     }
     private void SetCamera(Vector3 newCameraPosition)
     {

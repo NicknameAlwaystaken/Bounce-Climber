@@ -9,8 +9,9 @@ public class PlatformClimber : GameModeManager
         this.gamemodeID = 1;
         this.cameraMode = 2;
         this.gamemodeName = "Platform Climber";
-        this.objectName = "Platform";
-        this.prefabsPath = "Prefabs/";
+        this.objectPaths = new List<string> {
+            "Prefabs/Platform",
+            "Prefabs/Platform_ThickAndWide" };
         this.platformStartPoint = new Vector3(0f, 0f, 0f);
         this.playerSpawnLocation = new Vector3(0f, 10f, 0f);
         this.cameraStartLocation = new Vector3(0f, 5f, -50f);

@@ -14,9 +14,8 @@ public class GameModeManager
 
     private readonly List<GameModeManager> gamemodeList = new List<GameModeManager>();
 
-    public string gamemodeName,
-        objectName,
-        prefabsPath;
+    public List<string> objectPaths;
+    public string gamemodeName;
     public Vector3 platformStartPoint,
         playerSpawnLocation,
         cameraStartLocation,

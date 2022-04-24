@@ -9,8 +9,8 @@ public class PlatformSmasher : GameModeManager
         this.gamemodeID = 2;
         this.cameraMode = 0;
         this.gamemodeName = "Platform Smasher";
-        this.objectName = "Platform_ThickAndWide";
-        this.prefabsPath = "Prefabs/";
+        this.objectPaths = new List<string> {
+            "Prefabs/Platform_ThickAndWide" };
         this.platformStartPoint = new Vector3(0f, 85f, 0f);
         this.playerSpawnLocation = new Vector3(0f, 60f, 0f);
         this.cameraStartLocation = new Vector3(0f, 50f, -50f);
