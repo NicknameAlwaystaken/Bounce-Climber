@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformRouteSpawner : MonoBehaviour
+/*
+ * Set individual settings for each PlatformRoute
+ * Keeps track of when route needs to destroy or spawn a platform
+ * Calls PlatformRoute to generate platforms to a specific route
+ * Gives settings to platformRoute for generating platforms in specific way
+ */
+public class PlatformRouteSpawner
 {
     private int currentRouteAmount, routeLength, currentGameMode;
     private float startingPointOffsetY, newRouteMaxDistance, platformDespawnDistance, maxDistance, minDistance, maxHeight, minHeight;
@@ -21,13 +27,11 @@ public class PlatformRouteSpawner : MonoBehaviour
 
     private List<GameObject> platformRoute;
     private List<List<GameObject>> platformRouteList;
-    private Camera mainCamera;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        mainCamera = FindObjectOfType<Camera>();
-    }
+    public string objectPath;
+    public int routeLength;
+
+
     public void GameSettings(GameModeManager newSettings)
     {
         platformRouteList = new List<List<GameObject>>();

@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
         bounceSpeedRatio;
     private float t;
     private PlayerControls playerControls;
-    public PlatformRouteSpawner platformRouteSpawner;
+    private PlatformRouteSpawner platformRouteSpawner;
     private GameModeManager gamemodeSettings;
     private GameModeManager gamemodeManager;
     public PlayerSpawner playerSpawner;
@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
+        platformRouteSpawner = new PlatformRouteSpawner();
         gamemodeManager = new GameModeManager();
         gamemodeManager.CheckIfFileValid();
         gamemodeSettings = gamemodeManager.LoadGamemodeSettings((int)GameMode.Platform_Smasher);
