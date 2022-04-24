@@ -297,7 +297,7 @@ MeshCollider:
   m_GameObject: {fileID: 492603470}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -362,8 +362,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Size: {x: 10, y: 20, z: 10}
+  m_Center: {x: 0, y: -10, z: 0}
 --- !u!1 &523278510
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,19 +491,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68287d91fbfb3f448b100cf380b7f0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformsOnStart: 12
-  platformRouteStartAmount: 1
-  falloffHeight: 40
-  gravity: -40
-  cameraFollowHorizontal: 15
-  cameraPositioningTime: 0.04
-  cameraAccelerationSpeed: 200
-  cameraAccumulatingSpeed: 0.05
-  cameraOffsetZ: -60
-  cameraOffsetY: 10
-  cameraSpeedToDistanceRatioZ: 5
-  startingBounceVelocity: 30
-  bounceSpeedRatio: 35
   platformRouteSpawner: {fileID: 540127568}
   playerSpawner: {fileID: 540127565}
   platform: {fileID: 343690378514341082, guid: eb5d9ac737447b3478828d58e7d604b4, type: 3}
@@ -533,7 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce26ea914b6b924bacd7d1d159d6ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: 0, y: 0, z: 0}
   player: {fileID: 6728209367372926302, guid: e3e62072bed9df245b3f6413ea556259, type: 3}
 --- !u!114 &540127568
 MonoBehaviour:
@@ -547,14 +533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c5fbb0841e69248abe385873987664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPointOffsetY: 20
-  newRouteMaxDistance: 20
-  platformDespawnDistance: 50
-  maxDistance: 20
-  minDistance: 10
-  maxHeight: 10
-  minHeight: 8
-  prefabsPath: Prefabs/
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

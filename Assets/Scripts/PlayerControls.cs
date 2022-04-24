@@ -22,7 +22,8 @@ public class PlayerControls : MonoBehaviour
 
     private Rigidbody rb;
 
-    public AudioSource audioSource;
+    private AudioSource audioSource;
+    public ParticleSystem particles;
 
     enum PlayerState
     {
@@ -89,6 +90,7 @@ public class PlayerControls : MonoBehaviour
             if (bounce)
             {
                 audioSource.Play();
+                Instantiate(particles, transform.position, new Quaternion());
                 bounce = false;
                 Vector3 upVelocity = Vector3.up * bounceVelocity;
                 rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
@@ -117,6 +119,7 @@ public class PlayerControls : MonoBehaviour
                 if (bounce)
                 {
                     audioSource.Play();
+                    Instantiate(particles, transform.position, new Quaternion());
                     playerDiving = false;
                     playerReturned = false;
                     bounce = false;
@@ -144,15 +147,16 @@ public class PlayerControls : MonoBehaviour
             GameObject collidedObject = collision.gameObject;
             if (collidedObject.CompareTag("Platform") || collidedObject.CompareTag("Ground"))
             {
-                bounce = true;
+                //bounce = true;
                 if (gameMode == 2)
                 {
                     if (playerDiving || playerReturned)
                     {
                         GameController.instance.DestroyPlatform(collidedObject);
-                        bounce = true;
+                        //bounce = true;
                     }
                 }
+                bounce = true;
             }
         }
     }
