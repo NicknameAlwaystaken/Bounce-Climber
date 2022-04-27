@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
         platformRouteSpawner = new PlatformRouteSpawner();
         gamemodeManager = new GameModeManager();
         gamemodeManager.CheckIfFileValid();
-        gamemodeSettings = gamemodeManager.LoadGamemodeSettings((int)GameMode.Platform_Smasher);
+        gamemodeSettings = gamemodeManager.LoadGamemodeSettings((int)GameMode.No_Breaks);
         StartGame();
     }
     private void StartGame()
