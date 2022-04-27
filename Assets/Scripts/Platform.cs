@@ -1,19 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
  * Platform
  * -------------------
- * Called by PlatformRoute to generate a specific type of platform
+ * Holds data for platform, example particle system and health
  */
 public class Platform : MonoBehaviour
 {
-    private GameObject platform;
+    public float health,
+        scoreOnBreak;
+    private float platformSpeed = 0;
+    public GameObject platformBreak;
 
-    public GameObject SpawnPlatform(string objectPath, Vector3 location)
+    public float PlatformSpeed { get => platformSpeed; set => platformSpeed = value; }
+
+    public void DestroyPlatform()
     {
-        GameObject newplatform = Resources.Load(objectPath) as GameObject;
-        platform = Instantiate(newplatform, location, new Quaternion());
-        return platform;
+        Instantiate(platformBreak, gameObject.transform.position, new Quaternion());
+        Destroy(gameObject);
+    }
+    void FixedUpdate()
+    {
+        if(platformSpeed > 0)
+        {
+            gameObject.transform.position += Vector3.down * platformSpeed * Time.deltaTime;
+            if (gameObject.transform.position.y <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

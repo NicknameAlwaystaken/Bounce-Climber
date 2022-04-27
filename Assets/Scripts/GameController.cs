@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * GameController calls GameModeManager to check if there is file to load --DONE--
- * GameController calls GameModeManager to give gamesettings from one gamemode on start as object --DONE--
- * GameController intializes PlayerController, PlatformRouteSpawner and PlayerSpawner with loaded settings --DONE--
- * */
+ * GameController
+ * -------------------
+ * GameController calls to spawn new Routes to left and right if furthers platform to the left or right is too close.
+ * GameController calls to spawn new platforms towards up or down if highest platform is too close to player height (only upwards right now)
+ * 
+ */
 
 public class GameController : MonoBehaviour
 {
@@ -20,6 +22,10 @@ public class GameController : MonoBehaviour
         cameraSpeedToDistanceRatioZ,
         startingBounceVelocity,
         bounceSpeedRatio;
+    private float spawnTimer;
+    private float platformSpawnIntervalMin;
+    private float platformSpawnIntervalMax;
+    public float platformSpawnYDistance = 50f;
     private float t;
     private PlayerControls playerControls;
     private PlatformRouteSpawner platformRouteSpawner;
@@ -70,14 +76,47 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player != null)
+        if(player != null && setupDone)
         {
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
-                Debug.Log("Attempting to destroy player");
+                Debug.Log("Player died.");
                 //Destroy(player);
             }
-            platformRouteSpawner.SetPlayerPosition(player.transform.position);
+            if(gamemodeSettings.gamemodeID == (int)GameMode.No_Breaks)
+            {
+                if (platformRouteSpawner.GetRouteAmount() > 0)
+                {
+                    GameObject platform = platformRouteSpawner.GetLowestRoutePlatform();
+                    if (platform != null)
+                    {
+                        float verticalDistance = Mathf.Abs(platform.transform.position.y - mainCamera.transform.position.y);
+                        if (verticalDistance < platformSpawnYDistance)
+                        {
+                            platformRouteSpawner.CallRouteToSpawn(platform);
+                        }
+                    }
+                    platform = platformRouteSpawner.GetLowestPlatformInRoutes();
+                    if (platform != null)
+                    {
+                        float verticalDistance = Mathf.Abs(platform.transform.position.y - mainCamera.transform.position.y);
+                        if (verticalDistance > platformSpawnYDistance)
+                        {
+                            platform.GetComponent<Platform>().DestroyPlatform();
+                        }
+                    }
+                }
+            }
+            if(gamemodeSettings.gamemodeID == (int)GameMode.Platform_Smasher)
+            {
+                spawnTimer -= Time.deltaTime;
+                if (spawnTimer <= 0)
+                {
+                    platformRouteSpawner.PlatformSmasherSpawnPlatform();
+                    spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+                }
+            }
+
         }
     }
 
@@ -162,20 +201,15 @@ public class GameController : MonoBehaviour
     }
     private void SpawnRoute(string objectName)
     {
-        platformRouteSpawner.SpawnRoute();
+        platformRouteSpawner.SpawnRoutes();
     }
     public void DestroyPlatform(GameObject platformToDestroy)
     {
-        platformRouteSpawner.DestroyPlatform(platformToDestroy);
-        Destroy(platformToDestroy);
+        platformToDestroy.GetComponent<Platform>().DestroyPlatform();
     }
     private void SetCamera(Vector3 newCameraPosition)
     {
         mainCamera.transform.position = newCameraPosition;
-    }
-    private void SetSettingsForRoutes(float newPlatformRangeX, float newPlatformRangeY)
-    {
-        platformRouteSpawner.SetPlatformRanges(newPlatformRangeX, newPlatformRangeY);
     }
     private void SetGameModeSettings()
     {
@@ -197,6 +231,9 @@ public class GameController : MonoBehaviour
         falloffHeight = gamemodeSettings.falloffHeight;
         startingBounceVelocity = gamemodeSettings.startingBounceVelocity;
         bounceSpeedRatio = gamemodeSettings.bounceSpeedRatio;
+        platformSpawnIntervalMin = gamemodeSettings.platformSpawnIntervalMin;
+        platformSpawnIntervalMax = gamemodeSettings.platformSpawnIntervalMax;
+        spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
     }
 
     private void CameraSettings()

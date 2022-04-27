@@ -2,27 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * PlatformRouteSpawner
- * -------------------
- * Set individual settings for each PlatformRoute
- * Keeps track of when route needs to destroy or spawn a platform
- * Calls PlatformRoute to generate platforms to a specific route
- * Gives settings to platformRoute for generating platforms in specific way
- * Calls PlatformRoute to spawn platforms based on player location. Calls platformRoute where next platform spawns, if player is close enough
- * Removes platforms from PlatformRoute if they are too far from the player
- * 
- * GameController withholds data how far platforms are allowed to be
- * GameController calls PlatFormRouteSpawner for lowest platform and highest platform
- * GameController destroys it if it is too far from player due to platformroutespawner being unable to call gameobject.destroy()
- * GameController calls to spawn new Routes to left and right if furthers platform to the left or right is too close.
- * GameController calls to spawn new platforms towards up or down if highest platform is too close to player height
- * 
- */
-
 public class PlatformRouteSpawner
 {
-    private int currentRouteAmount, routeLength, currentGameMode;
+    private int currentRouteAmount, routeLength;
+    public int currentGameMode;
     private float startingPointOffsetY, newRouteMaxDistance, platformDespawnDistance, maxDistance, minDistance, maxHeight, minHeight;
     public float platformRangeX,
         platformRangeY,
@@ -30,126 +13,184 @@ public class PlatformRouteSpawner
         platformSpeed,
         platformSpawnIntervalMin,
         platformSpawnIntervalMax;
-    private float spawnTimer;
-    private bool setupDone = false;
     public List<string> objectPaths;
-    public Vector3 routeStartPosition,
-        playerPosition;
+    public Vector3 routeStartPosition;
 
-    private PlatformRouteSpawner routeSettings;
-    private PlatformRoute platformRoute;
+    private GameModeManager routeSettings;
 
     private List<PlatformRoute> platformRouteList;
 
-    public void GenerateRoute(PlatformRouteSpawner newSettings)
+    enum GameMode
     {
-        platformRoute = new PlatformRoute(newSettings);
-        platformRouteList.Add(platformRoute);
+        Freeplay = 0,
+        No_Breaks = 1,
+        Platform_Smasher = 2
     }
-    public void SetSpawnerSettings(PlatformRouteSpawner newSettings)
+
+    public void GenerateRoute()
     {
-        routeSettings = newSettings;
+        PlatformRoute platformRoute = new PlatformRoute(routeSettings);
+        for (int i = 0; i < routeLength; i++)
+        {
+            platformRoute.SpawnPlatform();
+        }
+        platformRouteList.Add(platformRoute);
     }
 
     public void GameSettings(GameModeManager newSettings)
     {
+        routeSettings = newSettings;
         platformRouteList = new List<PlatformRoute>();
-        objectPaths = newSettings.objectPaths;
-        currentRouteAmount = newSettings.platformRouteAmount;
-        routeLength = newSettings.platformsOnStart;
-        routeStartPosition = newSettings.platformStartPoint;
+        objectPaths = routeSettings.objectPaths;
+        currentRouteAmount = routeSettings.platformRouteAmount;
+        routeLength = routeSettings.platformsOnStart;
+        routeStartPosition = routeSettings.platformStartPoint;
 
-        currentGameMode = newSettings.gamemodeID;
-
-        spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
+        currentGameMode = routeSettings.gamemodeID;
 
 
-        startingPointOffsetY = newSettings.startingPointOffsetY;
-        newRouteMaxDistance = newSettings.newRouteMaxDistance;
-        platformDespawnDistance = newSettings.platformDespawnDistance;
-        maxDistance = newSettings.maxDistance;
-        minDistance = newSettings.minDistance;
-        maxHeight = newSettings.maxHeight;
-        minHeight = newSettings.minHeight;
 
-        setupDone = true;
+        startingPointOffsetY = routeSettings.startingPointOffsetY;
+        newRouteMaxDistance = routeSettings.newRouteMaxDistance;
+        platformDespawnDistance = routeSettings.platformDespawnDistance;
+        maxDistance = routeSettings.maxDistance;
+        minDistance = routeSettings.minDistance;
+        maxHeight = routeSettings.maxHeight;
+        minHeight = routeSettings.minHeight;
+
     }
+
+
     public void SpawnRoutes()
     {
         for(int i = 0; i < currentRouteAmount; i++)
         {
-            GenerateRoute(routeSettings);
+            GenerateRoute();
         }
-    }
-    public void SpawnRoute()
-    {
-        GenerateRoute(routeSettings);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public GameObject GetHighestPlatformInRoutes()
     {
-        if(setupDone)
+        GameObject highestPlatform = new GameObject();
+        foreach(PlatformRoute route in platformRouteList.ToArray())
         {
-            if (currentGameMode == 2)
+            var itemRoute = route;
+            if(highestPlatform != null)
             {
-                /*
-                spawnTimer -= Time.deltaTime;
-                foreach (PlatformRouteSpawner route in platformRouteList.ToArray())
+                Object.Destroy(highestPlatform);
+                highestPlatform = itemRoute.GetHighestPlatform();
+            }
+            if (highestPlatform.transform.position.y < itemRoute.GetHighestPlatform().transform.position.y)
+            {
+                highestPlatform = itemRoute.GetHighestPlatform();
+            }
+        }
+        return highestPlatform;
+    }
+    public GameObject GetLowestRoutePlatform() // returns route that has highest platform being lower than other route's highest platforms
+    {
+        if(platformRouteList.Count > 0)
+        {
+            List<GameObject> routeList = new List<GameObject>();
+            GameObject routePlatform;
+            foreach (PlatformRoute route in platformRouteList.ToArray())
+            {
+                var itemRoute = route;
+                routePlatform = itemRoute.GetHighestPlatform();
+                if(routePlatform != null)
+                {
+                    if (routePlatform.transform.position.y < itemRoute.GetHighestPlatform().transform.position.y)
+                    {
+                        routePlatform = itemRoute.GetHighestPlatform();
+                    }
+                    routeList.Add(routePlatform);
+                }
+            }
+            if (routeList.Count == 0)
+            {
+                return null;
+            }
+            GameObject platformToReturn = routeList[0];
+            for (int i = 0; i < routeList.Count; i++)
+            {
+                var item = routeList[i];
+
+                if(item.transform.position.y < platformToReturn.transform.position.y)
+                {
+                    platformToReturn = item;
+                }
+            }
+            return platformToReturn;
+        }
+        return null;
+    }
+    public GameObject GetLowestPlatformInRoutes()
+    {
+        if (platformRouteList.Count > 0)
+        {
+            GameObject lowestPlatform = platformRouteList[0].GetLowestPlatform();
+            foreach (PlatformRoute route in platformRouteList)
+            {
+                if(route != null)
                 {
                     var itemRoute = route;
-                    if (spawnTimer <= 0)
+                    if(lowestPlatform != null)
                     {
-                        itemRoute.platformRoute.SpawnPlatformStaticLocation();
-                        spawnTimer = Random.Range(platformSpawnIntervalMin, platformSpawnIntervalMax);
-                    }
-                    itemRoute.
-                    platform.transform.position += Vector3.down * platformSpeed * Time.deltaTime;
-                        if(platform.transform.position.y <= 0)
+                        if (lowestPlatform.transform.position.y > itemRoute.GetLowestPlatform().transform.position.y)
                         {
-                            Destroy(platform);
+                            lowestPlatform = itemRoute.GetLowestPlatform();
                         }
                     }
                 }
-                */
             }
-            else
+            return lowestPlatform;
+        }
+        return null;
+    }
+
+    public void CallRouteToSpawn(GameObject newPlatform)
+    {
+        foreach (PlatformRoute route in platformRouteList.ToArray())
+        {
+            if (route != null)
             {
-                foreach (PlatformRoute route in platformRouteList.ToArray())
+                if(route.CheckIfPlatformInRoute(newPlatform))
                 {
-                    var itemRoute = route;
-                    GameObject lowestPlatform = itemRoute.GetLowestPlatform();
-                    if (lowestPlatform != null)
-                    {
-                        Vector3 lowestPlatformPosition = lowestPlatform.transform.position;
-                        if (lowestPlatformPosition.y < playerPosition.y - platformDespawnDistance)
-                        {
-                            route.SpawnPlatform();
-                            break;
-                        }
-                    }
+                    route.SpawnPlatform();
                 }
             }
         }
     }
-    public GameObject CreatePlatform(string objectName, Vector3 location)
+    public void SpawnInRoute(int index)
     {
-        completePath = prefabsPath + objectName;
-        GameObject newplatform = Resources.Load(completePath) as GameObject;
-        GameObject platform = Instantiate(newplatform, location, new Quaternion());
-        return platform;
+        foreach (PlatformRoute route in platformRouteList.ToArray())
+        {
+            if (route != null)
+            {
+                if (route.CheckRouteIndex(index))
+                {
+                    route.SpawnPlatform();
+                }
+            }
+        }
     }
-    public void DestroyPlatform(GameObject platformToDestroy)
+    public void PlatformSmasherSpawnPlatform()
     {
-        platformToDestroy
+        foreach (PlatformRoute route in platformRouteList.ToArray())
+        {
+            if (route != null)
+            {
+                route.SpawnPlatform();
+            }
+        }
     }
     private void IncrementPlatformRange()
     {
         platformRangeX *= platformRangeIncrement;
         platformRangeY *= platformRangeIncrement;
     }
-    public void SetPlayerPosition(Vector3 newPosition)
+    public int GetRouteAmount()
     {
-        playerPosition = newPosition;
+        return platformRouteList.Count;
     }
 }

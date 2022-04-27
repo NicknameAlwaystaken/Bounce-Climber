@@ -8,6 +8,8 @@ public class PlatformSmasher : GameModeManager
     {
         this.gamemodeID = 2;
         this.cameraMode = 0;
+        this.platformsOnStart = 1;
+        this.platformRouteAmount = 1;
         this.gamemodeName = "Platform Smasher";
         this.objectPaths = new List<string> {
             "Prefabs/Platform_ThickAndWide" };
@@ -37,8 +39,6 @@ public class PlatformSmasher : GameModeManager
         this.cameraOffsetY = 10f;
         this.platformSpeedRatioX = 100f;
         this.platformSpeedRatioY = 100f;
-        this.platformsOnStart = 1;
-        this.platformRouteAmount = 1;
         this.returnHeight = 75f;
         this.maxDropSpeed = 75f;
         this.diveCooldownCounter = 0f;
