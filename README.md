@@ -17,7 +17,3 @@ My first unity game, I hope you enjoy it! :)
 ![Screenshot](No_Breaks.png)
 ![Screenshot](Ball_Animations.png)
 ![Screenshot](Platform_Breaking.png)
-
-![alt text](https://github.com/NicknameAlwaystaken/Bounce-Climber/No_Breaks.png?raw=true)
-![alt text](https://github.com/NicknameAlwaystaken/Bounce-Climber/Ball_Animations.png?raw=true)
-![alt text](https://github.com/NicknameAlwaystaken/Bounce-Climber/Platform_Breaking.png?raw=true)
