@@ -13,6 +13,7 @@ My first unity game, I hope you enjoy it! :)
 - [ ] Make a "charge-up jump" when holding down "down-key" (S or Arrow down)
 - [ ] Add double-jump for the ball
 - [ ] Add more platform types
+- [ ] Make icy platform break effect (ice break animation and only platform inside is left)
 
 ![Screenshot](No_Breaks.png)
 ![Screenshot](Ball_Animations.png)
