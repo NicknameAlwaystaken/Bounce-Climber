@@ -13,13 +13,19 @@ public class Platform : MonoBehaviour
         scoreOnBreak;
     private float platformSpeed = 0;
     public GameObject platformBreak;
+    public GameObject destructableObject;
+    public GameObject fracturedObject;
 
     public float PlatformSpeed { get => platformSpeed; set => platformSpeed = value; }
 
     public void DestroyPlatform()
     {
-        Instantiate(platformBreak, gameObject.transform.position, new Quaternion());
-        Destroy(gameObject);
+        if(destructableObject != null)
+        {
+            Instantiate(fracturedObject, gameObject.transform.position, new Quaternion());
+            Destroy(destructableObject);
+        }
+        //Instantiate(platformBreak, gameObject.transform.position, new Quaternion());
     }
     void FixedUpdate()
     {
