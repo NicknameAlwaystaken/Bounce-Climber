@@ -12,6 +12,11 @@ public class Platform : MonoBehaviour
     public float health,
         scoreOnBreak;
     private float platformSpeed = 0;
+    public bool colliderSet = true;
+    public Vector3 nextColliderSize;
+    public Vector3 nextColliderCenter;
+    public int protectiveLayers = 0;
+    public bool destructable = false;
     public GameObject platformBreak;
     public GameObject destructableObject;
     public GameObject fracturedObject;
@@ -20,13 +25,35 @@ public class Platform : MonoBehaviour
 
     public void DestroyPlatform()
     {
+        if(protectiveLayers > 0)
+        {
+            colliderSet = false;
+            DestroyBreakable();
+        }
+        else
+        {
+            Instantiate(platformBreak, gameObject.transform.position, new Quaternion());
+            Destroy(gameObject);
+        }
+    }
+
+    public void DestroyBreakable()
+    {
         if(destructableObject != null)
         {
             Instantiate(fracturedObject, gameObject.transform.position, new Quaternion());
             Destroy(destructableObject);
+            protectiveLayers--;
         }
-        //Instantiate(platformBreak, gameObject.transform.position, new Quaternion());
+        if(protectiveLayers == 0 && !colliderSet)
+        {
+            BoxCollider collider = (BoxCollider)gameObject.GetComponent<Collider>();
+
+            collider.center = nextColliderCenter;
+            collider.size = nextColliderSize;
+        }
     }
+
     void FixedUpdate()
     {
         if(platformSpeed > 0)

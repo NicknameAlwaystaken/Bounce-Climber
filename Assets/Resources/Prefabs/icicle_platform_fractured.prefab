@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5058324064679736866}
   - component: {fileID: 3356959635011918380}
   - component: {fileID: 7011691044775380951}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.081
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,9 +122,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013310377139890981}
-  - component: {fileID: 9143668776416056310}
   - component: {fileID: 5320040149995534998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: icicle_platform_fractured
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,19 +219,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &9143668776416056310
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 386131749644775839}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6, y: 2.3, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5320040149995534998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,8 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505c0024252469a49b13fdcbba89b8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delaySeconds: 5
+  delaySeconds: 2
   scaleAmount: 0.995
+  shrinkMode: 0
 --- !u!1 &449825133424557177
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +247,7 @@ GameObject:
   - component: {fileID: 6242149747946708259}
   - component: {fileID: 8939594020222841769}
   - component: {fileID: 2606244323910324044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.105
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +360,7 @@ GameObject:
   - component: {fileID: 3291168110356718221}
   - component: {fileID: 2162635388832106871}
   - component: {fileID: 1405439906320140574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.094
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +473,7 @@ GameObject:
   - component: {fileID: 5071858112832832692}
   - component: {fileID: 2266271466301650714}
   - component: {fileID: 1683819975536347198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.122
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +586,7 @@ GameObject:
   - component: {fileID: 3732882152284065177}
   - component: {fileID: 5940668638348545419}
   - component: {fileID: 6211252865978077785}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.080
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +699,7 @@ GameObject:
   - component: {fileID: 2545072451257035309}
   - component: {fileID: 8640064705639705361}
   - component: {fileID: 7035809387054944816}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.116
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +812,7 @@ GameObject:
   - component: {fileID: 463544831536341201}
   - component: {fileID: 2146104044438739379}
   - component: {fileID: 598602025754624021}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.077
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,7 +925,7 @@ GameObject:
   - component: {fileID: 7104292500493526619}
   - component: {fileID: 8453551767286111276}
   - component: {fileID: 3171194762254148158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.125
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1051,7 +1038,7 @@ GameObject:
   - component: {fileID: 3322533932539676858}
   - component: {fileID: 3574706466943703188}
   - component: {fileID: 5024103639081351822}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.119
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1164,7 +1151,7 @@ GameObject:
   - component: {fileID: 7477395084741516100}
   - component: {fileID: 1069304378312532454}
   - component: {fileID: 8473653624630257416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.083
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,7 +1264,7 @@ GameObject:
   - component: {fileID: 5866845443101374297}
   - component: {fileID: 6046084160065680289}
   - component: {fileID: 5620991287231337608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.082
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1390,7 +1377,7 @@ GameObject:
   - component: {fileID: 401517612533279388}
   - component: {fileID: 2008552879439149357}
   - component: {fileID: 1700162586374325577}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.091
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1490,7 @@ GameObject:
   - component: {fileID: 6360653602005349089}
   - component: {fileID: 66534783194767847}
   - component: {fileID: 2849962293476215511}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.079
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1616,7 +1603,7 @@ GameObject:
   - component: {fileID: 2224542592550282214}
   - component: {fileID: 7227741855156140397}
   - component: {fileID: 2690413148868879658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.102
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1729,7 +1716,7 @@ GameObject:
   - component: {fileID: 6809405429705925780}
   - component: {fileID: 3561318725580769375}
   - component: {fileID: 619288694177046714}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.098
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1842,7 +1829,7 @@ GameObject:
   - component: {fileID: 9009063964622811248}
   - component: {fileID: 2866378657714983087}
   - component: {fileID: 127939220034802349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.111
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1955,7 +1942,7 @@ GameObject:
   - component: {fileID: 5805939672026337003}
   - component: {fileID: 749674725104203456}
   - component: {fileID: 3942492886973804022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.093
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2055,7 @@ GameObject:
   - component: {fileID: 4812849619371291096}
   - component: {fileID: 4000789481744705105}
   - component: {fileID: 8747000780191076126}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.085
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2181,7 +2168,7 @@ GameObject:
   - component: {fileID: 1470637787072172297}
   - component: {fileID: 8236367480114476323}
   - component: {fileID: 4899988522670687352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.087
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2294,7 +2281,7 @@ GameObject:
   - component: {fileID: 5351317206319025825}
   - component: {fileID: 3614193200124267693}
   - component: {fileID: 2157589465259201229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.066
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2407,7 +2394,7 @@ GameObject:
   - component: {fileID: 57611197988670108}
   - component: {fileID: 5850493470524603040}
   - component: {fileID: 4155268128344790638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.092
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2520,7 +2507,7 @@ GameObject:
   - component: {fileID: 4823088137742805386}
   - component: {fileID: 7231008606843573917}
   - component: {fileID: 4624568238203465405}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.099
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2633,7 +2620,7 @@ GameObject:
   - component: {fileID: 2885215817287034997}
   - component: {fileID: 9039496099706748834}
   - component: {fileID: 6533826363251785843}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.123
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2746,7 +2733,7 @@ GameObject:
   - component: {fileID: 5095222089461540102}
   - component: {fileID: 8716601613465509476}
   - component: {fileID: 7623448378152645204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.059
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2859,7 +2846,7 @@ GameObject:
   - component: {fileID: 868351541827918102}
   - component: {fileID: 7581159367049551251}
   - component: {fileID: 2880274534286350832}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.118
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2972,7 +2959,7 @@ GameObject:
   - component: {fileID: 8561274768885159391}
   - component: {fileID: 7976073280528969780}
   - component: {fileID: 752079205887176034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.109
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3085,7 +3072,7 @@ GameObject:
   - component: {fileID: 4121853275914434190}
   - component: {fileID: 616752370594317212}
   - component: {fileID: 6397562708698590854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.114
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3198,7 +3185,7 @@ GameObject:
   - component: {fileID: 8699387686620870915}
   - component: {fileID: 5627685006248891374}
   - component: {fileID: 502022388526952686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.103
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3311,7 +3298,7 @@ GameObject:
   - component: {fileID: 4829537476550333183}
   - component: {fileID: 4749990170478187043}
   - component: {fileID: 8614267517469224318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.072
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3424,7 +3411,7 @@ GameObject:
   - component: {fileID: 2544179247504325225}
   - component: {fileID: 7048124656193971934}
   - component: {fileID: 5495578666776104428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.100
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3537,7 +3524,7 @@ GameObject:
   - component: {fileID: 1845420919830797739}
   - component: {fileID: 7515737490643197959}
   - component: {fileID: 1316803247935251296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.101
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3650,7 +3637,7 @@ GameObject:
   - component: {fileID: 1730568003595165702}
   - component: {fileID: 2006549965145682505}
   - component: {fileID: 4910803688415624716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.086
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3763,7 +3750,7 @@ GameObject:
   - component: {fileID: 4676685162586676800}
   - component: {fileID: 6872406597800943978}
   - component: {fileID: 1869752177492427194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.108
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3876,7 +3863,7 @@ GameObject:
   - component: {fileID: 6718007649690377046}
   - component: {fileID: 535706063778220344}
   - component: {fileID: 9190049840320003445}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.096
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3989,7 +3976,7 @@ GameObject:
   - component: {fileID: 1691663940539119850}
   - component: {fileID: 2145863734214673614}
   - component: {fileID: 584705189342741609}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.070
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4102,7 +4089,7 @@ GameObject:
   - component: {fileID: 2485114024317886661}
   - component: {fileID: 5288399469495728942}
   - component: {fileID: 3482359089159103890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.089
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4215,7 +4202,7 @@ GameObject:
   - component: {fileID: 7625573869494937958}
   - component: {fileID: 2206652164573481595}
   - component: {fileID: 1850875315178183956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.110
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4328,7 +4315,7 @@ GameObject:
   - component: {fileID: 3005007859219639354}
   - component: {fileID: 2237761119906330747}
   - component: {fileID: 2667713364731772324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.062
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4441,7 +4428,7 @@ GameObject:
   - component: {fileID: 979790815606999460}
   - component: {fileID: 3029053097440211346}
   - component: {fileID: 4421614322090386212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.065
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4554,7 +4541,7 @@ GameObject:
   - component: {fileID: 58788630592227334}
   - component: {fileID: 6727299578841376517}
   - component: {fileID: 5662173779744497152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.104
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4667,7 +4654,7 @@ GameObject:
   - component: {fileID: 8950676848213876799}
   - component: {fileID: 652890552021094134}
   - component: {fileID: 4771649083544857377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.075
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4780,7 +4767,7 @@ GameObject:
   - component: {fileID: 9114127053868858077}
   - component: {fileID: 6505059211657272065}
   - component: {fileID: 9019936839690643313}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.128
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4893,7 +4880,7 @@ GameObject:
   - component: {fileID: 7741940421975914469}
   - component: {fileID: 6077985765341979976}
   - component: {fileID: 5783481790785750021}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.061
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5006,7 +4993,7 @@ GameObject:
   - component: {fileID: 5580875495462733880}
   - component: {fileID: 8672734830940232443}
   - component: {fileID: 8745487016993588764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.127
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5119,7 +5106,7 @@ GameObject:
   - component: {fileID: 1004599209251353420}
   - component: {fileID: 8343894792518502962}
   - component: {fileID: 8043160573986934614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.073
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5232,7 +5219,7 @@ GameObject:
   - component: {fileID: 6340782049636109277}
   - component: {fileID: 3238645056788235782}
   - component: {fileID: 5505582554719592210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.117
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5345,7 +5332,7 @@ GameObject:
   - component: {fileID: 7516926647332345695}
   - component: {fileID: 8812168685635340831}
   - component: {fileID: 260436462319727695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.063
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5458,7 +5445,7 @@ GameObject:
   - component: {fileID: 5894036165922282327}
   - component: {fileID: 552844559833286477}
   - component: {fileID: 1900449419596041848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.106
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5571,7 +5558,7 @@ GameObject:
   - component: {fileID: 2550127920770465670}
   - component: {fileID: 4299223177487851071}
   - component: {fileID: 6221810563538672751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.133
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5684,7 +5671,7 @@ GameObject:
   - component: {fileID: 3537548376986362062}
   - component: {fileID: 6220775081720029231}
   - component: {fileID: 2481458432914220094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.069
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5797,7 +5784,7 @@ GameObject:
   - component: {fileID: 883082245029987287}
   - component: {fileID: 4134657637618791425}
   - component: {fileID: 4982676530916573407}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.084
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5910,7 +5897,7 @@ GameObject:
   - component: {fileID: 6339415211126524080}
   - component: {fileID: 4386917174389260021}
   - component: {fileID: 324254617727946706}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.078
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6023,7 +6010,7 @@ GameObject:
   - component: {fileID: 8158230489311543816}
   - component: {fileID: 1569692722160513606}
   - component: {fileID: 7500835400369636858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.068
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6136,7 +6123,7 @@ GameObject:
   - component: {fileID: 6927678250091759386}
   - component: {fileID: 9152280821338808529}
   - component: {fileID: 3338657468491548724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.064
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6249,7 +6236,7 @@ GameObject:
   - component: {fileID: 2994770731717832442}
   - component: {fileID: 3978029215049401893}
   - component: {fileID: 5406044122069933530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.124
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6362,7 +6349,7 @@ GameObject:
   - component: {fileID: 8931310001215454697}
   - component: {fileID: 3952098107799198403}
   - component: {fileID: 7287765421951573006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.107
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6475,7 +6462,7 @@ GameObject:
   - component: {fileID: 1302711982353116948}
   - component: {fileID: 4769823916444831102}
   - component: {fileID: 2808528991026711783}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.121
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6588,7 +6575,7 @@ GameObject:
   - component: {fileID: 7272807343097792755}
   - component: {fileID: 3959372456525622514}
   - component: {fileID: 1676069643959300919}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.112
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6701,7 +6688,7 @@ GameObject:
   - component: {fileID: 9001940234760321767}
   - component: {fileID: 5109689907462354938}
   - component: {fileID: 8584352433690048009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.115
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6814,7 +6801,7 @@ GameObject:
   - component: {fileID: 4860998428123196384}
   - component: {fileID: 3616587315600936717}
   - component: {fileID: 6900415360129047258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.126
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6927,7 +6914,7 @@ GameObject:
   - component: {fileID: 1697864225804550341}
   - component: {fileID: 8204056778134338404}
   - component: {fileID: 9198288738060541640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.132
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7040,7 +7027,7 @@ GameObject:
   - component: {fileID: 3514118107953756459}
   - component: {fileID: 7258612832262165959}
   - component: {fileID: 1323606129802514930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.129
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7153,7 +7140,7 @@ GameObject:
   - component: {fileID: 684994236701856102}
   - component: {fileID: 237884938941737813}
   - component: {fileID: 404796274860887589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.090
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7266,7 +7253,7 @@ GameObject:
   - component: {fileID: 2401497775602058234}
   - component: {fileID: 6236277207266778067}
   - component: {fileID: 8357257071624836305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.120
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7379,7 +7366,7 @@ GameObject:
   - component: {fileID: 7880319167952991198}
   - component: {fileID: 354464156162471921}
   - component: {fileID: 7261472584971056300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.074
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7492,7 +7479,7 @@ GameObject:
   - component: {fileID: 738414977648406565}
   - component: {fileID: 2547160411084467451}
   - component: {fileID: 218900659273138487}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.095
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7605,7 +7592,7 @@ GameObject:
   - component: {fileID: 8233497822950359884}
   - component: {fileID: 2119616033509719895}
   - component: {fileID: 5215935892390226217}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.071
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7718,7 +7705,7 @@ GameObject:
   - component: {fileID: 3955135793124860902}
   - component: {fileID: 7416463520066374000}
   - component: {fileID: 727100311039232592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.131
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7831,7 +7818,7 @@ GameObject:
   - component: {fileID: 8892661545763823051}
   - component: {fileID: 8304199941461359309}
   - component: {fileID: 3977838627527846374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.067
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7944,7 +7931,7 @@ GameObject:
   - component: {fileID: 8065702037095503759}
   - component: {fileID: 2892144499720539987}
   - component: {fileID: 2520471596110105079}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.076
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8057,7 +8044,7 @@ GameObject:
   - component: {fileID: 2895416871139160358}
   - component: {fileID: 2116668869607429127}
   - component: {fileID: 5836538030979635431}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.088
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8170,7 +8157,7 @@ GameObject:
   - component: {fileID: 967608508000725444}
   - component: {fileID: 3160163554133442731}
   - component: {fileID: 3662797568373302335}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.130
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8283,7 +8270,7 @@ GameObject:
   - component: {fileID: 4293581223283530350}
   - component: {fileID: 5337196338550615303}
   - component: {fileID: 5055425674480701846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.097
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8396,7 +8383,7 @@ GameObject:
   - component: {fileID: 6886790799765409073}
   - component: {fileID: 8901148818051789640}
   - component: {fileID: 3589236750743051156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.060
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8509,7 +8496,7 @@ GameObject:
   - component: {fileID: 3392959100428657472}
   - component: {fileID: 1735766711476243621}
   - component: {fileID: 3904952402692413268}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_Ice_cell.113
   m_TagString: Untagged
   m_Icon: {fileID: 0}

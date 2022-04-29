@@ -147,11 +147,15 @@ public class PlayerControls : MonoBehaviour
             GameObject collidedObject = collision.gameObject;
             if (collidedObject.CompareTag("Platform") || collidedObject.CompareTag("Ground"))
             {
-                if (gameMode == 2 && collidedObject.CompareTag("Platform"))
+                if(collidedObject.CompareTag("Platform"))
                 {
-                    if (playerDiving || playerReturned)
+                    GameController.instance.DestroyBreakable(collidedObject);
+                    if (gameMode == 2)
                     {
-                        GameController.instance.DestroyPlatform(collidedObject);
+                        if (playerDiving || playerReturned)
+                        {
+                            GameController.instance.DestroyPlatform(collidedObject);
+                        }
                     }
                 }
                 bounce = true;

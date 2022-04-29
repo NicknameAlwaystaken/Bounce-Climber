@@ -6,6 +6,7 @@ public class DelayRemoval : MonoBehaviour
 {
     public float delaySeconds = 2f;
     public float scaleAmount = 0.95f;
+    public bool shrinkMode = false;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -15,11 +16,13 @@ public class DelayRemoval : MonoBehaviour
         {
             if (child != null)
             {
-                Debug.Log(child.name);
-                child.transform.localScale = Vector3.Scale(child.transform.localScale, new Vector3(scaleAmount, scaleAmount, scaleAmount));
+                if(shrinkMode)
+                {
+                    child.transform.localScale = Vector3.Scale(child.transform.localScale, new Vector3(scaleAmount, scaleAmount, scaleAmount));
+                }
                 if (delaySeconds <= 0)
                 {
-                    gameObject.SetActive(false);
+                    Destroy(gameObject);
                 }
             }
         }

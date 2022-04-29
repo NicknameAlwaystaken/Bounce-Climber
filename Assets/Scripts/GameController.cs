@@ -207,6 +207,10 @@ public class GameController : MonoBehaviour
     {
         platformToDestroy.GetComponent<Platform>().DestroyPlatform();
     }
+    public void DestroyBreakable(GameObject platformToDestroy)
+    {
+        platformToDestroy.GetComponent<Platform>().DestroyBreakable();
+    }
     private void SetCamera(Vector3 newCameraPosition)
     {
         mainCamera.transform.position = newCameraPosition;
