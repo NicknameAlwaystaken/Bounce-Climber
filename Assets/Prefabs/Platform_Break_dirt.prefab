@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 453752408002367235}
   - component: {fileID: 1932059461766441644}
   m_Layer: 0
-  m_Name: Platform_Break_purple
+  m_Name: Platform_Break_dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4759,7 +4759,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 430d8f62edaf6a743ab271651c099f3d, type: 2}
+  - {fileID: 2100000, guid: 67ca599862eb70f4fbc38df1010bf757, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
