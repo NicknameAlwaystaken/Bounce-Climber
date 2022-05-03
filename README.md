@@ -33,6 +33,8 @@ My first unity game, I hope you enjoy it! :)
         - [ ] Summer platform animations
     - [ ] Autumn
 
+## Screenshots and GIFs
+
 ![Screenshot](No_Breaks.png)
 ![Screenshot](Ball_Animations.png)
 ![Screenshot](Platform_Breaking.png)
