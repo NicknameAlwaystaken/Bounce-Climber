@@ -94,7 +94,7 @@ Here I am aiming to use the skeleton of the game
     - [ ] Delayed Jump
     - [ ] Increased velocity based on time held
 
-- [ ] Dash ability [`link`](#dash-ability)
+- [ ] Dash ability [link](#dash-ability)
 - [ ] Dive ability [`link`](#dive-ability)
 
 - [ ] Player/Ball deformation
