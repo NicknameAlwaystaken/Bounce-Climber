@@ -14,7 +14,7 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 
 
 
-# To-do-list
+# To-do list
 
 
 ## Game Structure
@@ -24,13 +24,17 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 
 ## Game Mechanics
 
-- [ ] Game menus
+#### Game menus
     - [ ] Main Menu
     - [ ] Settings menu
         - [ ] Game Settings
             - [ ] Ball color change
         - [ ] Sound Settings
             - [ ] Change volume for sounds
+
+#### Minimap
+    - [ ] Intuitive to read
+    - [ ] Useful for micro-movements
 
 - [ ] Close game loop (Start game --> play --> lose/win --> start game)
 
