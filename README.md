@@ -95,7 +95,7 @@ Here I am aiming to use the skeleton of the game
     - [ ] Increased velocity based on time held
 
 - [ ] Dash ability[^dash_ability]
-- [ ] Dive ability[`dive-ability`]
+- [ ] [`Dive ability`](#dive-ability)
 
 - [ ] Player/Ball deformation
     - [ ] On bounce
