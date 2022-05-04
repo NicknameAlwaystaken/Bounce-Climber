@@ -1,6 +1,7 @@
 # Document list
 
 [**Project Description**](README.md#bounce-climber-project-description)
+[**Project Description In Finnish**](README.md#bounce-climber-project-description-finnish)
 [**Game Manual**](GAMEMANUAL.md#game-manual)
 [**To-do List**](TODOLIST.md#to-do-list)
 
@@ -15,8 +16,9 @@ I will gather here things that are mostly done in the side of creating a skeleto
 - [ ] State machines
     - [ ] **Player**
         - [ ] Basic States
-            - [ ] Playing
             - [ ] In Main Menu
+            - [ ] Dead
+            - [ ] Playing
             - [ ] Movement
                 - [ ] Bouncing
                 - [ ] Falling
