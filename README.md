@@ -83,6 +83,9 @@ Here I am aiming to use the skeleton of the game
     - [ ] Delayed Jump
     - [ ] Increased velocity based on time held
 
+- [ ] Dash ability[^1]
+- [ ] Dive ability
+
 - [ ] Player/Ball deformation
     - [ ] On bounce
     - [ ] On high speeds
@@ -148,3 +151,12 @@ I aim to create very pleasing looking and sounding game with these effects
 #### Ice break melting animation (Outdated look, but same animation. See above for new look)
 
 ![GIF](https://j.gifs.com/79z1VG.gif "Ice Platform Breaking")
+
+
+# Explaining game mechanics
+
+## Player
+
+### Dash ability [^1]
+
+Player can dash to a direction by double-tapping left or right ( or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
