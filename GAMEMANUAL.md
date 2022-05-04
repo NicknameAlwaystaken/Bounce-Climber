@@ -1,8 +1,8 @@
 # Document list
 
 [**Project Description**](README.md#bounce-climber-project-description)
-[**Game Manual**](GAMEMANUAL.md)
-[**To-do List**](TODOLIST.md)
+[**Game Manual**](GAMEMANUAL.md#game-manual)
+[**To-do List**](TODOLIST.md#to-do-list)
 
 
 # Game Manual
