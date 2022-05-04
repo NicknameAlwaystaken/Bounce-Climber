@@ -94,8 +94,8 @@ Here I am aiming to use the skeleton of the game
     - [ ] Delayed Jump
     - [ ] Increased velocity based on time held
 
-- [ ] Dash ability[^dash_ability]
-- [ ] [`Dive ability`](#dive-ability)
+- [ ] Dash ability [`link`](#dash-ability)
+- [ ] Dive ability [`link`](#dive-ability)
 
 - [ ] Player/Ball deformation
     - [ ] On bounce
@@ -173,7 +173,7 @@ I aim to create very pleasing looking and sounding game with these effects
 
 ### Behavior
 
-[^bouncing]: By default player will be always bouncing with a set velocity, to change bounce height player is given vertical movement, but instead of bounce velocity it introduces gravity changes. This way player can levitate a bit or fall down faster.
+By default player will be always bouncing with a set velocity, to change bounce height player is given vertical movement, but instead of bounce velocity it introduces gravity changes. This way player can levitate a bit or fall down faster.
 
 ### Controls
 
@@ -181,7 +181,7 @@ I aim to create very pleasing looking and sounding game with these effects
 
 #### Dash ability
 
-[^dash_ability]: Player can dash to a direction by double-tapping left or right ( or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash a set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
+Player can dash to a direction by double-tapping left or right ( or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash a set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
 
 #### Dive ability
 
