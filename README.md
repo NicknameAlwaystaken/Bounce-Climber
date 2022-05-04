@@ -27,16 +27,15 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 
 ## Game Mechanics
 
-##### Game menus
+### Game menus
+- [ ] Main Menu
+- [ ] Settings menu
+    - [ ] Game Settings
+        - [ ] Ball color change
+    - [ ] Sound Settings
+        - [ ] Change volume for sounds
 
-    - [ ] Main Menu
-    - [ ] Settings menu
-        - [ ] Game Settings
-            - [ ] Ball color change
-        - [ ] Sound Settings
-            - [ ] Change volume for sounds
-
-##### Minimap
+### Minimap
 
     - [ ] Intuitive to read
     - [ ] Useful for micro-movements
@@ -69,24 +68,24 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 
 #### No Breaks gamemode where you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster.
 
-![Screenshot](No_Breaks.png)
+![Screenshot](No_Breaks.png "No Breaks gamemode")
 
 #### Ball has a trail and creates dust or wind on contact with a platform
 
-![Screenshot](Ball_Animations.png)
+![Screenshot](Ball_Animations.png "Ball Animations")
 
 #### Animation for default platform break
 
-![Screenshot](Platform_Breaking.png)
+![Screenshot](Platform_Breaking.png "Platform Breaking")
 
 #### Grass type platform
 
-![Screenshot](Grass_Platform.png)
+![Screenshot](Grass_Platform.png "Grass Platform")
 
 #### Ice platform and ice breaking animation
 
-![Screenshot](Ice_platform_and_break.png)
+![Screenshot](Ice_platform_and_break.png "Ice Platform")
 
 #### Ice break melting animation (Outdated look, but same animation. See above for new look)
 
-![GIF](https://j.gifs.com/79z1VG.gif)
+![GIF](https://j.gifs.com/79z1VG.gif "Ice Platform Breaking")
