@@ -2,8 +2,6 @@
 
 [**Project Description**](README.md#bounce-climber-project-description)
 
-[**Project Description In Finnish**](README.md#bounce-climber-project-description-finnish)
-
 [**Game Manual**](GAMEMANUAL.md#game-manual)
 
 [**To-do List**](TODOLIST.md#to-do-list)
