@@ -3,16 +3,24 @@ My first unity game, I hope you enjoy it! :)
 
 
 
-### To-do-list
+# To-do-list
 
 
 ## Game Structure
 
 - [ ] Using state machines
+    - [ ] Have a state for the player to be able to showcase the ball in menus
 
 ## Game Mechanics
 
-- [ ] Main Menu
+- [ ] Game menus
+    - [ ] Main Menu
+    - [ ] Settings menu
+        - [ ] Game Settings
+            - [ ] Ball color change
+        - [ ] Sound Settings
+            - [ ] Change volume for sounds
+
 - [ ] Close game loop (Start game --> play --> lose/win --> start game)
 
 - [ ] Make a "charge-up jump" when holding down "down-key" (S or Arrow down)
