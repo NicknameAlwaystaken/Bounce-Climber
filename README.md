@@ -157,6 +157,6 @@ I aim to create very pleasing looking and sounding game with these effects
 
 ## Player
 
-### Dash ability [^1]
+### Dash ability
 
-Player can dash to a direction by double-tapping left or right ( or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
+[^1]: Player can dash to a direction by double-tapping left or right ( or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash a set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
