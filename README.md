@@ -27,7 +27,7 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 
 ## Game Mechanics
 
-#### Game menus
+##### Game menus
 
     - [ ] Main Menu
     - [ ] Settings menu
@@ -36,7 +36,7 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
         - [ ] Sound Settings
             - [ ] Change volume for sounds
 
-#### Minimap
+##### Minimap
 
     - [ ] Intuitive to read
     - [ ] Useful for micro-movements
