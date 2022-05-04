@@ -19,36 +19,70 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 
 ## Game Structure
 
+I will gather here things that are mostly done in the side of creating a skeleton for the game to work with.
+
 - [ ] State machines
-    - [ ] Showcase for menus
-    - [ ] Playing
-    - [ ] Frozen
-    - [ ] Collision
+    - [ ] Player
+        - [ ] Basic States
+            - [ ] Playing
+            - [ ] Movement
+                - [ ] Bouncing
+                - [ ] Falling
+                - [ ] Jumping
+        - [ ] Special States
+            - [ ] Showcase for menus
+                - [ ] Idle
+                - [ ] Bouncing
+            - [ ] Static Toggle
+            - [ ] Collision Toggle
+    - [ ] Game
+        - [ ] Main Menu
+        - [ ] Paused
+        - [ ] Playing
+        - [ ] Player States
 
 ## Game Mechanics
 
+Here I am aiming to use the skeleton
+
 ### Game menus
+
 - [ ] Main Menu
+- [ ] Pause Menu
+    - [ ] Continue
+    - [ ] To Main Menu
+- [ ] Gameover Menu
+    - [ ] Restart
+    - [ ] To Main Menu
 - [ ] Settings menu
     - [ ] Game Settings
         - [ ] Ball color change
     - [ ] Sound Settings
-        - [ ] Change volume for sounds
+        - [ ] Main Volume Slider 0 to 100 (Default 50)
 
 ### Minimap
 
-    - [ ] Intuitive to read
-    - [ ] Useful for micro-movements
+- [ ] Intuitive to read
+- [ ] Useful for micro-movements
+
+### Gameplay
+
+#### Player Specific
+
+- [ ] Charge-up jump on "Down-key"
+    - [ ] Delayed Jump
+    - [ ] Increased velocity based on time held
+- [ ] Player/Ball deformation on bounce
+    - [ ] Jump delay based on Falling speed
+    - [ ] Deformation amount based on falling speed
+    - [ ] Add extra special effects on higher velocities
+- [ ] Double-jump
+- [x] Icy platform break on contact (from above)
+
+#### Game Specific
 
 - [ ] Close game loop (Start game --> play --> lose/win --> start game)
-
-- [ ] Make a "charge-up jump" when holding down "down-key" (S or Arrow down)
-
-- [ ] Add double-jump for the ball
-
 - [ ] Cycle of Seasons with distance
-
-- [x] Make icy platform break effect (ice break animation and only platform inside is left)
 
 ## Art
 
@@ -58,10 +92,14 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
     - [ ] Better default platform break animation
 - [ ] Add more platform types
     - [x] Winter
-        - [x] Winter platform animations
+        - [x] Winter platform animations (Ice break and melt)
+        - [ ] Unique sound on ice and the platform
+        - [x] Unique animation on land (Ice breaking, none for platform inside)
     - [ ] Spring
     - [x] Summer
-        - [ ] Summer platform animations
+        - [ ] Summer platform animations (maybe flowers growing, bees flying)
+        - [ ] Unique sound
+        - [ ] Unique animation on land
     - [ ] Autumn
 
 ## Screenshots and GIFs
