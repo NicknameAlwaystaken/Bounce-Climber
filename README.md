@@ -90,10 +90,7 @@ Here I am aiming to use the skeleton of the game
 
 #### Player Specific
 
-- [ ] Charge-up jump on "Down-key"[^charge_jump]
-    - [ ] Delayed Jump
-    - [ ] Increased velocity based on time held
-
+- [ ] Charge jump [*link*](#charge-jump-ability)
 - [ ] Dash ability [link](#dash-ability)
 - [ ] Dive ability [`link`](#dive-ability)
 
@@ -173,6 +170,7 @@ I aim to create very pleasing looking and sounding game with these effects
 
 ### Behavior
 
+#### Bouncing
 By default player will be always bouncing with a set velocity, to change bounce height player is given vertical movement, but instead of bounce velocity it introduces gravity changes. This way player can levitate a bit or fall down faster.
 
 ### Controls
@@ -186,3 +184,7 @@ Player can dash to a direction by double-tapping left or right ( or alternativel
 #### Dive ability
 
 Player is able to dive with great speed downwards to hit into a platform faster than just plainly falling. It is activated by pressing Down-key
+
+#### Charge Jump ability
+
+Player is able to reach greater heights using Charge Jump. It's used by holding down Down-key whlist you are ontop of a surface. It will pause [Bouncing](#bouncing) during, and the longer you hold the higher you can jump.
