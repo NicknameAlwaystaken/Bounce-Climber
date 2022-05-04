@@ -19,12 +19,16 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 
 ## Game Structure
 
-- [ ] Using state machines
-    - [ ] Have a state for the player to be able to showcase the ball in menus
+- [ ] State machines
+    - [ ] Showcase for menus
+    - [ ] Playing
+    - [ ] Frozen
+    - [ ] Collision
 
 ## Game Mechanics
 
 #### Game menus
+
     - [ ] Main Menu
     - [ ] Settings menu
         - [ ] Game Settings
@@ -33,6 +37,7 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
             - [ ] Change volume for sounds
 
 #### Minimap
+
     - [ ] Intuitive to read
     - [ ] Useful for micro-movements
 
