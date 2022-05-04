@@ -138,7 +138,6 @@ I aim to create very pleasing looking and sounding game with these effects
     - [ ] **Autumn**
 
 
-#### Ball has a trail and creates dust or wind on contact with a platform
 
 
 
@@ -163,6 +162,8 @@ In this gamemode you aim to climb upwards while staying in the camera view. Came
 #### Ball
 
 ##### Still images
+
+Ball has a trail and creates dust or wind on contact with a platform
 
 ![Screenshot](Ball_Animations.png "Ball Animations")
 
