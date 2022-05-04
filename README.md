@@ -43,6 +43,17 @@ I will gather here things that are mostly done in the side of creating a skeleto
         - [ ] Paused
         - [ ] Playing
 
+- [ ] **Platform changes**
+    - [x] Give platforms breakable layers
+        - [ ] As a list
+        - [ ] Have set their own health
+
+- [ ] **Player changes**
+    - [ ] Inflict damage to platforms on contact
+        - [ ] Static amount
+            - [ ] Eventually upgradeable (lower damage inflicted)
+        - [ ] Based on speed on contact
+
 ## Game Mechanics
 
 Here I am aiming to use the skeleton of the game
@@ -79,12 +90,12 @@ Here I am aiming to use the skeleton of the game
 
 #### Player Specific
 
-- [ ] Charge-up jump on "Down-key"
+- [ ] Charge-up jump on "Down-key"[^charge_jump]
     - [ ] Delayed Jump
     - [ ] Increased velocity based on time held
 
-- [ ] Dash ability[^1]
-- [ ] Dive ability
+- [ ] Dash ability[^dash_ability]
+- [ ] Dive ability[`dive-ability`]
 
 - [ ] Player/Ball deformation
     - [ ] On bounce
@@ -99,6 +110,9 @@ Here I am aiming to use the skeleton of the game
 
 #### Game Specific
 
+- [ ] Give platforms "health" for when they break
+    - [ ] Some platforms to never break
+    - [ ] Some platforms to have layers, which have their own health
 - [ ] Close game loop (Start game --> play --> lose/win --> start game)
 - [ ] Cycle of Seasons with distance
 
@@ -157,10 +171,18 @@ I aim to create very pleasing looking and sounding game with these effects
 
 ## Player
 
+### Behavior
+
+[^bouncing]: By default player will be always bouncing with a set velocity, to change bounce height player is given vertical movement, but instead of bounce velocity it introduces gravity changes. This way player can levitate a bit or fall down faster.
+
 ### Controls
 
 ### Abilities
 
 #### Dash ability
 
-[^1]: Player can dash to a direction by double-tapping left or right ( or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash a set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
+[^dash_ability]: Player can dash to a direction by double-tapping left or right ( or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash a set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
+
+#### Dive ability
+
+Player is able to dive with great speed downwards to hit into a platform faster than just plainly falling. It is activated by pressing Down-key
