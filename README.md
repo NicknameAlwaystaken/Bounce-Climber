@@ -137,44 +137,63 @@ I aim to create very pleasing looking and sounding game with these effects
 
     - [ ] **Autumn**
 
-## Screenshots and GIFs
-
-#### No Breaks gamemode where you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster.
-
-![Screenshot](No_Breaks.png "No Breaks gamemode")
 
 #### Ball has a trail and creates dust or wind on contact with a platform
 
+
+
+
+# Game Manual
+
+## GameModes
+
+### No Breaks
+
+#### Explanation
+In this gamemode you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster. If you fall behind of the camera/out of view you will lose life/die.
+
+#### Still images
+
+![Screenshot](No_Breaks.png "No Breaks gamemode")
+
+## Objects
+
+### Player
+
+#### Ball
+
+##### Still images
+
 ![Screenshot](Ball_Animations.png "Ball Animations")
+
+### Platforms
 
 #### Animation for default platform break
 
 ![Screenshot](Platform_Breaking.png "Platform Breaking")
 
-#### Grass type platform
+#### Ice Platform
 
-![Screenshot](Grass_Platform.png "Grass Platform")
-
-#### Ice platform and ice breaking animation
+##### Still image
 
 ![Screenshot](Ice_platform_and_break.png "Ice Platform")
 
-#### Ice break melting animation (Outdated look, but same animation. See above for new look)
+##### Animations
 
 ![GIF](https://j.gifs.com/79z1VG.gif "Ice Platform Breaking")
 
 
-# Game Manual
+#### Grass Platform
 
-## Objects
+##### Still image
 
-### Platforms
+![Screenshot](Grass_Platform.png "Grass Platform")
 
-#### Ice Platform
+##### Animations
 
-![Screenshot](Ice_platform_and_break.png "Ice Platform")
+No GIF.
 
-## Player
+## Player Mechanics
 
 ### Behavior
 
