@@ -5,9 +5,11 @@
 [**Game Manual**](GAMEMANUAL.md#game-manual)
 [**To-do List**](TODOLIST.md#to-do-list)
 
-Updated 4th of May 2022
+
 
 # Bounce Climber Project Description
+
+Updated 4th of May 2022
 
 A simple game with player playing as a ball and you interact with platforms in different ways. Say climbing higher or purposefully breaking them.
 
@@ -37,9 +39,10 @@ I am heavily enjoying OOP and the way I can use it in unity. I am starting to ge
 
 As of writing this now 4th of May, I still have a lot to learn, but I am looking forward to finishing this project and be proud of it!
 
-Päivitetty 4.5.2022
 
 # Bounce Climber Projektin Kuvaus Suomeksi
+
+Päivitetty 4.5.2022
 
 Bounce Climber eli Pallo Kiipeily *(ei ole suoraan käännetty)*
 
