@@ -47,7 +47,7 @@ Tosi yksinkertainen peli, jossa pelataan pallolla ja ollaan vuorovaikutuksessa t
 
 ## Miten Päädyin Tähän
 
-Tämä on suurin projekti jota olen lähtenyt tekemään ja suunnittelemaan! Se alkoi siitä että halusin tehdä hyvin simppelin pelin jota on tosi mukava pelata. Tälläisen pelin tekemiseen vaaditaan paljon peli-elementtien (esim äänien ja erinlaisten tehosteiden *(effects)*) hiostamista, jotta pelaamisesta tulee sujuvaa ja nautinnollista.
+Tämä on suurin projekti, jota olen lähtenyt tekemään ja suunnittelemaan! Se alkoi siitä että halusin tehdä hyvin simppelin pelin jota on tosi mukava pelata. Tälläisen pelin tekemiseen vaaditaan paljon peli-elementtien (esim äänien ja erinlaisten tehosteiden *(effects)*) hiostamista, jotta pelaamisesta tulee sujuvaa ja nautinnollista.
 
 ## Minusta
 
