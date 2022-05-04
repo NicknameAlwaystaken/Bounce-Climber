@@ -22,41 +22,51 @@ As of writing this now 4th of May, I still have lot to learn, but I am looking f
 I will gather here things that are mostly done in the side of creating a skeleton for the game to work with.
 
 - [ ] State machines
-    - [ ] Player
+    - [ ] **Player**
         - [ ] Basic States
             - [ ] Playing
+            - [ ] In Main Menu
             - [ ] Movement
                 - [ ] Bouncing
                 - [ ] Falling
                 - [ ] Jumping
+
         - [ ] Special States
+            - [ ] Static Toggle
+            - [ ] Collision Toggle
             - [ ] Showcase for menus
                 - [ ] Idle
                 - [ ] Bouncing
-            - [ ] Static Toggle
-            - [ ] Collision Toggle
-    - [ ] Game
+
+    - [ ] **Game**
         - [ ] Main Menu
         - [ ] Paused
         - [ ] Playing
-        - [ ] Player States
 
 ## Game Mechanics
 
-Here I am aiming to use the skeleton
+Here I am aiming to use the skeleton of the game
 
 ### Game menus
 
-- [ ] Main Menu
-- [ ] Pause Menu
+- [ ] **Main Menu**
+    - [ ] Play Game Menu
+        - [ ] Start Game
+        - [ ] Change Gamemode
+        - [ ] Back to Main Menu
+- [ ] **Pause Menu**
     - [ ] Continue
+    - [ ] Settings Menu
     - [ ] To Main Menu
-- [ ] Gameover Menu
+
+- [ ] **Gameover Menu**
     - [ ] Restart
     - [ ] To Main Menu
-- [ ] Settings menu
+
+- [ ] **Settings Menu**
     - [ ] Game Settings
         - [ ] Ball color change
+
     - [ ] Sound Settings
         - [ ] Main Volume Slider 0 to 100 (Default 50)
 
@@ -72,10 +82,15 @@ Here I am aiming to use the skeleton
 - [ ] Charge-up jump on "Down-key"
     - [ ] Delayed Jump
     - [ ] Increased velocity based on time held
-- [ ] Player/Ball deformation on bounce
+
+- [ ] Player/Ball deformation
+    - [ ] On bounce
+    - [ ] On high speeds
+    - [ ] Back to original on zero speed
     - [ ] Jump delay based on Falling speed
     - [ ] Deformation amount based on falling speed
     - [ ] Add extra special effects on higher velocities
+
 - [ ] Double-jump
 - [x] Icy platform break on contact (from above)
 
@@ -86,21 +101,27 @@ Here I am aiming to use the skeleton
 
 ## Art
 
+I aim to create very pleasing looking and sounding game with these effects
+
 - [ ] Polishing game with graphics and sounds
     - [ ] Ball deformation
     - [ ] Better splash animation on landing
     - [ ] Better default platform break animation
+
 - [ ] Add more platform types
-    - [x] Winter
+    - [x] **Winter**
         - [x] Winter platform animations (Ice break and melt)
         - [ ] Unique sound on ice and the platform
         - [x] Unique animation on land (Ice breaking, none for platform inside)
-    - [ ] Spring
-    - [x] Summer
+
+    - [ ] **Spring**
+
+    - [x] **Summer**
         - [ ] Summer platform animations (maybe flowers growing, bees flying)
         - [ ] Unique sound
         - [ ] Unique animation on land
-    - [ ] Autumn
+
+    - [ ] **Autumn**
 
 ## Screenshots and GIFs
 
