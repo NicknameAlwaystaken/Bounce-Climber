@@ -1,8 +1,11 @@
 # Document list
 
 [**Project Description**](README.md#bounce-climber-project-description)
-[**Project Description In Finnish**](README.md#bounce-climber-projektin-kuvaus-suomeksi)
+
+[**Projektin Kuvaus Suomeksi (finnish)**](README.md#bounce-climber-projektin-kuvaus-suomeksi)
+
 [**Game Manual**](GAMEMANUAL.md#game-manual)
+
 [**To-do List**](TODOLIST.md#to-do-list)
 
 
