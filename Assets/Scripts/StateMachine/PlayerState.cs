@@ -18,6 +18,7 @@ public abstract class PlayerState
     }
     public virtual IEnumerator Exit()
     {
+        GameModeController.SetPlayerState(new Moving(GameModeController));
         yield break;
     }
     public virtual IEnumerator Spawning()

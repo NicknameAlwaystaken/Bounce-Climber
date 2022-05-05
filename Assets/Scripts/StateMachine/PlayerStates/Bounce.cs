@@ -9,15 +9,12 @@ public class Bounce : PlayerState
     }
     public override IEnumerator Start()
     {
-        yield break;
-    }
+        Rigidbody rb = GameModeController.GetComponent<Rigidbody>();
+        Vector3 upVelocity = Vector3.up * 30f;
+        if(rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
 
-    public override void Update()
-    {
-        audioSource.Play();
-        Instantiate(particles, transform.position, new Quaternion());
-        bounce = false;
-        Vector3 upVelocity = Vector3.up * bounceVelocity;
-        rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
+        base.Exit();
+
+        yield break;
     }
 }
