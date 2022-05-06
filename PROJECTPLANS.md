@@ -72,10 +72,12 @@ sequenceDiagram
     SpawningPlayer->>GameModeController: SetPlayerState(new Bouncing())
     GameModeController->>PlayerState: SetPlayerState();
     GameState->>Bouncing: Start()
-    PlayerControls->>GameModeController: On landing SetPlayerState(new Jumping())
-    GameModeController->>PlayerState: StartCoroutine(new Jump())
-    PlayerState->>Jumping: Start()
-    Jumping->>GameModeController: SetPlayerState(new Bouncing())
-    GameModeController->>PlayerState: SetGameState();
-    GameState->>Bouncing: Start()
+    loop OnCollisionEnter()
+        PlayerControls->>GameModeController: SetPlayerState(new Jumping())
+        GameModeController->>PlayerState: StartCoroutine(new Jump())
+        PlayerState->>Jumping: Start()
+        Jumping->>GameModeController: SetPlayerState(new Bouncing())
+        GameModeController->>PlayerState: SetGameState();
+        GameState->>Bouncing: Start()
+    end
 ```
