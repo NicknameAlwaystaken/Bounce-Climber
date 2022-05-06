@@ -56,3 +56,26 @@ classDiagram
     PlayerState <|-- SpawningPlayer  : Inheritance
     GameState <|-- StartGame  : Inheritance
 ```
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant GameModeController
+    participant GameState
+    participant PlayerState
+    GameModeController->>GameState: SetGameState();
+    GameState->>StartGame: Start()
+    StartGame->>GameModeController: SetPlayerState(new SpawningPlayer(GameModeController))
+    GameModeController->>PlayerState: StartCoroutine(new SpawningPlayer())
+    PlayerState->>SpawningPlayer: Start()
+    SpawningPlayer->>GameModeController: GameModeController.player = Object.Instantiate()
+    SpawningPlayer->>GameModeController: SetPlayerState(new Bouncing())
+    GameModeController->>PlayerState: SetPlayerState();
+    GameState->>Bouncing: Start()
+    PlayerControls->>GameModeController: On landing SetPlayerState(new Jumping())
+    GameModeController->>PlayerState: StartCoroutine(new Jump())
+    PlayerState->>Jumping: Start()
+    Jumping->>GameModeController: SetPlayerState(new Bouncing())
+    GameModeController->>PlayerState: SetGameState();
+    GameState->>Bouncing: Start()
+```
