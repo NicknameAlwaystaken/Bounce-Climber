@@ -23,7 +23,7 @@
 
 #### Explanation
 
-In this gamemode you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster. If you fall behind of the camera/out of view you will lose life/die.
+<font color="blue">In this gamemode you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster. If you fall behind of the camera/out of view you will lose life/die.</font>
 
 #### Still images
 
