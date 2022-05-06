@@ -1,4 +1,5 @@
-# Document list
+<details>
+<summary><h1>Document List</h1></summary>
 
 [**Project Description**](README.md#bounce-climber-project-description)
 
@@ -6,6 +7,7 @@
 
 [**To-do List**](TODOLIST.md#to-do-list)
 
+</details>
 
 # Game Manual
 
