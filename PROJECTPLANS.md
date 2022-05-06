@@ -47,6 +47,10 @@ classDiagram
         +virtual IEnumerator Start()
         +virtual IEnumerator Exit()
     }
+    class StartGame{
+        +StartGame(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
     class SpawningPlayer{
         +SpawningPlayer(GameModeController) : base(GameModeController)
         +override IEnumerator Start()
