@@ -18,7 +18,7 @@ A simple game with player playing as a ball and you interact with platforms in d
 
 ## How I came to this project
 
-This is my biggest project I have ever tackled! It started with me thinking of creating a very simple game, with very pleasing gameplay. This meant that I will try to polish the game so much that even simplest games will feel very nice to play. I am trying to achieve this by adding small details that will add up to the total game experience.
+- This is my biggest project I have ever tackled! It started with me thinking of creating a very simple game, with very pleasing gameplay. This meant that I will try to polish the game so much that even simplest games will feel very nice to play. I am trying to achieve this by adding small details that will add up to the total game experience.
 
 ## About me
 
