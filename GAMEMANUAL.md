@@ -7,7 +7,7 @@
 
 [**To-do List** *(TODOLIST.md)*](TODOLIST.md#to-do-list)
 
-[**Project Plans** *(PROJECTPLANS.md)*](PROJECTPLANS.md#to-do-list)
+[**Project Plans** *(PROJECTPLANS.md)*](PROJECTPLANS.md#project-plans)
 
 </details>
 
