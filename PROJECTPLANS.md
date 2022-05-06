@@ -15,7 +15,9 @@
 
 ## Project diagram using Mermaid Diagrams
 
-### Class Diagram
+- ### Class Diagram
+
+    - Diagram where it's showing structure and dependancies of classes.
 
 ```mermaid
 classDiagram
@@ -43,21 +45,40 @@ classDiagram
         #PlayerState(GameModeController)
 
         +virtual IEnumerator Start()
-    }
-    class SpawningPlayer{
-        +SpawningPlayer(GameModeController) : base(GameModeController)
-        +override IEnumerator Start()
+        +virtual IEnumerator Exit()
     }
     class StartGame{
         +StartGame(GameModeController) : base(GameModeController)
         +override IEnumerator Start()
     }
+    class SpawningPlayer{
+        +SpawningPlayer(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
+    class Bouncing{
+        +Bouncing(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
+    class Jumping{
+        +Jumping(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
     StateMachine <|-- GameModeController  : Inheritance
     PlayerState <|-- SpawningPlayer  : Inheritance
+    PlayerState <|-- Bouncing  : Inheritance
+    PlayerState <|-- Jumping  : Inheritance
     GameState <|-- StartGame  : Inheritance
+    GameModeController <.. PlayerState  : Dependency
+    GameModeController <.. GameState  : Dependency
+    GameModeController <.. StartGame  : Dependency
+    GameModeController <.. SpawningPlayer  : Dependency
+    GameModeController <.. Bouncing  : Dependency
+    GameModeController <.. Jumping  : Dependency
 ```
 
-### Sequence Diagram
+- ### Sequence Diagram
+
+    - Diagram where it's showing interactions between classes, it goes from starting the game to spawning ball and at the end showing loop how the ball behaves.
 
 ```mermaid
 sequenceDiagram
