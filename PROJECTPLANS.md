@@ -22,23 +22,28 @@ My project script structure
       StateMachine <|-- GameModeController
       class StateMachine
       {
-          -protected GameState
-          -protected PlayerState
+          #GameState
+          #PlayerState
           +SetGameState()
           +SetPlayerState()
       }
+      class GameModeController
+      {
+          +GameObject player
+          +Vector3 spawnPoint
+      }
       class GameState{
-          -protected GameModeController
+          #GameModeController
 
-          -protected GameState(GameModeController)
-          
-          +public virtual IEnumerator Start()
+          #GameState(GameModeController)
+
+          +virtual IEnumerator Start()
       }
       class PlayerState{
-          -protected GameModeController
+          #GameModeController
 
-          -protected PlayerState(GameModeController)
+          #PlayerState(GameModeController)
 
-          +public virtual IEnumerator Start()
+          +virtual IEnumerator Start()
       }
 ```
