@@ -87,30 +87,30 @@ Here I am aiming to use the skeleton of the game
 
 ### Gameplay
 
-#### Player Specific
+-   #### Player Specific
 
-- [ ] [**Charge jump ability**](GAMEMANUAL.md#charge-jump-ability)
-- [ ] [**Dash ability**](GAMEMANUAL.md#dash-ability)
-- [ ] [**Dive ability**](GAMEMANUAL.md#dive-ability)
+    - [ ] [**Charge jump ability**](GAMEMANUAL.md#charge-jump-ability)
+    - [ ] [**Dash ability**](GAMEMANUAL.md#dash-ability)
+    - [ ] [**Dive ability**](GAMEMANUAL.md#dive-ability)
 
-- [ ] Player/Ball deformation
-    - [ ] On bounce
-    - [ ] On high speeds
-    - [ ] Back to original on zero speed
-    - [ ] Jump delay based on Falling speed
-    - [ ] Deformation amount based on falling speed
-    - [ ] Add extra special effects on higher velocities
+    - [ ] Player/Ball deformation
+        - [ ] On bounce
+        - [ ] On high speeds
+        - [ ] Back to original on zero speed
+        - [ ] Jump delay based on Falling speed
+        - [ ] Deformation amount based on falling speed
+        - [ ] Add extra special effects on higher velocities
 
-- [ ] Double-jump
-- [x] Icy platform break on contact (from above)
+    - [ ] Double-jump
+    - [x] Icy platform break on contact (from above)
 
-#### Game Specific
+-   #### Game Specific
 
-- [ ] Give platforms "health" for when they break
-    - [ ] Some platforms to never break
-    - [ ] Some platforms to have layers, which have their own health
-- [ ] Close game loop (Start game --> play --> lose/win --> start game)
-- [ ] Cycle of Seasons with distance
+    - [ ] Give platforms "health" for when they break
+        - [ ] Some platforms to never break
+        - [ ] Some platforms to have layers, which have their own health
+    - [ ] Close game loop (Start game --> play --> lose/win --> start game)
+    - [ ] Cycle of Seasons with distance
 
 </details>
 
@@ -138,5 +138,5 @@ I aim to create very pleasing looking and sounding game with these effects
         - [ ] Unique animation on land
 
     - [ ] **Autumn**
-    
+
 </details>
