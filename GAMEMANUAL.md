@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="readme.css">
+</head>
+<body>
+
 # Document list
 
 [**Project Description**](README.md#bounce-climber-project-description)
@@ -10,7 +17,7 @@
 # Game Manual
 
 <details>
-<summary><font size="10">Game Modes</font></summary>
+<summary><h1>Game Modes</h1></summary>
 
 ## Game Modes
 
@@ -109,3 +116,7 @@ Player is able to dive with great speed downwards to hit into a platform faster 
 #### Charge Jump ability
 
 Player is able to reach greater heights using Charge Jump. It's used by holding down Down-key whlist you are ontop of a surface. It will pause [**Bouncing**](#bouncing) during, and the longer you hold the higher you can jump.
+
+
+</body>
+</html>
