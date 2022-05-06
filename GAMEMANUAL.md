@@ -25,57 +25,32 @@
 
 ### Player
 
-#### Ball
+-   #### Ball
 
-##### Still images
-<details>
-<summary><h6>Ball has a trail and creates dust or wind on contact with a platform</h6></summary>
-
-![Screenshot](Ball_Animations.png "Ball Animations")
-</details>
+    - ##### Still images
+        - <details><summary><h6>Ball has a trail and creates dust or wind on contact with a platform</h6></summary><img src="Ball_Animations.png" alt="Ball Animations"></details>
 
 ### Platforms
 
-##### Still images
+-   #### Still images
+    - <details><summary><h5>Animation for default platform break</h5></summary><img src="Platform_Breaking.png" alt="Platform Breaking"></details>
 
-<details>
-<summary><h6>Animation for default platform break</h6></summary>
+-   #### Ice Platform
 
-![Screenshot](Platform_Breaking.png "Platform Breaking")
-</details>
+    - ##### Still images
+        - <details><summary><h6>Ball has a trail and creates dust or wind on contact with a platform</h6></summary><img src="Ice_platform_and_break.png" alt="Ice Platform"></details>
 
-#### Ice Platform
+    - ##### Animations
+        - <details><summary><h6>Ball has a trail and creates dust or wind on contact with a platform</h6></summary><img src="https://j.gifs.com/79z1VG.gif" alt="Ice Platform Breaking"></details>
 
-##### Still images
+-   #### Grass Platform
 
-<details>
-<summary><h6>Ice Platform</h6></summary>
+    - ##### Still images
+        - <details><summary><h6>Ball has a trail and creates dust or wind on contact with a platform</h6></summary><img src="Grass_Platform.png" alt="Grass Platform"></details>
 
-![Screenshot](Ice_platform_and_break.png "Ice Platform")
-</details>
+    - ##### Animations
 
-##### Animations
-
-<details>
-<summary><h6>Ice Platform break animation</h6></summary>
-
-![GIF](https://j.gifs.com/79z1VG.gif "Ice Platform Breaking")
-</details>
-
-
-#### Grass Platform
-
-##### Still images
-
-<details>
-<summary><h6>Grass Platform</h6></summary>
-
-![Screenshot](Grass_Platform.png "Grass Platform")
-</details>
-
-##### Animations
-
-No GIF.
+        - No GIF yet.
 
 </details>
 
@@ -85,24 +60,26 @@ No GIF.
 
 ### Behavior
 
-#### Bouncing
+-   #### Bouncing
 
-By default player will be always bouncing with a set velocity, to change bounce height player is given vertical movement, but instead of bounce velocity it introduces gravity changes. This way player can levitate a bit or fall down faster.
+    - By default player will be always bouncing with a set velocity, to change bounce height player is given vertical movement, but instead of bounce velocity it introduces gravity changes. This way player can levitate a bit or fall down faster.
 
 ### Controls
 
+-   None documented yet.
+
 ### Abilities
 
-#### Dash ability
+-   #### Dash ability
 
-Player can dash to a direction by double-tapping left or right (or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash a set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
+    - Player can dash to a direction by double-tapping left or right (or alternatively tapping shift + directional key). It will reset falling speed on use, and will dash a set distance to left and right and reset horizontal movement at the end of dash. By reset I mean setting it to zero (or maybe some other value in the future).
 
-#### Dive ability
+-   #### Dive ability
 
-Player is able to dive with great speed downwards to hit into a platform faster than just plainly falling. It is activated by pressing Down-key
+    - Player is able to dive with great speed downwards to hit into a platform faster than just plainly falling. It is activated by pressing Down-key
 
-#### Charge Jump ability
+-   #### Charge Jump ability
 
-Player is able to reach greater heights using Charge Jump. It's used by holding down Down-key whlist you are ontop of a surface. It will pause [**Bouncing**](#bouncing) during, and the longer you hold the higher you can jump.
+    - Player is able to reach greater heights using Charge Jump. It's used by holding down Down-key whlist you are ontop of a surface. It will pause [**Bouncing**](#bouncing) during, and the longer you hold the higher you can jump.
 
 </details>
