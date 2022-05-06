@@ -17,9 +17,7 @@
 # Game Manual
 
 <details>
-<summary><h1>Game Modes</h1></summary>
-
-## Game Modes
+<summary><h1 style="color: navy;">Game Modes</h1></summary>
 
 ### No Breaks
 
