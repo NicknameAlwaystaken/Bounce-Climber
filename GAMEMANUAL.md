@@ -9,9 +9,10 @@
 
 # Game Manual
 
-<details><font size="10">GameModes</font>
+<details>
+<summary><font size="10">Game Modes</font></summary>
 
-## GameModes
+## Game Modes
 
 ### No Breaks
 
