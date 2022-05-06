@@ -69,9 +69,11 @@ sequenceDiagram
     GameModeController->>PlayerState: StartCoroutine(new SpawningPlayer())
     PlayerState->>SpawningPlayer: Start()
     SpawningPlayer->>GameModeController: GameModeController.player = Object.Instantiate()
+    SpawningPlayer->>PlayerControls: Object.Instantiate()
     SpawningPlayer->>GameModeController: SetPlayerState(new Bouncing())
     GameModeController->>PlayerState: SetPlayerState();
     GameState->>Bouncing: Start()
+    %% Aim to end autonumber here
     loop OnCollisionEnter()
         PlayerControls->>GameModeController: SetPlayerState(new Jumping())
         GameModeController->>PlayerState: StartCoroutine(new Jump())
