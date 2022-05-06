@@ -19,7 +19,7 @@
 <details>
 <summary><h2 style="color: navy;">Game Modes</h2></summary>
 
-<h3 style="color: navy;">No Breaks</h3>
+<h3><font color="blue">No Breaks</font></h3>
 
 #### Explanation
 
@@ -93,7 +93,7 @@ No GIF.
 
 
 <details>
-<summary><h2 style="color: navy;">Player Mechanics</h2></summary>
+<summary><h2 style="color:DodgerBlue;">Player Mechanics</h2></summary>
 
 ### Behavior
 
