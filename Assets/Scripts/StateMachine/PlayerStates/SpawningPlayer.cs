@@ -11,7 +11,7 @@ public class SpawningPlayer : PlayerState
     public override IEnumerator Start()
     {
 
-        GameModeController.player = Object.Instantiate(GameModeController.player, GameModeController.spawnPoint, new Quaternion());
+        GameModeController.SpawnPlayer();
 
         yield return new WaitForSeconds(2f);
 

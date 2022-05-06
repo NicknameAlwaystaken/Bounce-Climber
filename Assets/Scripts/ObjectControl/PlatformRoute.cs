@@ -71,15 +71,9 @@ public class PlatformRoute : PlatformRouteSpawner
                 {
                     lowestplatform = platform;
                 }
-                else
+                else if (platform != null && lowestplatform.transform.position.y > platform.transform.position.y)
                 {
-                    if (platform != null)
-                    {
-                        if (lowestplatform.transform.position.y > platform.transform.position.y)
-                        {
-                            lowestplatform = platform;
-                        }
-                    }
+                    lowestplatform = platform;
                 }
             }
             return lowestplatform;
@@ -101,15 +95,9 @@ public class PlatformRoute : PlatformRouteSpawner
                 {
                     highestPlatform = platform;
                 }
-                else
+                else if (platform != null && highestPlatform.transform.position.y < platform.transform.position.y)
                 {
-                    if(platform != null)
-                    {
-                        if(highestPlatform.transform.position.y < platform.transform.position.y)
-                        {
-                            highestPlatform = platform;
-                        }
-                    }
+                    highestPlatform = platform;
                 }
             }
             return highestPlatform;
@@ -192,12 +180,9 @@ public class PlatformRoute : PlatformRouteSpawner
     {
         foreach(GameObject route in platformList.ToArray())
         {
-            if(route != null)
+            if(route != null && Equals(givenPlatform, route))
             {
-                if(Equals(givenPlatform, route))
-                {
-                    return true;
-                }
+                return true;
             }
         }
         return false;

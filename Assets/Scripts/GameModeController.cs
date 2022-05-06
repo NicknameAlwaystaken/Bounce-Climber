@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameModeController : StateMachine
 {
     public GameObject player;
+    public PlayerSpawner playerSpawner;
     public Vector3 spawnPoint;
 
     // Start is called before the first frame update
@@ -14,5 +15,10 @@ public class GameModeController : StateMachine
     {
         Debug.Log("first layer");
         SetGameState(new StartGame(this));
+    }
+
+    public void SpawnPlayer()
+    {
+        player = playerSpawner.SpawnPlayer();
     }
 }
