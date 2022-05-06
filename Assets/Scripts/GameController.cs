@@ -70,18 +70,31 @@ public class GameController : MonoBehaviour
     }
     private void StartGame()
     {
+        setupDone = false;
         SetGameModeSettings();
+        setupDone = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player != null && setupDone)
+        if(Input.GetButtonDown("Cancel"))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+
+        if (player != null && setupDone)
         {
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
-                Debug.Log("Player died.");
-                //Destroy(player);
+                Destroy(player);
+                EndGame();
+                StartGame();
+                return;
             }
             if(gamemodeSettings.gamemodeID == (int)GameMode.No_Breaks)
             {
@@ -117,6 +130,16 @@ public class GameController : MonoBehaviour
                 }
             }
 
+        }
+    }
+
+    private void EndGame()
+    {
+        var objects = GameObject.FindGameObjectsWithTag("Platform");
+        //var objectCount = objects.Length;
+        foreach (var obj in objects)
+        {
+            if(obj != null) Destroy(obj);
         }
     }
 
@@ -226,7 +249,6 @@ public class GameController : MonoBehaviour
         playerControls.SetPlayerSettings(gamemodeSettings);
         platformRouteSpawner.GameSettings(gamemodeSettings);
         platformRouteSpawner.SpawnRoutes();
-        setupDone = true;
     }
 
     private void GameControllerSetup()
