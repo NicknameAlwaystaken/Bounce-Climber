@@ -36,11 +36,9 @@ In this gamemode you aim to climb upwards while staying in the camera view. Came
 ### Platforms
 
 <details>
-
-#### <summary>Animation for default platform break</summary>
+<summary><font size="10">Animation for default platform break</font></summary>
 
 ![Screenshot](Platform_Breaking.png "Platform Breaking")
-
 </details>
 
 #### Ice Platform
