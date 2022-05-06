@@ -18,8 +18,27 @@
 My project script structure
 
 ```mermaid
-graph TD;
-    GameModeController-->StateMachine;
-    PlayerState-->SpawningPlayer;
-    GameState-->StartGame;
+ classDiagram
+      StateMachine <|-- GameModeController
+      class StateMachine
+      {
+          -protected GameState
+          -protected PlayerState
+          +SetGameState()
+          +SetPlayerState()
+      }
+      class GameState{
+          -protected GameModeController
+
+          -protected GameState(GameModeController)
+          
+          +public virtual IEnumerator Start()
+      }
+      class PlayerState{
+          -protected GameModeController
+
+          -protected PlayerState(GameModeController)
+
+          +public virtual IEnumerator Start()
+      }
 ```
