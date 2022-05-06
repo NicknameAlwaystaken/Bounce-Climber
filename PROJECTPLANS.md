@@ -22,8 +22,8 @@ My project script structure
       StateMachine <|-- GameModeController
       class StateMachine
       {
-          #GameState GameState
-          #PlayerState PlayerState
+          %% #GameState GameState
+          %% #PlayerState PlayerState
           +SetGameState()
           +SetPlayerState()
       }
