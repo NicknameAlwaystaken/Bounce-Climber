@@ -27,10 +27,11 @@ In this gamemode you aim to climb upwards while staying in the camera view. Came
 #### Ball
 
 ##### Still images
-
-Ball has a trail and creates dust or wind on contact with a platform
+<details>
+<summary>Ball has a trail and creates dust or wind on contact with a platform</summary>
 
 ![Screenshot](Ball_Animations.png "Ball Animations")
+</details>
 
 ### Platforms
 
