@@ -13,7 +13,7 @@
 
 # Project Plans
 
-## Mermaid Diagrams
+## Project diagram using Mermaid Diagrams
 
 My project script structure
 
