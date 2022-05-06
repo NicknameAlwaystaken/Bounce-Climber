@@ -65,6 +65,8 @@ classDiagram
     }
     StateMachine <|-- GameModeController  : Inheritance
     PlayerState <|-- SpawningPlayer  : Inheritance
+    PlayerState <|-- Bouncing  : Inheritance
+    PlayerState <|-- Jumping  : Inheritance
     GameState <|-- StartGame  : Inheritance
     GameModeController <.. StartGame  : Dependency
     GameModeController <.. SpawningPlayer  : Dependency
