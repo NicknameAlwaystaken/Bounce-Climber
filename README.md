@@ -1,4 +1,5 @@
-# Document list
+<details>
+<summary><h1>Document List</h1></summary>
 
 [**Project Description**](README.md#bounce-climber-project-description)
 
@@ -8,7 +9,7 @@
 
 [**Projektin Kuvaus Suomeksi (finnish)**](README.md#bounce-climber-projektin-kuvaus-suomeksi)
 
-
+</details>
 
 # Bounce Climber Project Description
 
