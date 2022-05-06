@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 Assets/GameModeSettings.txt
 Assets/GameModeSettings.txt.meta
+
+#IntelliJ
+.idea
