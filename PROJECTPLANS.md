@@ -68,6 +68,8 @@ classDiagram
     PlayerState <|-- Bouncing  : Inheritance
     PlayerState <|-- Jumping  : Inheritance
     GameState <|-- StartGame  : Inheritance
+    GameModeController <.. PlayerState  : Dependency
+    GameModeController <.. GameState  : Dependency
     GameModeController <.. StartGame  : Dependency
     GameModeController <.. SpawningPlayer  : Dependency
     GameModeController <.. Bouncing  : Dependency
