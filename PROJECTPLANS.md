@@ -15,12 +15,11 @@
 
 ## Mermaid Diagrams
 
-Here is a simple flow chart:
+My project script structure
 
 ```mermaid
 graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+    GameModeController-->StateMachine;
+    PlayerState-->SpawningPlayer;
+    GameState-->StartGame;
 ```
