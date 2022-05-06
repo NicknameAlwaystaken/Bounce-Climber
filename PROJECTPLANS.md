@@ -18,32 +18,41 @@
 My project script structure
 
 ```mermaid
- classDiagram
-      StateMachine <|-- GameModeController
-      class StateMachine
-      {
-          %% #GameState GameState
-          %% #PlayerState PlayerState
-          +SetGameState()
-          +SetPlayerState()
-      }
-      class GameModeController
-      {
-          +GameObject player
-          +Vector3 spawnPoint
-      }
-      class GameState{
-          #GameModeController GameModeController
+classDiagram
+    class StateMachine ~MonoBehaviour~{
+        <<abstract>>
+        #GameState GameState
+        #PlayerState PlayerState
+        +SetGameState()
+        +SetPlayerState()
+    }
+    class GameModeController{
+        +GameObject player
+        +Vector3 spawnPoint
+    }
+    class GameState{
+        #GameModeController GameModeController
 
-          #GameState(GameModeController)
+        #GameState(GameModeController)
 
-          +IEnumerator Start()
-      }
-      class PlayerState{
-          #GameModeController GameModeController
+        +virtual IEnumerator Start()
+    }
+    class PlayerState{
+        #GameModeController GameModeController
 
-          #PlayerState(GameModeController)
+        #PlayerState(GameModeController)
 
-          +IEnumerator Start()
-      }
+        +virtual IEnumerator Start()
+    }
+    class SpawningPlayer{
+        +SpawningPlayer(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
+    class StartGame{
+        +StartGame(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
+    StateMachine <|-- GameModeController  : Inheritance
+    PlayerState <|-- SpawningPlayer  : Inheritance
+    GameState <|-- StartGame  : Inheritance
 ```
