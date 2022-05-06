@@ -14,17 +14,15 @@
 
 ### No Breaks
 
-#### Explanation
+-   #### Explanation
+    - In this gamemode you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster. If you fall behind of the camera/out of view you will lose life/die.
 
-In this gamemode you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster. If you fall behind of the camera/out of view you will lose life/die.
+-   #### Still images
 
-#### Still images
+    - <details><summary>No Breaks gamemode</summary>
 
-<details>
-<summary>No Breaks gamemode</summary>
-
-![Screenshot](No_Breaks.png "No Breaks gamemode")
-</details>
+    - ![Screenshot](No_Breaks.png "No Breaks gamemode")
+    - </details>
 
 ## Objects
 
