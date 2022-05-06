@@ -642,6 +642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7d2411ba8c7b8409a94912963c153e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 6728209367372926302, guid: e3e62072bed9df245b3f6413ea556259, type: 3}
+  spawnPoint: {x: 0, y: 3, z: 0}
 --- !u!4 &746059650
 Transform:
   m_ObjectHideFlags: 0

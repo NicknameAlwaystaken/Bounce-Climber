@@ -7,6 +7,7 @@ public class Bounce : PlayerState
     public Bounce(GameModeController controller) : base(controller)
     {
     }
+
     public override IEnumerator Start()
     {
         Rigidbody rb = GameModeController.GetComponent<Rigidbody>();
