@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="readme.css">
-</head>
-<body>
-
 # Document list
 
 [**Project Description**](README.md#bounce-climber-project-description)
@@ -17,18 +10,18 @@
 # Game Manual
 
 <details>
-<summary><h2 style="color: navy;">Game Modes</h2></summary>
+<summary><h2>Game Modes</h2></summary>
 
-<h3><font color="blue">No Breaks</font></h3>
+### No Breaks
 
 #### Explanation
 
-<font color="blue">In this gamemode you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster. If you fall behind of the camera/out of view you will lose life/die.</font>
+In this gamemode you aim to climb upwards while staying in the camera view. Camera keeps accelerating up faster. If you fall behind of the camera/out of view you will lose life/die.
 
 #### Still images
 
 <details>
-<summary><font size="10">No Breaks gamemode</font></summary>
+<summary>No Breaks gamemode</summary>
 
 ![Screenshot](No_Breaks.png "No Breaks gamemode")
 </details>
@@ -41,7 +34,7 @@
 
 ##### Still images
 <details>
-<summary><font size="10">Ball has a trail and creates dust or wind on contact with a platform</font></summary>
+<summary><h6>Ball has a trail and creates dust or wind on contact with a platform</h6></summary>
 
 ![Screenshot](Ball_Animations.png "Ball Animations")
 </details>
@@ -51,7 +44,7 @@
 ##### Still images
 
 <details>
-<summary><font size="10">Animation for default platform break</font></summary>
+<summary><h6>Animation for default platform break</h6></summary>
 
 ![Screenshot](Platform_Breaking.png "Platform Breaking")
 </details>
@@ -61,7 +54,7 @@
 ##### Still images
 
 <details>
-<summary><font size="10">Ice Platform</font></summary>
+<summary><h6>Ice Platform</h6></summary>
 
 ![Screenshot](Ice_platform_and_break.png "Ice Platform")
 </details>
@@ -69,7 +62,7 @@
 ##### Animations
 
 <details>
-<summary><font size="10">Ice Platform break animation</font></summary>
+<summary><h6>Ice Platform break animation</h6></summary>
 
 ![GIF](https://j.gifs.com/79z1VG.gif "Ice Platform Breaking")
 </details>
@@ -80,7 +73,7 @@
 ##### Still images
 
 <details>
-<summary><font size="10">Grass Platform</font></summary>
+<summary><h6>Grass Platform</h6></summary>
 
 ![Screenshot](Grass_Platform.png "Grass Platform")
 </details>
@@ -93,7 +86,7 @@ No GIF.
 
 
 <details>
-<summary><h2 style="color:DodgerBlue;">Player Mechanics</h2></summary>
+<summary><h2>Player Mechanics</h2></summary>
 
 ### Behavior
 
@@ -118,6 +111,3 @@ Player is able to dive with great speed downwards to hit into a platform faster 
 Player is able to reach greater heights using Charge Jump. It's used by holding down Down-key whlist you are ontop of a surface. It will pause [**Bouncing**](#bouncing) during, and the longer you hold the higher you can jump.
 
 </details>
-
-</body>
-</html>
