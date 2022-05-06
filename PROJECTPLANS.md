@@ -74,7 +74,7 @@ sequenceDiagram
     GameModeController->>PlayerState: SetPlayerState();
     GameState->>Bouncing: Start()
     %% Aim to end autonumber here
-    loop OnCollisionEnter() with tag Ground/Platform
+    loop OnCollisionEnter() with tag "Ground"/"Platform"
         PlayerControls->>GameModeController: SetPlayerState(new Jumping())
         GameModeController->>PlayerState: StartCoroutine(new Jump())
         PlayerState->>Jumping: Start()
