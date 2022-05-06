@@ -79,3 +79,9 @@
 - Olen tykännyt rakentaa Unityssä OOP-tyylisellä *(Objet-Oriented Programming)* ohjelmointitavalla ja Blenderikin alkaa sujumaan hyvin. Blenderin omat työkalut Varjostus *(Shader)* ja Geometria solmut *(Geometry Nodes)* on älyttömän hauskoja käyttää.
 
 - Tätä kirjoittaessa minulla on vielä paljon opittavaa, mutta innolla odotan tämän projektin loppuunsaattamista ja pystymään olemaan siitä ylpeä!
+
+
+## Self Notes
+
+-   In readme describe what is the project, how to use it with installation and launch guide, how to build it from source and how to contribute.
+-   Also about future development
