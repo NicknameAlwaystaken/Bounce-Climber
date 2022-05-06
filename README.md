@@ -7,6 +7,8 @@
 
 [**To-do List** *(TODOLIST.md)*](TODOLIST.md#to-do-list)
 
+[**Project Plans** *(PROJECTPLANS.md)*](PROJECTPLANS.md#to-do-list)
+
 [**Projektin Kuvaus Suomeksi (finnish)** *(README.md)*](README.md#bounce-climber-projektin-kuvaus-suomeksi)
 
 </details>

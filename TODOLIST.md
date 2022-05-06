@@ -7,6 +7,8 @@
 
 [**To-do List** *(TODOLIST.md)*](TODOLIST.md#to-do-list)
 
+[**Project Plans** *(PROJECTPLANS.md)*](PROJECTPLANS.md#to-do-list)
+
 </details>
 
 # To-do list
