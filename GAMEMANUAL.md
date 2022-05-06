@@ -19,10 +19,7 @@
 
 -   #### Still images
 
-    - <details><summary>No Breaks gamemode</summary>
-
-![Screenshot](No_Breaks.png "No Breaks gamemode")
-</details>
+    - <details><summary>No Breaks gamemode</summary> ![Screenshot](No_Breaks.png "No Breaks gamemode")</details>
 
 ## Objects
 
