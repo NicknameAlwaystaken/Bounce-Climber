@@ -84,9 +84,9 @@ Here I am aiming to use the skeleton of the game
 
 #### Player Specific
 
-- [ ] [**Charge jump ability**](#charge-jump-ability)
-- [ ] [**Dash ability**](#dash-ability)
-- [ ] [**Dive ability**](#dive-ability)
+- [ ] [**Charge jump ability**](GAMEMANUAL.md#charge-jump-ability)
+- [ ] [**Dash ability**](GAMEMANUAL.md#dash-ability)
+- [ ] [**Dive ability**](GAMEMANUAL.md#dive-ability)
 
 - [ ] Player/Ball deformation
     - [ ] On bounce

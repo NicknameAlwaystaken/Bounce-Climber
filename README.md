@@ -57,7 +57,7 @@ Tämä on suurin projekti, jota olen lähtenyt tekemään ja suunnittelemaan! Se
 
 ## Minusta
 
-En ole juurikaan aikaisemmin koskenut Unityyn (Pelinkehitys-alusta) tai Blenderiin (3D-Mallinnus-ohjelma). Joskus vuosia sitten kokeilin ja tein jotain pientä, mutta into siitä ei alkanut.
+En ole juurikaan aikaisemmin koskenut Unityyn *(Pelinkehitys-alusta)* tai Blenderiin *(3D-Mallinnus-ohjelma)*. Joskus vuosia sitten kokeilin ja tein jotain pientä, mutta into siitä ei alkanut.
 
 Asiat on muuttunut! Nyt minä joka päivä innoissaan mietin, että mitä sitä seuraavaksi! Ehkä uudenlasia tasoja? Erinlaisia ääniä ja efektejä? Tai sitten kirjoitan itselleni tasokasta koodia, jota voin helposti liittää minun uusiin peliesineisiin *(Game Objects)* tosi simppelisti. Kokoajan saan hirveesti ideoita ja nyt alan niitä lisäämään kunnolla mun dokumentti *(README.md)* tiedostoon.
 
