@@ -15,46 +15,44 @@
 
 ## Project diagram using Mermaid Diagrams
 
-<details>
-<summary><h3>My project class diagram structure</h3></summary>
-    ```mermaid
-    classDiagram
-        class StateMachine ~MonoBehaviour~{
-            <<abstract>>
-            #GameState GameState
-            #PlayerState PlayerState
-            +SetGameState()
-            +SetPlayerState()
-        }
-        class GameModeController{
-            +GameObject player
-            +Vector3 spawnPoint
-        }
-        class GameState{
-            #GameModeController GameModeController
+My project script structure
 
-            #GameState(GameModeController)
+```mermaid
+classDiagram
+    class StateMachine ~MonoBehaviour~{
+        <<abstract>>
+        #GameState GameState
+        #PlayerState PlayerState
+        +SetGameState()
+        +SetPlayerState()
+    }
+    class GameModeController{
+        +GameObject player
+        +Vector3 spawnPoint
+    }
+    class GameState{
+        #GameModeController GameModeController
 
-            +virtual IEnumerator Start()
-        }
-        class PlayerState{
-            #GameModeController GameModeController
+        #GameState(GameModeController)
 
-            #PlayerState(GameModeController)
+        +virtual IEnumerator Start()
+    }
+    class PlayerState{
+        #GameModeController GameModeController
 
-            +virtual IEnumerator Start()
-        }
-        class SpawningPlayer{
-            +SpawningPlayer(GameModeController) : base(GameModeController)
-            +override IEnumerator Start()
-        }
-        class StartGame{
-            +StartGame(GameModeController) : base(GameModeController)
-            +override IEnumerator Start()
-        }
-        StateMachine <|-- GameModeController  : Inheritance
-        PlayerState <|-- SpawningPlayer  : Inheritance
-        GameState <|-- StartGame  : Inheritance
-    ```
+        #PlayerState(GameModeController)
 
-</details>
+        +virtual IEnumerator Start()
+    }
+    class SpawningPlayer{
+        +SpawningPlayer(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
+    class StartGame{
+        +StartGame(GameModeController) : base(GameModeController)
+        +override IEnumerator Start()
+    }
+    StateMachine <|-- GameModeController  : Inheritance
+    PlayerState <|-- SpawningPlayer  : Inheritance
+    GameState <|-- StartGame  : Inheritance
+```
