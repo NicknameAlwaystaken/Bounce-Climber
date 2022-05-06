@@ -15,7 +15,7 @@
 
 ## Project diagram using Mermaid Diagrams
 
-My project script structure
+### Class Diagram
 
 ```mermaid
 classDiagram
@@ -56,6 +56,8 @@ classDiagram
     PlayerState <|-- SpawningPlayer  : Inheritance
     GameState <|-- StartGame  : Inheritance
 ```
+
+### Sequence Diagram
 
 ```mermaid
 sequenceDiagram
