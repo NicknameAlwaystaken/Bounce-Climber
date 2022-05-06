@@ -10,3 +10,17 @@
 [**Project Plans** *(PROJECTPLANS.md)*](PROJECTPLANS.md#to-do-list)
 
 </details>
+
+# Project Plans
+
+## Mermaid Diagrams
+
+Here is a simple flow chart:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
