@@ -22,8 +22,8 @@ My project script structure
       StateMachine <|-- GameModeController
       class StateMachine
       {
-          #GameState
-          #PlayerState
+          #GameState GameState
+          #PlayerState PlayerState
           +SetGameState()
           +SetPlayerState()
       }
@@ -33,17 +33,17 @@ My project script structure
           +Vector3 spawnPoint
       }
       class GameState{
-          #GameModeController
+          #GameModeController GameModeController
 
           #GameState(GameModeController)
 
-          +virtual IEnumerator Start()
+          +IEnumerator Start()
       }
       class PlayerState{
-          #GameModeController
+          #GameModeController GameModeController
 
           #PlayerState(GameModeController)
 
-          +virtual IEnumerator Start()
+          +IEnumerator Start()
       }
 ```
