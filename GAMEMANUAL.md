@@ -28,16 +28,20 @@ In this gamemode you aim to climb upwards while staying in the camera view. Came
 
 ##### Still images
 <details>
-<summary>Ball has a trail and creates dust or wind on contact with a platform</summary>
+<summary>*(image)* Ball has a trail and creates dust or wind on contact with a platform</summary>
 
 ![Screenshot](Ball_Animations.png "Ball Animations")
 </details>
 
 ### Platforms
 
-#### Animation for default platform break
+<details>
+
+#### <summary>Animation for default platform break</summary>
 
 ![Screenshot](Platform_Breaking.png "Platform Breaking")
+
+</details>
 
 #### Ice Platform
 
