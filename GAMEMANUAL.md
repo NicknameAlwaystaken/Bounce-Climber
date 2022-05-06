@@ -17,9 +17,9 @@
 # Game Manual
 
 <details>
-<summary><h1 style="color: navy;">Game Modes</h1></summary>
+<summary><h2 style="color: navy;">Game Modes</h2></summary>
 
-### No Breaks
+<h3 style="color: navy;">No Breaks</h3>
 
 #### Explanation
 
@@ -91,7 +91,9 @@ No GIF.
 
 </details>
 
-## Player Mechanics
+
+<details>
+<summary><h2 style="color: navy;">Player Mechanics</h2></summary>
 
 ### Behavior
 
@@ -115,6 +117,7 @@ Player is able to dive with great speed downwards to hit into a platform faster 
 
 Player is able to reach greater heights using Charge Jump. It's used by holding down Down-key whlist you are ontop of a surface. It will pause [**Bouncing**](#bouncing) during, and the longer you hold the higher you can jump.
 
+</details>
 
 </body>
 </html>
