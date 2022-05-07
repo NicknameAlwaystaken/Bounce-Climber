@@ -40,13 +40,15 @@ public class GameController : MonoBehaviour
     private CameraType cameraState;
     private bool setupDone;
 
+    public GameMode gameModes;
+
     enum CameraType
     {
         Static = 0,
         Following = 1,
         Accelerating = 2
     }
-    enum GameMode
+    public enum GameMode
     {
         Freeplay = 0,
         No_Breaks = 1,

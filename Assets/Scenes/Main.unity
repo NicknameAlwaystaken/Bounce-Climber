@@ -493,6 +493,7 @@ MonoBehaviour:
   platformSpawnYDistance: 50
   playerSpawner: {fileID: 540127565}
   platform: {fileID: 343690378514341082, guid: eb5d9ac737447b3478828d58e7d604b4, type: 3}
+  gameModes: 1
 --- !u!4 &540127564
 Transform:
   m_ObjectHideFlags: 0
