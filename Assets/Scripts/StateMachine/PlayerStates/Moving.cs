@@ -15,4 +15,11 @@ public class Moving : PlayerState
         Player.MovingAllowed = true;
         yield break;
     }
+    public override IEnumerator Move()
+    {
+        Vector3 movement = Player.HorizontalInput * Player.MaxMovementSpeed * Player.transform.right;
+        Rigidbody rb = Player.GetComponent<Rigidbody>();
+        rb.velocity = new Vector3(movement.x, rb.velocity.y);
+        yield break;
+    }
 }

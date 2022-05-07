@@ -23,6 +23,10 @@ public abstract class PlayerState
         PlayerController.SetPlayerState(new Bouncing(PlayerController,Player));
         yield break;
     }
+    public virtual IEnumerator Move()
+    {
+        yield break;
+    }
     public virtual IEnumerator Jump()
     {
         yield break;

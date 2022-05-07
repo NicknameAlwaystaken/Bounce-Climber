@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public string currentStateName;
 
     private float bounceVelocity,
+        tempBounceVelocity,
         returnVelocity,
         returnHeight,
         maxMovementSpeed,
@@ -15,9 +16,17 @@ public class Player : MonoBehaviour
         gravityDownChange,
         maxDropSpeed,
         diveCooldownCounter,
-        diveCooldown;
+        diveCooldown,
+        superJumpIncrement,
+        lowJumpIncrement,
+        horizontalInput,
+        verticalInput;
     public bool movingAllowed;
     private bool moving;
+    private bool movingLeft;
+    private bool movingRight;
+    private bool movingUp;
+    private bool movingDown;
     public bool jumpingAllowed;
     private bool jumping;
     private bool jumpingDone;
@@ -38,8 +47,17 @@ public class Player : MonoBehaviour
     public float DiveCooldownCounter { get => diveCooldownCounter; set => diveCooldownCounter = value; }
     public float DiveCooldown { get => diveCooldown; set => diveCooldown = value; }
     public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
-    public bool Moving { get => moving; set => moving = value; }
     public bool JumpingDone { get => jumpingDone; set => jumpingDone = value; }
+    public bool Moving { get => moving; set => moving = value; }
+    public bool MovingLeft { get => movingLeft; set => movingLeft = value; }
+    public bool MovingRight { get => movingRight; set => movingRight = value; }
+    public float HorizontalInput { get => horizontalInput; set => horizontalInput = value; }
+    public float VerticalInput { get => verticalInput; set => verticalInput = value; }
+    public bool MovingUp { get => movingUp; set => movingUp = value; }
+    public bool MovingDown { get => movingDown; set => movingDown = value; }
+    public float SuperJumpIncrement { get => superJumpIncrement; set => superJumpIncrement = value; }
+    public float TempBounceVelocity { get => tempBounceVelocity; set => tempBounceVelocity = value; }
+    public float LowJumpIncrement { get => lowJumpIncrement; set => lowJumpIncrement = value; }
 
     public void Start()
     {
@@ -57,18 +75,39 @@ public class Player : MonoBehaviour
     {
         if(movingAllowed)
         {
-            float inputHorizontal = Input.GetAxis("Horizontal");
-            float inputVertical = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
 
-            if (inputHorizontal != 0)
+            Moving = false;
+            if (horizontalInput != 0)
             {
                 Moving = true;
-                Vector3 movement = inputHorizontal * MaxMovementSpeed * transform.right;
-                rb.velocity = new Vector3(movement.x, rb.velocity.y);
+                if (horizontalInput > 0)
+                {
+                    MovingLeft = true;
+                }
+                else
+                {
+                    MovingLeft = true;
+                }
+            }
+            if (verticalInput != 0)
+            {
+                Moving = true;
+                if (verticalInput > 0)
+                {
+                    MovingUp = true;
+                    tempBounceVelocity = bounceVelocity * superJumpIncrement;
+                }
+                else
+                {
+                    MovingDown = true;
+                    tempBounceVelocity = bounceVelocity * lowJumpIncrement;
+                }
             }
             else
             {
-                Moving = false;
+                tempBounceVelocity = bounceVelocity;
             }
         }
     }

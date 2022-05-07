@@ -15,10 +15,22 @@ public class PlayerController : StateMachine
         SetPlayerState(new Spawning(this, player));
         player.MaxMovementSpeed = 30f;
         player.BounceVelocity = 10f;
+        player.SuperJumpIncrement = 1.5f;
+        player.LowJumpIncrement = 0.5f;
     }
     public void Update()
     {
-        if (PlayerState != null) StartCoroutine(PlayerState.Update());
-        if (player.Jumping) StartCoroutine(PlayerState.Jump());
+        if (PlayerState != null)
+        {
+            StartCoroutine(PlayerState.Update());
+            if (player.Jumping)
+            {
+                StartCoroutine(PlayerState.Jump());
+            }
+            if (player.Moving)
+            {
+                StartCoroutine(PlayerState.Move());
+            }
+        }
     }
 }
