@@ -9,17 +9,16 @@ public class PlayerController : StateMachine
     public PlayerSpawner playerSpawner;
     public Vector3 playerSpawnLocation;
 
-    public Player SpawnPlayer()
+    public void SpawnPlayer()
     {
         player = playerSpawner.SpawnPlayer(playerSpawnLocation).GetComponent<Player>();
         SetPlayerState(new Spawning(this, player));
         player.MaxMovementSpeed = 30f;
-        return player;
+        player.BounceVelocity = 10f;
     }
     public void Update()
     {
         if (PlayerState != null) StartCoroutine(PlayerState.Update());
         if (player.Jumping) StartCoroutine(PlayerState.Jump());
-        if (player.JumpingDone) StopCoroutine(PlayerState.Jump());
     }
 }

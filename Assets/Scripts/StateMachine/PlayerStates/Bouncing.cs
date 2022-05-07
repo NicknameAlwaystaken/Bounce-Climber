@@ -20,7 +20,7 @@ public class Bouncing : PlayerState
         Player.AudioSource.Play();
         Object.Instantiate(Player.particles, Player.transform.position, new Quaternion());
         Rigidbody rb = Player.GetComponent<Rigidbody>();
-        Vector3 upVelocity = Vector3.up * 30f;
+        Vector3 upVelocity = Vector3.up * Player.BounceVelocity;
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
         Player.Jumping = false;
         Player.JumpingDone = true;
