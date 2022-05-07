@@ -7,19 +7,14 @@ public abstract class StateMachine : MonoBehaviour
     protected GameState GameState;
     protected PlayerState PlayerState;
 
-    public void SetGameState(GameState state)
+    public void SetGameState(GameState gameState)
     {
-        GameState = state;
+        GameState = gameState;
         StartCoroutine(GameState.Start());
     }
-    public void SetPlayerState(PlayerState state)
+    public void SetPlayerState(PlayerState playerState)
     {
-        PlayerState = state;
+        PlayerState = playerState;
         StartCoroutine(PlayerState.Start());
-    }
-    public virtual void Update()
-    {
-        GameState.Update();
-        PlayerState.Update();
     }
 }

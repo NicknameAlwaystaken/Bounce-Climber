@@ -5,11 +5,11 @@ using UnityEngine;
 
 public abstract class GameState
 {
-    protected GameModeController GameModeController;
+    protected GameController GameController;
 
-    protected GameState(GameModeController gameModeController)
+    protected GameState(GameController gameModeController)
     {
-        this.GameModeController = gameModeController;
+        this.GameController = gameModeController;
     }
 
     public virtual IEnumerator Start()
@@ -17,8 +17,8 @@ public abstract class GameState
         yield break;
     }
 
-    public virtual void Update()
+    public virtual IEnumerator Update()
     {
-
+        yield break;
     }
 }

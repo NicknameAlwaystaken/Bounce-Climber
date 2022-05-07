@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Dive : PlayerState
 {
-    public Dive(GameModeController controller) : base(controller)
+    public Dive(PlayerController controller, Player player) : base(controller, player)
     {
+        Player.currentStateName = "Diving";
     }
 
     public override IEnumerator Start()

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Die : PlayerState
 {
-    public Die(GameModeController controller) : base(controller)
+    public Die(PlayerController controller, Player player) : base(controller, player)
     {
+        Player.currentStateName = "Dying";
     }
     public override IEnumerator Start()
     {

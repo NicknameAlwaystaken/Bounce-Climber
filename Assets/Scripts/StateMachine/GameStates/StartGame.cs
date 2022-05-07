@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class StartGame : GameState
 {
-    public StartGame(GameModeController controller) : base(controller)
+    public StartGame(GameController controller) : base(controller)
     {
     }
 
     public override IEnumerator Start()
     {
-        GameModeController.SetPlayerState(new SpawningPlayer(GameModeController));
+        Debug.Log("second layer");
+        GameController.SetGameState(new SpawningPlayer(GameController));
         yield break;
     }
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Dash : PlayerState
 {
-    public Dash(GameModeController controller) : base(controller)
+    public Dash(PlayerController controller, Player player) : base(controller, player)
     {
+        Player.currentStateName = "Dashing";
     }
     public override IEnumerator Start()
     {

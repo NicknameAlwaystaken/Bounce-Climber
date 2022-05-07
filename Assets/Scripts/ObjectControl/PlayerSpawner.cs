@@ -8,7 +8,6 @@ public class PlayerSpawner : MonoBehaviour
 
     public GameObject SpawnPlayer(Vector3 newSpawnPoint = new Vector3())
     {
-        Debug.Log("Attempting to spawn player");
         Vector3 spawnPosition = newSpawnPoint;
         GameObject obj = Instantiate(player, spawnPosition, new Quaternion());
         return obj;

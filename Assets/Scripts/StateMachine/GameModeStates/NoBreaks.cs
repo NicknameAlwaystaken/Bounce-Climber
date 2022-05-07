@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoBreaks : PlayerState
+public class NoBreaks : GameState
 {
-    public NoBreaks(GameModeController controller) : base(controller)
+    public NoBreaks(GameController controller) : base(controller)
     {
     }
 

@@ -5,11 +5,13 @@ using UnityEngine;
 
 public abstract class PlayerState
 {
-    protected GameModeController GameModeController;
+    protected PlayerController PlayerController;
+    protected Player Player;
 
-    protected PlayerState(GameModeController controller)
+    protected PlayerState(PlayerController controller, Player player)
     {
-        this.GameModeController = controller;
+        this.PlayerController = controller;
+        this.Player = player;
     }
 
     public virtual IEnumerator Start()
@@ -18,29 +20,16 @@ public abstract class PlayerState
     }
     public virtual IEnumerator Exit()
     {
-        GameModeController.SetPlayerState(new Moving(GameModeController));
+        PlayerController.SetPlayerState(new Bouncing(PlayerController,Player));
         yield break;
     }
-    public virtual IEnumerator Spawning()
+    public virtual IEnumerator Jump()
     {
         yield break;
     }
-
-    public virtual IEnumerator Dying()
+    public virtual IEnumerator Update()
     {
         yield break;
-    }
-    public virtual IEnumerator Diving()
-    {
-        yield break;
-    }
-    public virtual IEnumerator Bouncing()
-    {
-        yield break;
-    }
-    public virtual void Update()
-    {
-
     }
 
 }

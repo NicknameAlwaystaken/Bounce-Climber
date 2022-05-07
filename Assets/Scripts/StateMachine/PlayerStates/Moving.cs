@@ -5,14 +5,14 @@ using UnityEngine;
 public class Moving : PlayerState
 {
 
-    public Moving(GameModeController controller) : base(controller)
+    public Moving(PlayerController controller, Player player) : base(controller, player)
     {
+        Player.currentStateName = "Moving";
     }
 
     public override IEnumerator Start()
     {
-
-        GameModeController.SetPlayerState(new Bounce(GameModeController));
+        Player.MovingAllowed = true;
         yield break;
     }
 }

@@ -4830,8 +4830,8 @@ GameObject:
   - component: {fileID: 6728209367372926296}
   - component: {fileID: 6728209367372926303}
   - component: {fileID: 6728209367372926299}
-  - component: {fileID: 6728209367372926292}
   - component: {fileID: 6710888533890768973}
+  - component: {fileID: -7922485545453693738}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -4932,19 +4932,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!114 &6728209367372926292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728209367372926302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dadd1d7be9134f94d9ba83add1b34843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particles: {fileID: 7945365061505629239, guid: 19b29f46121fff64dab7561c89a63cb0, type: 3}
 --- !u!82 &6710888533890768973
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5041,3 +5028,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7922485545453693738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728209367372926302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a19f3ec12291e4084200a6ddc95613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles: {fileID: 7945365061505629239, guid: 19b29f46121fff64dab7561c89a63cb0, type: 3}

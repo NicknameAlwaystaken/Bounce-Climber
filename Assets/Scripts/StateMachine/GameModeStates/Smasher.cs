@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Smasher : PlayerState
+public class Smasher : GameState
 {
-    public Smasher(GameModeController controller) : base(controller)
+    public Smasher(GameController controller) : base(controller)
     {
     }
 
