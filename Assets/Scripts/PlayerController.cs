@@ -13,11 +13,17 @@ public class PlayerController : StateMachine
     {
         player = playerSpawner.SpawnPlayer(playerSpawnLocation).GetComponent<Player>();
         SetPlayerState(new Spawning(this, player));
-        player.MaxMovementSpeed = 30f;
-        player.BounceVelocity = 10f;
-        player.SuperJumpIncrement = 1.5f;
-        player.LowJumpIncrement = 0.5f;
+        SetPlayerSettings();
     }
+
+    private void SetPlayerSettings()
+    {
+        player.MaxMovementSpeed = 30f;
+        player.BounceVelocity = 30f;
+        player.SuperJumpIncrement = 1.5f;
+        player.LowJumpIncrement = 0.8f;
+    }
+
     public void Update()
     {
         if (PlayerState != null)

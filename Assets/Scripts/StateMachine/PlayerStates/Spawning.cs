@@ -10,7 +10,6 @@ public class Spawning : PlayerState
     }
     public override IEnumerator Start()
     {
-        Debug.Log("fourth layer");
         PlayerController.SetPlayerState(new Bouncing(PlayerController, Player));
         yield break;
     }

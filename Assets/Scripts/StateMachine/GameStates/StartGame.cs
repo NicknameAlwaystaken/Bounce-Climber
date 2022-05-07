@@ -10,7 +10,6 @@ public class StartGame : GameState
 
     public override IEnumerator Start()
     {
-        Debug.Log("second layer");
         GameController.SetGameState(new SpawningPlayer(GameController));
         yield break;
     }

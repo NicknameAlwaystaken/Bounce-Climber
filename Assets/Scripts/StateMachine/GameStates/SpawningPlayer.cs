@@ -10,7 +10,6 @@ public class SpawningPlayer : GameState
 
     public override IEnumerator Start()
     {
-        Debug.Log("third layer");
         GameController.SpawnPlayer();
         yield break;
     }

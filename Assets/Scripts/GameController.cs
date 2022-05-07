@@ -16,7 +16,6 @@ public class GameController : StateMachine
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("first layer");
         SetGameState(new StartGame(this));
     }
 
@@ -24,8 +23,16 @@ public class GameController : StateMachine
     {
         playerController.SpawnPlayer();
     }
-    public virtual void Update()
+    public void Update()
     {
-        if (GameState != null) StartCoroutine(GameState.Update());
+        if (Input.GetButtonDown("Cancel"))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+            if (GameState != null) StartCoroutine(GameState.Update());
     }
 }
