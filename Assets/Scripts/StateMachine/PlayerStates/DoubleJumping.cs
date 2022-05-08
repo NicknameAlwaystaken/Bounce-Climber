@@ -1,24 +1,24 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jumping : PlayerState
+public class DoubleJumping : PlayerState
 {
-    public Jumping(PlayerController controller, Player player) : base(controller, player)
+    public DoubleJumping(PlayerController controller, Player player) : base(controller, player)
     {
-        Player.currentStateName = "Jumping";
     }
     public override IEnumerator Start()
     {
-        Player.JumpingAllowed = true;
+        Player.DoubleJumpingAllowed = true;
         yield break;
     }
-    public override IEnumerator Jump()
+    public override IEnumerator DoubleJump()
     {
-        if (Player.Jumping)
+        if (Player.DoubleJumping)
         {
-            JumpWithEffects("Jumping", Player.BounceVelocity * Player.FirstJumpIncrement);
-            Player.JumpingDone = true;
+            JumpWithEffects("DoubleJumping", Player.BounceVelocity * Player.DoubleJumpIncrement);
+            Player.DoubleJumpingConditions = false;
+            Player.JumpingDone = false;
             yield break;
         }
     }

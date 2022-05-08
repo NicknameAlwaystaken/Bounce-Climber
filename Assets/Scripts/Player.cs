@@ -22,21 +22,26 @@ public class Player : MonoBehaviour
         horizontalInput,
         verticalInput;
     public bool movingAllowed;
+    public bool jumpingAllowed;
+    public bool bouncingAllowed;
+    public bool doubleJumpingAllowed;
+
     private bool moving;
     private bool movingLeft;
     private bool movingRight;
     private bool movingUp;
     private bool movingDown;
-    public bool jumpingAllowed;
+
     private bool jumping;
     private bool jumpingDone;
-    private bool bouncingAllowed;
+
     private bool bouncing;
     private bool bouncingDone;
-    private bool doubleJumpingAllowed;
+
     private bool doubleJumping;
     private bool doubleJumpingDone;
     private bool doubleJumpingConditions;
+
     private bool inputVerticalZero;
 
     private float autoJumpBounceVelocity;
@@ -101,6 +106,7 @@ public class Player : MonoBehaviour
             MovingUp = verticalInput > 0;
             MovingDown = !MovingUp;
             InputVerticalZero = verticalInput == 0;
+            Moving = MovingUp || MovingDown || MovingLeft || MovingRight;
 
             if (DoubleJumpingConditions && MovingUp && Input.GetKeyUp(KeyCode.W))
             {
@@ -110,7 +116,6 @@ public class Player : MonoBehaviour
             {
                 DoubleJumpingConditions = true;
             }
-            Moving = MovingUp || MovingDown || MovingLeft || MovingRight;
         }
     }
     private void OnCollisionEnter(Collision collision)

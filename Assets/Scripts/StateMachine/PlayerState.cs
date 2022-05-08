@@ -27,6 +27,10 @@ public abstract class PlayerState
     {
         yield break;
     }
+    public virtual IEnumerator Jump()
+    {
+        yield break;
+    }
     public virtual IEnumerator Bounce()
     {
         yield break;
@@ -35,7 +39,15 @@ public abstract class PlayerState
     {
         yield break;
     }
-    public virtual IEnumerator Jump()
+    public virtual IEnumerator Dive()
+    {
+        yield break;
+    }
+    public virtual IEnumerator Dash()
+    {
+        yield break;
+    }
+    public virtual IEnumerator Die()
     {
         yield break;
     }

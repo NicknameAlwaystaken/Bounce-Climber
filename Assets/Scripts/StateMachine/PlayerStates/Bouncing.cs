@@ -6,32 +6,19 @@ public class Bouncing : PlayerState
 {
     public Bouncing(PlayerController controller, Player player) : base(controller, player)
     {
-        Player.currentStateName = "Bouncing";
     }
     public override IEnumerator Start()
     {
-        Player.MovingAllowed = true;
-        Player.JumpingAllowed = true;
         Player.BouncingAllowed = true;
-        Player.DoubleJumpingAllowed = true;
         yield break;
     }
+    /*
     public override IEnumerator Jump()
     {
         if (Player.Jumping)
         {
             JumpWithEffects("Jumping", Player.BounceVelocity * Player.FirstJumpIncrement);
             Player.JumpingDone = true;
-            yield break;
-        }
-    }
-    public override IEnumerator DoubleJump()
-    {
-        if (Player.DoubleJumping)
-        {
-            JumpWithEffects("DoubleJumping", Player.BounceVelocity * Player.DoubleJumpIncrement);
-            Player.DoubleJumpingConditions = false;
-            Player.JumpingDone = false;
             yield break;
         }
     }
@@ -48,7 +35,7 @@ public class Bouncing : PlayerState
         Player.Bouncing = false;
         Player.DoubleJumping = false;
     }
-
+    */
     public override IEnumerator Bounce()
     {
         if (Player.MovingUp)
@@ -57,23 +44,26 @@ public class Bouncing : PlayerState
         }
         Player.currentStateName = "Bouncing";
         Player.BouncingDone = false;
-        /*
-        Player.AudioSource.Play();
-        Object.Instantiate(Player.particles, Player.transform.position, new Quaternion());
-        */
-        Rigidbody rb = Player.GetComponent<Rigidbody>();
-        Vector3 upVelocity = Vector3.up * Player.BounceVelocity * Player.AutoJumpBounceVelocity;
-        if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
+        JumpWithoutEffects();
         Player.Bouncing = false;
         Player.BouncingDone = true;
         yield break;
     }
-    public override IEnumerator Move()
+
+    private void JumpWithoutEffects()
     {
-        Player.currentStateName = "Moving";
-        Vector3 movement = Player.HorizontalInput * Player.MaxMovementSpeed * Player.transform.right;
         Rigidbody rb = Player.GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(movement.x, rb.velocity.y);
-        yield break;
+        Vector3 upVelocity = Vector3.up * Player.BounceVelocity * Player.AutoJumpBounceVelocity;
+        if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
     }
+    /*
+public override IEnumerator Move()
+{
+   Player.currentStateName = "Moving";
+   Vector3 movement = Player.HorizontalInput * Player.MaxMovementSpeed * Player.transform.right;
+   Rigidbody rb = Player.GetComponent<Rigidbody>();
+   rb.velocity = new Vector3(movement.x, rb.velocity.y);
+   yield break;
+}
+*/
 }
