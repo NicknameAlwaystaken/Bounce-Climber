@@ -5041,3 +5041,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 7945365061505629239, guid: 19b29f46121fff64dab7561c89a63cb0, type: 3}
+  currentStateName: 
+  movingAllowed: 0
+  jumpingAllowed: 0
+  bouncingAllowed: 0
+  doubleJumpingAllowed: 0
+  dashingAllowed: 0
+  toggleBounce: 0
+  landed: 0
+  bounceToggleKey: 115
+  dashKey: 304

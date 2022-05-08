@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     private AudioSource audioSource;
     public ParticleSystem particles;
+    public Rigidbody rb;
     public string currentStateName;
 
     private float bounceVelocity,
@@ -25,7 +26,14 @@ public class Player : MonoBehaviour
     public bool jumpingAllowed;
     public bool bouncingAllowed;
     public bool doubleJumpingAllowed;
+    public bool dashingAllowed;
+    public float dashingDistance;
+    public float dashingLift;
+    public float dashingHorizontalTimer;
+    public float dashingVerticalTimer;
     public bool landed;
+    public KeyCode bounceToggleKey;
+    public KeyCode dashKey;
 
     private bool moving;
     private bool movingLeft;
@@ -38,17 +46,22 @@ public class Player : MonoBehaviour
 
     private bool bouncing;
     private bool bouncingDone;
+    private bool toggleBounce;
 
     private bool doubleJumping;
     private bool doubleJumpingDone;
     private bool doubleJumpingConditions;
+
+    private bool dashing;
+    private bool dashingDone;
+    private bool dashingConditions;
+    private float dashFreeingDistance;
 
     private bool inputVerticalZero;
 
     private float autoJumpBounceVelocity;
 
 
-    private Rigidbody rb;
 
     public bool MovingAllowed { get => movingAllowed; set => movingAllowed = value; }
     public bool JumpingAllowed { get => jumpingAllowed; set => jumpingAllowed = value; }
@@ -84,6 +97,16 @@ public class Player : MonoBehaviour
     public bool InputVerticalZero { get => inputVerticalZero; set => inputVerticalZero = value; }
     public bool DoubleJumpingConditions { get => doubleJumpingConditions; set => doubleJumpingConditions = value; }
     public bool Landed { get => landed; set => landed = value; }
+    public bool ToggleBounce { get => toggleBounce; set => toggleBounce = value; }
+    public bool DashingAllowed { get => dashingAllowed; set => dashingAllowed = value; }
+    public bool Dashing { get => dashing; set => dashing = value; }
+    public bool DashingDone { get => dashingDone; set => dashingDone = value; }
+    public bool DashingConditions { get => dashingConditions; set => dashingConditions = value; }
+    public float DashingDistance { get => dashingDistance; set => dashingDistance = value; }
+    public float DashingHorizontalTimer { get => dashingHorizontalTimer; set => dashingHorizontalTimer = value; }
+    public float DashingLift { get => dashingLift; set => dashingLift = value; }
+    public float DashingVerticalTimer { get => dashingVerticalTimer; set => dashingVerticalTimer = value; }
+    public float DashFreeingDistance { get => dashFreeingDistance; set => dashFreeingDistance = value; }
 
     public void Start()
     {
@@ -93,8 +116,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(movingAllowed)
+        if (Input.GetKeyDown(dashKey) && DashingAllowed && !DashingDone && (MovingLeft || MovingRight))
         {
+            DashingConditions = true;
+            Debug.Log("Dashing allowed");
+        }
+        if (movingAllowed)
+        {
+            if (Input.GetKeyDown(bounceToggleKey)) ToggleBounce = true;
+
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
 
@@ -126,6 +156,7 @@ public class Player : MonoBehaviour
         if (collidedObject.CompareTag("Platform") || collidedObject.CompareTag("Ground"))
         {
             Landed = true;
+            DashingDone = false;
         }
     }
     public string GetPlayerState()

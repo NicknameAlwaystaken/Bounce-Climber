@@ -47,11 +47,19 @@ public abstract class PlayerState
     {
         yield break;
     }
+    public virtual IEnumerator StopDash()
+    {
+        yield break;
+    }
     public virtual IEnumerator Die()
     {
         yield break;
     }
     public virtual IEnumerator Update()
+    {
+        yield break;
+    }
+    public virtual IEnumerator FixedUpdate()
     {
         yield break;
     }

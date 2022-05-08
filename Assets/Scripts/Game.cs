@@ -100,6 +100,7 @@ public class Game : MonoBehaviour
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
                 //Destroy(player);
+                player.transform.position = new Vector3(0f,3f,0f);
                 EndGame();
                 StartGame();
                 return;
