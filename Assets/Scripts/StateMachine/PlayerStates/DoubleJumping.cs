@@ -6,21 +6,14 @@ public class DoubleJumping : PlayerState
 {
     public DoubleJumping(PlayerController controller, Player player) : base(controller, player)
     {
+        Player.currentStateName = "DoubleJumping";
+        JumpWithEffects("DoubleJumping", Player.BounceVelocity * Player.DoubleJumpIncrement);
+        Player.DoubleJumpingConditions = false;
+        Player.JumpingDone = false;
     }
     public override IEnumerator Start()
     {
-        Player.DoubleJumpingAllowed = true;
         yield break;
-    }
-    public override IEnumerator DoubleJump()
-    {
-        if (Player.DoubleJumping)
-        {
-            JumpWithEffects("DoubleJumping", Player.BounceVelocity * Player.DoubleJumpIncrement);
-            Player.DoubleJumpingConditions = false;
-            Player.JumpingDone = false;
-            yield break;
-        }
     }
     private void JumpWithEffects(string stateName, float bounceVelocity)
     {

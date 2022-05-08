@@ -7,20 +7,12 @@ public class Jumping : PlayerState
     public Jumping(PlayerController controller, Player player) : base(controller, player)
     {
         Player.currentStateName = "Jumping";
+        JumpWithEffects("Jumping", Player.BounceVelocity * Player.FirstJumpIncrement);
+        Player.JumpingDone = true;
     }
     public override IEnumerator Start()
     {
-        Player.JumpingAllowed = true;
         yield break;
-    }
-    public override IEnumerator Jump()
-    {
-        if (Player.Jumping)
-        {
-            JumpWithEffects("Jumping", Player.BounceVelocity * Player.FirstJumpIncrement);
-            Player.JumpingDone = true;
-            yield break;
-        }
     }
     private void JumpWithEffects(string stateName, float bounceVelocity)
     {
