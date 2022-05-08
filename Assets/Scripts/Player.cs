@@ -17,8 +17,8 @@ public class Player : MonoBehaviour
         maxDropSpeed,
         diveCooldownCounter,
         diveCooldown,
-        superJumpIncrement,
-        lowJumpIncrement,
+        firstJumpIncrement,
+        doubleJumpIncrement,
         horizontalInput,
         verticalInput;
     public bool movingAllowed;
@@ -30,6 +30,16 @@ public class Player : MonoBehaviour
     public bool jumpingAllowed;
     private bool jumping;
     private bool jumpingDone;
+    private bool autoJumpingAllowed;
+    private bool autoJumping;
+    private bool autoJumpingDone;
+    private bool doubleJumpingAllowed;
+    private bool doubleJumping;
+    private bool doubleJumpingDone;
+    private bool doubleJumpingConditions;
+    private bool inputVerticalZero;
+
+    private float autoJumpBounceVelocity;
 
 
     private Rigidbody rb;
@@ -55,9 +65,18 @@ public class Player : MonoBehaviour
     public float VerticalInput { get => verticalInput; set => verticalInput = value; }
     public bool MovingUp { get => movingUp; set => movingUp = value; }
     public bool MovingDown { get => movingDown; set => movingDown = value; }
-    public float SuperJumpIncrement { get => superJumpIncrement; set => superJumpIncrement = value; }
+    public float FirstJumpIncrement { get => firstJumpIncrement; set => firstJumpIncrement = value; }
     public float TempBounceVelocity { get => tempBounceVelocity; set => tempBounceVelocity = value; }
-    public float LowJumpIncrement { get => lowJumpIncrement; set => lowJumpIncrement = value; }
+    public float DoubleJumpIncrement { get => doubleJumpIncrement; set => doubleJumpIncrement = value; }
+    public bool AutoJumpingAllowed { get => autoJumpingAllowed; set => autoJumpingAllowed = value; }
+    public bool AutoJumping { get => autoJumping; set => autoJumping = value; }
+    public bool AutoJumpingDone { get => autoJumpingDone; set => autoJumpingDone = value; }
+    public bool DoubleJumpingAllowed { get => doubleJumpingAllowed; set => doubleJumpingAllowed = value; }
+    public bool DoubleJumping { get => doubleJumping; set => doubleJumping = value; }
+    public bool DoubleJumpingDone { get => doubleJumpingDone; set => doubleJumpingDone = value; }
+    public float AutoJumpBounceVelocity { get => autoJumpBounceVelocity; set => autoJumpBounceVelocity = value; }
+    public bool InputVerticalZero { get => inputVerticalZero; set => inputVerticalZero = value; }
+    public bool DoubleJumpingConditions { get => doubleJumpingConditions; set => doubleJumpingConditions = value; }
 
     public void Start()
     {
@@ -73,6 +92,10 @@ public class Player : MonoBehaviour
             verticalInput = Input.GetAxis("Vertical");
 
             Moving = false;
+            MovingDown = false;
+            MovingUp = false;
+            MovingLeft = false;
+            MovingRight = false;
             if (horizontalInput != 0)
             {
                 Moving = true;
@@ -87,21 +110,29 @@ public class Player : MonoBehaviour
             }
             if (verticalInput != 0)
             {
+                InputVerticalZero = false;
                 Moving = true;
                 if (verticalInput > 0)
                 {
                     MovingUp = true;
-                    tempBounceVelocity = bounceVelocity * superJumpIncrement;
                 }
                 else
                 {
                     MovingDown = true;
-                    tempBounceVelocity = bounceVelocity * lowJumpIncrement;
                 }
             }
             else
             {
+                InputVerticalZero = true;
                 tempBounceVelocity = bounceVelocity;
+            }
+            if(Input.GetKeyUp(KeyCode.W) && DoubleJumpingAllowed && JumpingDone)
+            {
+                DoubleJumpingConditions = true;
+            }
+            if(DoubleJumpingConditions && MovingUp && Input.GetKeyDown(KeyCode.W))
+            {
+                DoubleJumping = true;
             }
         }
     }
@@ -110,9 +141,19 @@ public class Player : MonoBehaviour
         GameObject collidedObject = collision.gameObject;
         if (collidedObject.CompareTag("Platform") || collidedObject.CompareTag("Ground"))
         {
-            if (JumpingAllowed)
+            if (JumpingAllowed && MovingUp)
             {
                 Jumping = true;
+                AutoJumping = false;
+                DoubleJumping = false;
+                DoubleJumpingConditions = false;
+            }
+            else if (AutoJumpingAllowed)
+            {
+                AutoJumping = true;
+                Jumping = false;
+                DoubleJumping = false;
+                DoubleJumpingConditions = false;
             }
         }
     }

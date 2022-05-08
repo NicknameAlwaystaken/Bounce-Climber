@@ -20,8 +20,9 @@ public class PlayerController : StateMachine
     {
         player.MaxMovementSpeed = 30f;
         player.BounceVelocity = 30f;
-        player.SuperJumpIncrement = 1.5f;
-        player.LowJumpIncrement = 0.8f;
+        player.FirstJumpIncrement = 1.2f;
+        player.DoubleJumpIncrement = 0.8f;
+        player.AutoJumpBounceVelocity = 0.5f;
     }
 
     public void Update()
@@ -32,6 +33,14 @@ public class PlayerController : StateMachine
             if (player.Jumping)
             {
                 StartCoroutine(PlayerState.Jump());
+            }
+            if (player.DoubleJumping)
+            {
+                StartCoroutine(PlayerState.DoubleJump());
+            }
+            if (player.AutoJumping)
+            {
+                StartCoroutine(PlayerState.AutoJump());
             }
             if (player.Moving)
             {

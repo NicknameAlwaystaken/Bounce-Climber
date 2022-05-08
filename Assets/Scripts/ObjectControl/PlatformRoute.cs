@@ -40,8 +40,6 @@ public class PlatformRoute : PlatformRouteSpawner
             newObject.GetComponent<Platform>().PlatformSpeed = 20f;
         }
         platformList.Add(newObject);
-
-        Debug.Log("Index of route: " + routeIndex + " platformList.Count : " + platformList.Count);
     }
     public void SpawnPlatformStaticLocation()
     {
@@ -80,7 +78,6 @@ public class PlatformRoute : PlatformRouteSpawner
         }
         else
         {
-            Debug.Log("Route: " + routeIndex + " setting starting point: " + startingPoint);
             return null;
         }
     }
@@ -104,7 +101,6 @@ public class PlatformRoute : PlatformRouteSpawner
         }
         else
         {
-            Debug.Log("Route: " + routeIndex + " setting starting point: " + startingPoint);
             return null;
         }
     }
@@ -123,7 +119,6 @@ public class PlatformRoute : PlatformRouteSpawner
             newSpawnPosition.x = Random.Range(minPointX, maxPointX);
             newSpawnPosition.y = Random.Range(minPointY, maxPointY);
 
-            Debug.Log("Route: " + routeIndex + " newSpawnPosition: " + newSpawnPosition);
             return newSpawnPosition;
         }
         if(direction == "up")
@@ -160,7 +155,6 @@ public class PlatformRoute : PlatformRouteSpawner
             newSpawnPosition.x = Random.Range(minPointX, maxPointX);
             newSpawnPosition.y = Random.Range(minPointY, maxPointY);
         }
-        Debug.Log("Route: " + routeIndex + " newSpawnPosition: " + newSpawnPosition);
         return newSpawnPosition;
     }
     public int GetRouteIndex()
@@ -171,7 +165,6 @@ public class PlatformRoute : PlatformRouteSpawner
     {
         if (routeIndex == index)
         {
-            Debug.Log("Found route: " + index);
             return true;
         }
         return false;

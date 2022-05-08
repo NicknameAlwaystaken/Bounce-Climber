@@ -76,7 +76,6 @@ public class Game : MonoBehaviour
         cameraPositioningTime = gamemodeManager.cameraPositioningTime;
         cameraAccelerationSpeed = gamemodeManager.cameraAccelerationSpeed;
         cameraAccumulatingSpeed = gamemodeManager.cameraAccumulatingSpeed;
-        Debug.Log("cameraoffsetz: " + gamemodeManager.cameraOffsetZ);
         cameraOffsetZ = gamemodeManager.cameraOffsetZ;
         cameraOffsetY = gamemodeManager.cameraOffsetY;
         cameraSpeedToDistanceRatioZ = gamemodeManager.cameraSpeedToDistanceRatioZ;
@@ -100,7 +99,7 @@ public class Game : MonoBehaviour
         {
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
-                Destroy(player);
+                //Destroy(player);
                 EndGame();
                 StartGame();
                 return;

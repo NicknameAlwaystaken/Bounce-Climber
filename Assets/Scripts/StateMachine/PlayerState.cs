@@ -27,6 +27,14 @@ public abstract class PlayerState
     {
         yield break;
     }
+    public virtual IEnumerator AutoJump()
+    {
+        yield break;
+    }
+    public virtual IEnumerator DoubleJump()
+    {
+        yield break;
+    }
     public virtual IEnumerator Jump()
     {
         yield break;
