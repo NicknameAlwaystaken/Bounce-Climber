@@ -19,10 +19,10 @@ public class PlayerController : StateMachine
     private void SetPlayerActions()
     {
         player.JumpingAllowed = true;
-        player.BouncingAllowed = true;
+        //player.BouncingAllowed = true;
         player.MovingAllowed = true;
         player.DoubleJumpingAllowed = true;
-        SetPlayerState(new Enable(this, player));
+        player.enabled = true;
     }
 
     private void SetPlayerSettings()
@@ -36,23 +36,40 @@ public class PlayerController : StateMachine
 
     public void Update()
     {
-        if (PlayerState != null)
+        if (player != null)
         {
-            if (player.Jumping)
+            if (Input.GetKeyDown(KeyCode.S))
             {
-                SetPlayerState(new Jumping(this, player));
+                player.BouncingAllowed = !player.BouncingAllowed;
+                if(player.BouncingAllowed)
+                {
+                    SetPlayerState(new Bouncing(this, player));
+                    player.Landed = false;
+                }
             }
             if (player.DoubleJumping)
             {
                 SetPlayerState(new DoubleJumping(this, player));
             }
-            if (player.Bouncing)
-            {
-                SetPlayerState(new Bouncing(this, player));
-            }
             if (player.Moving)
             {
                 SetPlayerState(new Moving(this, player));
+            }
+            if (player.Landed)
+            {
+                player.Jumping = player.JumpingAllowed && player.MovingUp;
+                player.Bouncing = player.BouncingAllowed;
+
+                if (player.Jumping)
+                {
+                    SetPlayerState(new Jumping(this, player));
+                    player.Landed = false;
+                }
+                else if (player.Bouncing)
+                {
+                    SetPlayerState(new Bouncing(this, player));
+                    player.Landed = false;
+                }
             }
         }
     }

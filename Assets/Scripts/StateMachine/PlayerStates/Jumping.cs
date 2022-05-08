@@ -7,6 +7,7 @@ public class Jumping : PlayerState
     public Jumping(PlayerController controller, Player player) : base(controller, player)
     {
         Player.currentStateName = "Jumping";
+        Player.DoubleJumpingConditions = false;
         JumpWithEffects("Jumping", Player.BounceVelocity * Player.FirstJumpIncrement);
         Player.JumpingDone = true;
     }
@@ -23,7 +24,5 @@ public class Jumping : PlayerState
         Vector3 upVelocity = Vector3.up * bounceVelocity;
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
         Player.Jumping = false;
-        Player.Bouncing = false;
-        Player.DoubleJumping = false;
     }
 }

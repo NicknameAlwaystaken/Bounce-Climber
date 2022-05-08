@@ -6,10 +6,6 @@ public class Bouncing : PlayerState
 {
     public Bouncing(PlayerController controller, Player player) : base(controller, player)
     {
-        if (Player.MovingUp)
-        {
-            return;
-        }
         Player.currentStateName = "Bouncing";
         Player.BouncingDone = false;
         JumpWithoutEffects();
