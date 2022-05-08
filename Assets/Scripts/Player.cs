@@ -96,44 +96,21 @@ public class Player : MonoBehaviour
             MovingUp = false;
             MovingLeft = false;
             MovingRight = false;
-            if (horizontalInput != 0)
-            {
-                Moving = true;
-                if (horizontalInput > 0)
-                {
-                    MovingRight = true;
-                }
-                else
-                {
-                    MovingLeft = true;
-                }
-            }
-            if (verticalInput != 0)
-            {
-                InputVerticalZero = false;
-                Moving = true;
-                if (verticalInput > 0)
-                {
-                    MovingUp = true;
-                }
-                else
-                {
-                    MovingDown = true;
-                }
-            }
-            else
-            {
-                InputVerticalZero = true;
-                tempBounceVelocity = bounceVelocity;
-            }
-            if(Input.GetKeyUp(KeyCode.W) && DoubleJumpingAllowed && JumpingDone)
-            {
-                DoubleJumpingConditions = true;
-            }
-            if(DoubleJumpingConditions && MovingUp && Input.GetKeyDown(KeyCode.W))
+            MovingRight = horizontalInput > 0;
+            MovingLeft = !MovingRight;
+            MovingUp = verticalInput > 0;
+            MovingDown = !MovingUp;
+            InputVerticalZero = verticalInput == 0;
+
+            if (DoubleJumpingConditions && MovingUp && Input.GetKeyUp(KeyCode.W))
             {
                 DoubleJumping = true;
             }
+            if (Input.GetKeyUp(KeyCode.W) && DoubleJumpingAllowed && JumpingDone)
+            {
+                DoubleJumpingConditions = true;
+            }
+            Moving = MovingUp || MovingDown || MovingLeft || MovingRight;
         }
     }
     private void OnCollisionEnter(Collision collision)
