@@ -121,6 +121,10 @@ public class Player : MonoBehaviour
             DashingConditions = true;
             Debug.Log("Dashing allowed");
         }
+        if (!DoubleJumpingDone && Input.GetKeyDown(KeyCode.W) && Dashing)
+        {
+            DoubleJumping = true;
+        }
         if (movingAllowed)
         {
             if (Input.GetKeyDown(bounceToggleKey)) ToggleBounce = true;
@@ -140,7 +144,7 @@ public class Player : MonoBehaviour
             InputVerticalZero = verticalInput == 0;
             Moving = MovingUp || MovingDown || MovingLeft || MovingRight;
 
-            if (DoubleJumpingConditions && MovingUp && Input.GetKeyDown(KeyCode.W))
+            if (DoubleJumpingConditions && Input.GetKeyDown(KeyCode.W))
             {
                 DoubleJumping = true;
             }
@@ -157,6 +161,7 @@ public class Player : MonoBehaviour
         {
             Landed = true;
             DashingDone = false;
+            DoubleJumpingDone = false;
         }
     }
     public string GetPlayerState()

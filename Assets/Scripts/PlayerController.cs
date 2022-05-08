@@ -46,7 +46,11 @@ public class PlayerController : StateMachine
             if(PlayerState != null) StartCoroutine(PlayerState.Update());
             if(Player.Dashing)
             {
-                if (Player.DoubleJumping) PlayerState.StopDash();
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    StartCoroutine(PlayerState.StopDash());
+                    return;
+                }
                 else return;
             }
             if (Player.ToggleBounce)
