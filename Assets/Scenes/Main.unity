@@ -642,6 +642,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bdd0376ef2063549974b9a79527c70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  falloffHeight: 0
+  cameraFollowHorizontal: 0
+  cameraPositioningTime: 0
+  cameraAccelerationSpeed: 0
+  cameraAccumulatingSpeed: 0
+  cameraOffsetZ: 0
+  cameraOffsetY: 0
+  cameraSpeedToDistanceRatioZ: 0
   gameModes: 1
   cameraState: 2
 --- !u!1 &963194225

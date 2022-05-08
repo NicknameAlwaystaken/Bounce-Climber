@@ -63,12 +63,6 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        /*
-        movingAllowed = false;
-        moving = false;
-        jumpingAllowed = false;
-        jumping = false;
-        */
     }
 
     void Update()
@@ -84,7 +78,7 @@ public class Player : MonoBehaviour
                 Moving = true;
                 if (horizontalInput > 0)
                 {
-                    MovingLeft = true;
+                    MovingRight = true;
                 }
                 else
                 {
