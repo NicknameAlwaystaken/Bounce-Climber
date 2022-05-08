@@ -12,7 +12,7 @@ public class Bouncing : PlayerState
     {
         Player.MovingAllowed = true;
         Player.JumpingAllowed = true;
-        Player.AutoJumpingAllowed = true;
+        Player.BouncingAllowed = true;
         Player.DoubleJumpingAllowed = true;
         yield break;
     }
@@ -45,18 +45,18 @@ public class Bouncing : PlayerState
         Vector3 upVelocity = Vector3.up * bounceVelocity;
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
         Player.Jumping = false;
-        Player.AutoJumping = false;
+        Player.Bouncing = false;
         Player.DoubleJumping = false;
     }
 
-    public override IEnumerator AutoJump()
+    public override IEnumerator Bounce()
     {
         if (Player.MovingUp)
         {
             yield break;
         }
-        Player.currentStateName = "AutoJumping";
-        Player.AutoJumpingDone = false;
+        Player.currentStateName = "Bouncing";
+        Player.BouncingDone = false;
         /*
         Player.AudioSource.Play();
         Object.Instantiate(Player.particles, Player.transform.position, new Quaternion());
@@ -64,8 +64,8 @@ public class Bouncing : PlayerState
         Rigidbody rb = Player.GetComponent<Rigidbody>();
         Vector3 upVelocity = Vector3.up * Player.BounceVelocity * Player.AutoJumpBounceVelocity;
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
-        Player.AutoJumping = false;
-        Player.AutoJumpingDone = true;
+        Player.Bouncing = false;
+        Player.BouncingDone = true;
         yield break;
     }
     public override IEnumerator Move()

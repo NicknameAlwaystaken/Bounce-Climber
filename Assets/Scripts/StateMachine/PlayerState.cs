@@ -27,7 +27,7 @@ public abstract class PlayerState
     {
         yield break;
     }
-    public virtual IEnumerator AutoJump()
+    public virtual IEnumerator Bounce()
     {
         yield break;
     }

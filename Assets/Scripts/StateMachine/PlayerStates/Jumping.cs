@@ -25,7 +25,7 @@ public class Jumping : PlayerState
             Vector3 upVelocity = Vector3.up * Player.BounceVelocity;
             if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
             Player.Jumping = false;
-            Player.AutoJumping = false;
+            Player.Bouncing = false;
             Player.JumpingDone = true;
             yield break;
         }

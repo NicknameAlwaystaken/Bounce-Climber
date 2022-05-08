@@ -38,9 +38,9 @@ public class PlayerController : StateMachine
             {
                 StartCoroutine(PlayerState.DoubleJump());
             }
-            if (player.AutoJumping)
+            if (player.Bouncing)
             {
-                StartCoroutine(PlayerState.AutoJump());
+                StartCoroutine(PlayerState.Bounce());
             }
             if (player.Moving)
             {

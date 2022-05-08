@@ -30,9 +30,9 @@ public class Player : MonoBehaviour
     public bool jumpingAllowed;
     private bool jumping;
     private bool jumpingDone;
-    private bool autoJumpingAllowed;
-    private bool autoJumping;
-    private bool autoJumpingDone;
+    private bool bouncingAllowed;
+    private bool bouncing;
+    private bool bouncingDone;
     private bool doubleJumpingAllowed;
     private bool doubleJumping;
     private bool doubleJumpingDone;
@@ -68,9 +68,9 @@ public class Player : MonoBehaviour
     public float FirstJumpIncrement { get => firstJumpIncrement; set => firstJumpIncrement = value; }
     public float TempBounceVelocity { get => tempBounceVelocity; set => tempBounceVelocity = value; }
     public float DoubleJumpIncrement { get => doubleJumpIncrement; set => doubleJumpIncrement = value; }
-    public bool AutoJumpingAllowed { get => autoJumpingAllowed; set => autoJumpingAllowed = value; }
-    public bool AutoJumping { get => autoJumping; set => autoJumping = value; }
-    public bool AutoJumpingDone { get => autoJumpingDone; set => autoJumpingDone = value; }
+    public bool BouncingAllowed { get => bouncingAllowed; set => bouncingAllowed = value; }
+    public bool Bouncing { get => bouncing; set => bouncing = value; }
+    public bool BouncingDone { get => bouncingDone; set => bouncingDone = value; }
     public bool DoubleJumpingAllowed { get => doubleJumpingAllowed; set => doubleJumpingAllowed = value; }
     public bool DoubleJumping { get => doubleJumping; set => doubleJumping = value; }
     public bool DoubleJumpingDone { get => doubleJumpingDone; set => doubleJumpingDone = value; }
@@ -121,13 +121,13 @@ public class Player : MonoBehaviour
             if (JumpingAllowed && MovingUp)
             {
                 Jumping = true;
-                AutoJumping = false;
+                Bouncing = false;
                 DoubleJumping = false;
                 DoubleJumpingConditions = false;
             }
-            else if (AutoJumpingAllowed)
+            else if (BouncingAllowed)
             {
-                AutoJumping = true;
+                Bouncing = true;
                 Jumping = false;
                 DoubleJumping = false;
                 DoubleJumpingConditions = false;
