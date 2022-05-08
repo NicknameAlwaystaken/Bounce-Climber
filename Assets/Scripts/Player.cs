@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public bool jumpingAllowed;
     public bool bouncingAllowed;
     public bool doubleJumpingAllowed;
+    public bool landed;
 
     private bool moving;
     private bool movingLeft;
@@ -82,6 +83,7 @@ public class Player : MonoBehaviour
     public float AutoJumpBounceVelocity { get => autoJumpBounceVelocity; set => autoJumpBounceVelocity = value; }
     public bool InputVerticalZero { get => inputVerticalZero; set => inputVerticalZero = value; }
     public bool DoubleJumpingConditions { get => doubleJumpingConditions; set => doubleJumpingConditions = value; }
+    public bool Landed { get => landed; set => landed = value; }
 
     public void Start()
     {
@@ -97,18 +99,18 @@ public class Player : MonoBehaviour
             verticalInput = Input.GetAxis("Vertical");
 
             Moving = false;
-            MovingDown = false;
             MovingUp = false;
+            MovingDown = false;
             MovingLeft = false;
             MovingRight = false;
-            MovingRight = horizontalInput > 0;
-            MovingLeft = !MovingRight;
             MovingUp = verticalInput > 0;
-            MovingDown = !MovingUp;
+            MovingDown = verticalInput < 0;
+            MovingRight = horizontalInput > 0;
+            MovingLeft = horizontalInput < 0;
             InputVerticalZero = verticalInput == 0;
             Moving = MovingUp || MovingDown || MovingLeft || MovingRight;
 
-            if (DoubleJumpingConditions && MovingUp && Input.GetKeyUp(KeyCode.W))
+            if (DoubleJumpingConditions && MovingUp && Input.GetKeyDown(KeyCode.W))
             {
                 DoubleJumping = true;
             }
@@ -123,20 +125,7 @@ public class Player : MonoBehaviour
         GameObject collidedObject = collision.gameObject;
         if (collidedObject.CompareTag("Platform") || collidedObject.CompareTag("Ground"))
         {
-            if (JumpingAllowed && MovingUp)
-            {
-                Jumping = true;
-                Bouncing = false;
-                DoubleJumping = false;
-                DoubleJumpingConditions = false;
-            }
-            else if (BouncingAllowed)
-            {
-                Bouncing = true;
-                Jumping = false;
-                DoubleJumping = false;
-                DoubleJumpingConditions = false;
-            }
+            Landed = true;
         }
     }
     public string GetPlayerState()
