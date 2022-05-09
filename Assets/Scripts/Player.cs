@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
+
+    #region Variables
+
     private AudioSource audioSource;
     public ParticleSystem particles;
     public Rigidbody rb;
@@ -21,7 +25,9 @@ public class Player : MonoBehaviour
         firstJumpIncrement,
         doubleJumpIncrement,
         horizontalInput,
-        verticalInput;
+        verticalInput,
+        currentScore;
+
     public bool movingAllowed;
     public bool jumpingAllowed;
     public bool bouncingAllowed;
@@ -63,6 +69,8 @@ public class Player : MonoBehaviour
     private float autoJumpBounceVelocity;
 
     private bool hasContact;
+
+    #endregion
 
 
     #region Get and Set
@@ -112,6 +120,7 @@ public class Player : MonoBehaviour
     public float DashFreeingDistance { get => dashFreeingDistance; set => dashFreeingDistance = value; }
     public GameObject LastContact { get => lastContact; set => lastContact = value; }
     public bool HasContact { get => hasContact; set => hasContact = value; }
+    public float CurrentScore { get => currentScore; set => currentScore = value; }
 
     #endregion
 
@@ -183,12 +192,15 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     public string GetPlayerState()
     {
         return currentStateName;
     }
+
     public void SetPlayerState(string playerState)
     {
         currentStateName = playerState;
     }
+
 }

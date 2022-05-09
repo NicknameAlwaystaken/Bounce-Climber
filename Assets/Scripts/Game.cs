@@ -99,7 +99,8 @@ public class Game : MonoBehaviour
         {
             if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
-                player.transform.position = new Vector3(0f,3f,0f);
+                Destroy(player);
+                GameController.instance.PlayerDead();
                 EndGame();
                 StartGame();
                 return;

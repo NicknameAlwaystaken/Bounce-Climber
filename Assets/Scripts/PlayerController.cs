@@ -8,12 +8,16 @@ public class PlayerController : StateMachine
     private Player Player;
     public PlayerSpawner playerSpawner;
     public Vector3 playerSpawnLocation;
+    private int currentScore;
 
-    public void SpawnPlayer()
+
+
+    public Player SpawnPlayer()
     {
         Player = playerSpawner.SpawnPlayer(playerSpawnLocation).GetComponent<Player>();
         SetPlayerActions();
         SetPlayerSettings();
+        return Player;
     }
 
     private void SetPlayerActions()
@@ -37,6 +41,12 @@ public class PlayerController : StateMachine
         Player.DashingVerticalTimer = 10.0f;
         Player.DashingLift = 15f;
         Player.DashFreeingDistance = 0.5f;
+        Player.CurrentScore = 0f;
+    }
+
+    public Player GetPlayer()
+    {
+        return Player;
     }
 
     public void Update()
