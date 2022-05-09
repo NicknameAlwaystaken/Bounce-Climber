@@ -46,7 +46,6 @@ public class PlayerController : StateMachine
             if(Player.HasContact && Player.LastContact != null)
             {
                 Player.HasContact = false;
-                Debug.Log("Last Contact: " + Player.LastContact);
                 GameController.instance.DestroyBreakable(Player.LastContact);
             }
             if(PlayerState != null) StartCoroutine(PlayerState.Update());

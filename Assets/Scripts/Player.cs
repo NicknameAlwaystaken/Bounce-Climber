@@ -126,7 +126,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(dashKey) && DashingAllowed && !DashingDone && HorizontalMovement()) // dashing
         {
             DashingConditions = true;
-            Debug.Log("Dashing allowed");
         }
         if (!DoubleJumpingDone && Input.GetKeyDown(KeyCode.W) && Dashing) // Jump to cancel dash
         {
