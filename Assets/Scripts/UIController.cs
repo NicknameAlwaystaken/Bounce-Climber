@@ -11,27 +11,36 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text endScore;
     [SerializeField] private string distanceType = "m";
     private float currentScore;
-    private float bestOfRunScore;
+    private float bestRunScore;
     private float topOfAllTimeScore;
 
     public void SetScore(float amount)
     {
         currentScore += amount;
-        if(bestOfRunScore < currentScore) bestOfRunScore = currentScore;
-        score.text = "Score: " + currentScore.ToString("0.00") + distanceType + "\nTop Score: " + bestOfRunScore.ToString("0.00") + distanceType;
+        if(bestRunScore < currentScore)
+        {
+            bestRunScore = currentScore;
+            score.color = Color.green;
+        }
+        if (topOfAllTimeScore < bestRunScore)
+        {
+            score.color = Color.blue;
+        }
+        score.text = "Score: " + currentScore.ToString("0.00") + distanceType + "\nBest Score: " + bestRunScore.ToString("0.00") + distanceType;
     }
     public void SetResetScore(float amount)
     {
         currentScore = amount;
-        score.text = "Score: " + currentScore.ToString("0.00") + distanceType + "\nTop Score: " + bestOfRunScore.ToString("0.00") + distanceType;
+        score.text = "Score: " + "0m" + "\nBest Score: " + bestRunScore.ToString("0.00") + distanceType;
     }
     public void SetEndScreen()
     {
-        if (topOfAllTimeScore < bestOfRunScore) topOfAllTimeScore = bestOfRunScore;
-        endScore.text = "Best Of Run Score: " + bestOfRunScore.ToString("0.00") + distanceType + "\nAll Time Top Score: " + topOfAllTimeScore.ToString("0.00") + distanceType;
+        if (topOfAllTimeScore < bestRunScore) topOfAllTimeScore = bestRunScore;
+        endScore.text = "Best Run Score: " + bestRunScore.ToString("0.00") + distanceType + "\nAll Time Top Score: " + topOfAllTimeScore.ToString("0.00") + distanceType;
     }
     public void GameStarted()
     {
+        score.color = Color.black;
         EndScreen.SetActive(false);
         GameScreen.SetActive(true);
     }
