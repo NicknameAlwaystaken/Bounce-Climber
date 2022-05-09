@@ -43,6 +43,12 @@ public class PlayerController : StateMachine
     {
         if (Player != null)
         {
+            if(Player.HasContact && Player.LastContact != null)
+            {
+                Player.HasContact = false;
+                Debug.Log("Last Contact: " + Player.LastContact);
+                GameController.instance.DestroyBreakable(Player.LastContact);
+            }
             if(PlayerState != null) StartCoroutine(PlayerState.Update());
             if(Player.Dashing)
             {
@@ -87,10 +93,10 @@ public class PlayerController : StateMachine
                     SetPlayerState(new Jumping(this, Player));
                     Player.Landed = false;
                 }
-                else if (Player.Bouncing)
+                else if (Player.Bouncing && !Player.BouncingDone)
                 {
                     SetPlayerState(new Bouncing(this, Player));
-                    Player.Landed = false;
+                    Player.BouncingDone = true;
                 }
             }
         }

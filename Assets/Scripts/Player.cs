@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public bool landed;
     public KeyCode bounceToggleKey;
     public KeyCode dashKey;
+    private GameObject lastContact;
 
     private bool moving;
     private bool movingLeft;
@@ -61,8 +62,10 @@ public class Player : MonoBehaviour
 
     private float autoJumpBounceVelocity;
 
+    private bool hasContact;
 
 
+    #region Get and Set
     public bool MovingAllowed { get => movingAllowed; set => movingAllowed = value; }
     public bool JumpingAllowed { get => jumpingAllowed; set => jumpingAllowed = value; }
     public bool Jumping { get => jumping; set => jumping = value; }
@@ -107,6 +110,10 @@ public class Player : MonoBehaviour
     public float DashingLift { get => dashingLift; set => dashingLift = value; }
     public float DashingVerticalTimer { get => dashingVerticalTimer; set => dashingVerticalTimer = value; }
     public float DashFreeingDistance { get => dashFreeingDistance; set => dashFreeingDistance = value; }
+    public GameObject LastContact { get => lastContact; set => lastContact = value; }
+    public bool HasContact { get => hasContact; set => hasContact = value; }
+
+    #endregion
 
     public void Start()
     {
@@ -116,12 +123,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(dashKey) && DashingAllowed && !DashingDone && (MovingLeft || MovingRight))
+        if (Input.GetKeyDown(dashKey) && DashingAllowed && !DashingDone && HorizontalMovement()) // dashing
         {
             DashingConditions = true;
             Debug.Log("Dashing allowed");
         }
-        if (!DoubleJumpingDone && Input.GetKeyDown(KeyCode.W) && Dashing)
+        if (!DoubleJumpingDone && Input.GetKeyDown(KeyCode.W) && Dashing) // Jump to cancel dash
         {
             DoubleJumping = true;
         }
@@ -154,6 +161,12 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    private bool HorizontalMovement()
+    {
+        return MovingLeft || MovingRight;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         GameObject collidedObject = collision.gameObject;
@@ -162,6 +175,13 @@ public class Player : MonoBehaviour
             Landed = true;
             DashingDone = false;
             DoubleJumpingDone = false;
+            BouncingDone = false;
+
+            if(collidedObject.CompareTag("Platform"))
+            {
+                LastContact = collidedObject;
+                HasContact = true;
+            }
         }
     }
     public string GetPlayerState()

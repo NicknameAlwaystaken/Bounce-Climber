@@ -8,9 +8,20 @@ public class GameController : StateMachine
 {
     public PlayerController playerController;
 
+    public static GameController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public PlayerController GetPlayerController()
     {
         return playerController;
+    }
+    public void DestroyBreakable(GameObject platformToDestroy)
+    {
+        platformToDestroy.GetComponent<Platform>().DestroyBreakable();
     }
 
     // Start is called before the first frame update
