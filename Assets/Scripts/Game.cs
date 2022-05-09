@@ -19,7 +19,7 @@ public class Game : MonoBehaviour
     private GameModeManager gamemodeManager;
 
     public static GameController instance;
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     public GameMode gameModes;
     public CameraType cameraState;
     private float platformSpawnYDistance = 50f;

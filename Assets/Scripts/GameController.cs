@@ -8,8 +8,8 @@ public class GameController : StateMachine
 {
     private float currentScore;
 
-    public PlayerController playerController;
-    public UIController UIController;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private UIController UIController;
     public Player player;
     public ScoreType scoreType;
 

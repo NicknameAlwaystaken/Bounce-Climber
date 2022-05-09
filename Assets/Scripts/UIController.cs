@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public GameObject GameScreen;
-    public GameObject EndScreen;
+    [SerializeField] private GameObject GameScreen;
+    [SerializeField] private GameObject EndScreen;
 
-    public Text score;
-    public Text endScore;
+    [SerializeField] private Text score;
+    [SerializeField] private Text endScore;
     public string distanceType = "m";
     private float currentScore;
     private float bestOfRunScore;

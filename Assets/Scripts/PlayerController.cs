@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerController : StateMachine
 {
     private Player Player;
-    public PlayerSpawner playerSpawner;
+    [SerializeField] private PlayerSpawner playerSpawner;
+
     public Vector3 playerSpawnLocation;
     private int currentScore;
 
