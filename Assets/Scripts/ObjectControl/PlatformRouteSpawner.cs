@@ -134,12 +134,9 @@ public class PlatformRouteSpawner
                 if(route != null)
                 {
                     var itemRoute = route;
-                    if(lowestPlatform != null)
+                    if(lowestPlatform != null && lowestPlatform.transform.position.y > itemRoute.GetLowestPlatform().transform.position.y)
                     {
-                        if (lowestPlatform.transform.position.y > itemRoute.GetLowestPlatform().transform.position.y)
-                        {
-                            lowestPlatform = itemRoute.GetLowestPlatform();
-                        }
+                        lowestPlatform = itemRoute.GetLowestPlatform();
                     }
                 }
             }
@@ -152,12 +149,9 @@ public class PlatformRouteSpawner
     {
         foreach (PlatformRoute route in platformRouteList.ToArray())
         {
-            if (route != null)
+            if (route != null && route.CheckIfPlatformInRoute(newPlatform))
             {
-                if(route.CheckIfPlatformInRoute(newPlatform))
-                {
-                    route.SpawnPlatform();
-                }
+                route.SpawnPlatform();
             }
         }
     }
@@ -165,12 +159,9 @@ public class PlatformRouteSpawner
     {
         foreach (PlatformRoute route in platformRouteList.ToArray())
         {
-            if (route != null)
+            if (route != null && route.CheckRouteIndex(index))
             {
-                if (route.CheckRouteIndex(index))
-                {
-                    route.SpawnPlatform();
-                }
+                route.SpawnPlatform();
             }
         }
     }

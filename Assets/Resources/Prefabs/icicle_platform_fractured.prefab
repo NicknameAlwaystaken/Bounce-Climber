@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delaySeconds: 2
   scaleAmount: 0.995
-  shrinkMode: 0
+  shrinkMode: 1
 --- !u!1 &449825133424557177
 GameObject:
   m_ObjectHideFlags: 0

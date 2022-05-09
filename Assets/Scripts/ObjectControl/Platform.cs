@@ -39,6 +39,7 @@ public class Platform : MonoBehaviour
 
     public void DestroyBreakable()
     {
+        Debug.Log("Destroying breakables");
         if(destructableObject != null)
         {
             Instantiate(fracturedObject, gameObject.transform.position, new Quaternion());
