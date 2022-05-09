@@ -27,4 +27,8 @@ public class DoubleJumping : PlayerState
         Player.Bouncing = false;
         Player.DoubleJumping = false;
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

@@ -17,4 +17,8 @@ public class Dying : PlayerState
         yield break;
 
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

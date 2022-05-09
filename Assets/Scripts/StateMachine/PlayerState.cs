@@ -55,6 +55,10 @@ public abstract class PlayerState
     {
         yield break;
     }
+    public virtual IEnumerator CurrentState()
+    {
+        yield break;
+    }
     public virtual IEnumerator Update()
     {
         yield break;

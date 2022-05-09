@@ -25,4 +25,8 @@ public class Jumping : PlayerState
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
         Player.Jumping = false;
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

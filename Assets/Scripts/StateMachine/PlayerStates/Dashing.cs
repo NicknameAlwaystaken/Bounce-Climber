@@ -61,4 +61,8 @@ public class Dashing : PlayerState
         Player.transform.GetComponent<Collider>().enabled = true;
         Player.rb.velocity = Vector3.zero;
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

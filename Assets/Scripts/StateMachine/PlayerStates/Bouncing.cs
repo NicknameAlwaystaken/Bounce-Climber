@@ -18,4 +18,8 @@ public class Bouncing : PlayerState
         Vector3 upVelocity = Vector3.up * Player.BounceVelocity * Player.AutoJumpBounceVelocity;
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

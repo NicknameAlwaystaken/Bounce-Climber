@@ -11,4 +11,8 @@ public class Moving : PlayerState
         Rigidbody rb = Player.GetComponent<Rigidbody>();
         rb.velocity = new Vector3(movement.x, rb.velocity.y);
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

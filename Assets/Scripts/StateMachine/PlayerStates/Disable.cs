@@ -9,4 +9,8 @@ public class Disable : PlayerState
         Player.currentStateName = "Disabling";
         Player.enabled = false;
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

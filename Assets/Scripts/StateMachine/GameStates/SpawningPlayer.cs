@@ -13,4 +13,8 @@ public class SpawningPlayer : GameState
         GameController.SpawnPlayer();
         yield break;
     }
+    public override IEnumerator CurrentState()
+    {
+        yield return this;
+    }
 }

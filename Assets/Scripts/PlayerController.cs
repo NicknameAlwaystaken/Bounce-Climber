@@ -52,7 +52,7 @@ public class PlayerController : StateMachine
 
     public void Update()
     {
-        if (Player != null)
+        if (Player != null && GameController.instance.GetGameStatus() != GameController.GameStatus.Stopped)
         {
             if(Player.HasContact && Player.LastContact != null)
             {
@@ -113,7 +113,7 @@ public class PlayerController : StateMachine
     }
     public void FixedUpdate()
     {
-        if (PlayerState != null)
+        if (PlayerState != null && GameController.instance.GetGameStatus() != GameController.GameStatus.Stopped)
         {
             StartCoroutine(PlayerState.FixedUpdate());
             if (Player.Dashing) StartCoroutine(PlayerState.Dash());
