@@ -4,20 +4,41 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public GameObject GameScreen;
+    public GameObject EndScreen;
+
     public Text score;
+    public Text endScore;
     public string distanceType = "m";
     private float currentScore;
-    private float topScore;
+    private float bestOfRunScore;
+    private float topOfAllTimeScore;
 
     public void SetScore(float amount)
     {
         currentScore += amount;
-        if(topScore < currentScore) topScore = currentScore;
-        score.text = "Score: " + currentScore.ToString("0.00") + distanceType + "\nTop Score: " + topScore.ToString("0.00") + distanceType;
+        if(bestOfRunScore < currentScore) bestOfRunScore = currentScore;
+        score.text = "Score: " + currentScore.ToString("0.00") + distanceType + "\nTop Score: " + bestOfRunScore.ToString("0.00") + distanceType;
     }
-    public void ResetScore(float amount)
+    public void SetResetScore(float amount)
     {
         currentScore = amount;
-        score.text = "Score: " + currentScore.ToString("0.00") + distanceType + "\nTop Score: " + topScore.ToString("0.00") + distanceType;
+        score.text = "Score: " + currentScore.ToString("0.00") + distanceType + "\nTop Score: " + bestOfRunScore.ToString("0.00") + distanceType;
+    }
+    public void SetEndScreen()
+    {
+        if (topOfAllTimeScore < bestOfRunScore) topOfAllTimeScore = bestOfRunScore;
+        endScore.text = "Best Of Run Score: " + bestOfRunScore.ToString("0.00") + distanceType + "\nAll Time Top Score: " + topOfAllTimeScore.ToString("0.00") + distanceType;
+    }
+    public void GameStarted()
+    {
+        EndScreen.SetActive(false);
+        GameScreen.SetActive(true);
+    }
+    public void GameEnded()
+    {
+        GameScreen.SetActive(false);
+        EndScreen.SetActive(true);
+        SetEndScreen();
     }
 }

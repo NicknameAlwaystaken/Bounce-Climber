@@ -20,6 +20,7 @@ public class GameController : StateMachine
     public event EventHandler<ScoreIncreaseEventArgs> ScoreIncrease;
     public event EventHandler<ScoreResetEventArgs> ScoreReset;
     public event EventHandler<PlayerDiedEventArgs> PlayerDied;
+    public event EventHandler<GameStartEventArgs> GameStart;
 
     #endregion
 
@@ -43,13 +44,15 @@ public class GameController : StateMachine
     }
     public void PlayerDead()
     {
-        PlayerDying(0f);
+        OnPlayerDying(0f);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        SetGameState(new StartGame(this));
+        GameStart += (sender, args) => SetGameState(new StartGame(this));
+        GameStart += (sender, args) => UIController.GameStarted();
+        OnStartGame();
     }
 
     private void GetPlayer()
@@ -61,9 +64,9 @@ public class GameController : StateMachine
     {
         player = playerController.SpawnPlayer();
         ScoreIncrease += (sender, args) => UIController.SetScore(args.Amount);
-        PlayerDied += (sender, args) => this.ResetScore(args.Amount);
-        PlayerDied += (sender, args) => UIController.ResetScore(args.Amount);
-        PlayerDied += (sender, args) => this.SpawnPlayer();
+        PlayerDied += (sender, args) => this.OnResetScore(args.Amount);
+        PlayerDied += (sender, args) => UIController.SetResetScore(args.Amount);
+        PlayerDied += (sender, args) => UIController.GameEnded();
     }
 
     private void Update()
@@ -77,12 +80,21 @@ public class GameController : StateMachine
 #endif
         }
         if (GameState != null) StartCoroutine(GameState.Update());
-        if(scoreType == ScoreType.Height && currentScore < player.transform.position.y)
+        if (GameState != null && Input.GetKeyDown(KeyCode.R)) OnStartGame();
+        if (scoreType == ScoreType.Height && player != null && currentScore < player.transform.position.y)
         {
-            AddScore(player.transform.position.y - currentScore);
+            OnScoreIncrease(player.transform.position.y - currentScore);
         }
     }
-    public void PlayerDying(float amount)
+    public void OnStartGame()
+    {
+        GameStart?.Invoke(this, new GameStartEventArgs());
+    }
+    public class GameStartEventArgs : EventArgs
+    {
+
+    }
+    public void OnPlayerDying(float amount)
     {
         PlayerDied?.Invoke(this, new PlayerDiedEventArgs(amount));
 
@@ -98,7 +110,7 @@ public class GameController : StateMachine
 
         public float Amount { get; private set; }
     }
-    public void AddScore(float amount)
+    public void OnScoreIncrease(float amount)
     {
         ScoreIncrease?.Invoke(this, new ScoreIncreaseEventArgs(amount));
 
@@ -114,7 +126,7 @@ public class GameController : StateMachine
 
         public float Amount { get; private set; }
     }
-    public void ResetScore(float amount)
+    public void OnResetScore(float amount)
     {
         ScoreReset?.Invoke(this, new ScoreResetEventArgs(amount));
     }

@@ -16,6 +16,14 @@ public abstract class GameState
     {
         yield break;
     }
+    public virtual IEnumerator Restart()
+    {
+        yield break;
+    }
+    public virtual IEnumerator Pause()
+    {
+        yield break;
+    }
 
     public virtual IEnumerator Update()
     {
