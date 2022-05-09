@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private Text score;
     [SerializeField] private Text endScore;
-    public string distanceType = "m";
+    [SerializeField] private string distanceType = "m";
     private float currentScore;
     private float bestOfRunScore;
     private float topOfAllTimeScore;
