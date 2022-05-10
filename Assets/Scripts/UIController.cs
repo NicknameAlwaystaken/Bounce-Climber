@@ -135,16 +135,11 @@ public class UIController : MonoBehaviour
         currentTop.text = "All Time Best Score\n" + topScore.ToString("0.00") + "m";
 
     }
-    public void ResetAllScores()
-    {
-        currentScore = 0f;
-        ScoreText(currentScore, TextForScore.None.Value);
-        bestRunScore = 0f;
-    }
     public void EndSession()
     {
         SaveTopScore(topScore);
         currentScore = 0f;
         bestRunScore = 0f;
+        ScoreText(currentScore, TextForScore.None.Value);
     }
 }
