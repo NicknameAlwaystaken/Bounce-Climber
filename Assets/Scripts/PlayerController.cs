@@ -12,7 +12,6 @@ public class PlayerController : StateMachine
     private int currentScore;
 
 
-
     public Player SpawnPlayer()
     {
         Player = playerSpawner.SpawnPlayer(playerSpawnLocation).GetComponent<Player>();
@@ -52,7 +51,20 @@ public class PlayerController : StateMachine
 
     public void Update()
     {
-        if (Player != null && GameController.instance.GetGameStatus() != GameController.GameStatus.Stopped)
+        if (!IsGamePlaying())
+        {
+            if(Player != null)
+            {
+                Player.Paused = true;
+            }
+            return;
+        }
+        else
+        {
+            if (Player != null) Player.Paused = false;
+        }
+
+        if (Player != null && IsGamePlaying())
         {
             if(Player.HasContact && Player.LastContact != null)
             {
@@ -113,10 +125,15 @@ public class PlayerController : StateMachine
     }
     public void FixedUpdate()
     {
-        if (PlayerState != null && GameController.instance.GetGameStatus() != GameController.GameStatus.Stopped)
+        if (PlayerState != null && IsGamePlaying())
         {
             StartCoroutine(PlayerState.FixedUpdate());
             if (Player.Dashing) StartCoroutine(PlayerState.Dash());
         }
+    }
+    private static bool IsGamePlaying()
+    {
+        return GameController.instance.GetGameStatus() == GameController.GameStatus.Started ||
+            GameController.instance.GetGameStatus() == GameController.GameStatus.Resumed;
     }
 }

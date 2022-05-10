@@ -4832,6 +4832,7 @@ GameObject:
   - component: {fileID: 6728209367372926299}
   - component: {fileID: 6710888533890768973}
   - component: {fileID: -7922485545453693738}
+  - component: {fileID: 4717321487706394911}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -5041,13 +5042,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 7945365061505629239, guid: 19b29f46121fff64dab7561c89a63cb0, type: 3}
+  rb: {fileID: 0}
   currentStateName: 
+  dashingHorizontalTimer: 0
+  dashingVerticalTimer: 0
   movingAllowed: 0
   jumpingAllowed: 0
   bouncingAllowed: 0
   doubleJumpingAllowed: 0
   dashingAllowed: 0
-  toggleBounce: 0
+  paused: 0
   landed: 0
+  dashingDistance: 0
+  dashingLift: 0
   bounceToggleKey: 115
   dashKey: 304
+  lastContact: {fileID: 0}
+--- !u!65 &4717321487706394911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728209367372926302}
+  m_Material: {fileID: 13400000, guid: ae6da4f91e6bf834a862fc5ae1a5018c, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1, y: 0.8, z: 0.8}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -28,19 +28,21 @@ public class Player : MonoBehaviour
         verticalInput,
         currentScore;
 
-    public bool movingAllowed;
-    public bool jumpingAllowed;
-    public bool bouncingAllowed;
-    public bool doubleJumpingAllowed;
-    public bool dashingAllowed;
-    public float dashingDistance;
-    public float dashingLift;
     public float dashingHorizontalTimer;
     public float dashingVerticalTimer;
-    public bool landed;
-    public KeyCode bounceToggleKey;
-    public KeyCode dashKey;
-    private GameObject lastContact;
+
+    [SerializeField] private bool movingAllowed;
+    [SerializeField] private bool jumpingAllowed;
+    [SerializeField] private bool bouncingAllowed;
+    [SerializeField] private bool doubleJumpingAllowed;
+    [SerializeField] private bool dashingAllowed;
+    [SerializeField] private bool paused;
+    [SerializeField] private bool landed;
+    [SerializeField] private float dashingDistance;
+    [SerializeField] private float dashingLift;
+    [SerializeField] private KeyCode bounceToggleKey;
+    [SerializeField] private KeyCode dashKey;
+    [SerializeField] private GameObject lastContact;
 
     private bool moving;
     private bool movingLeft;
@@ -121,6 +123,7 @@ public class Player : MonoBehaviour
     public GameObject LastContact { get => lastContact; set => lastContact = value; }
     public bool HasContact { get => hasContact; set => hasContact = value; }
     public float CurrentScore { get => currentScore; set => currentScore = value; }
+    public bool Paused { get => paused; set => paused = value; }
 
     #endregion
 
@@ -132,6 +135,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Paused) return;
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+
         if (Input.GetKeyDown(dashKey) && DashingAllowed && !DashingDone && HorizontalMovement()) // dashing
         {
             DashingConditions = true;
@@ -144,8 +151,6 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(bounceToggleKey)) ToggleBounce = true;
 
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
 
             Moving = false;
             MovingUp = false;

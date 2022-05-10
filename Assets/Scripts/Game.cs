@@ -24,7 +24,7 @@ public class Game : MonoBehaviour
     public CameraType cameraState;
     private float platformSpawnYDistance = 50f;
     private float cameraTimer;
-    private GameObject player;
+    private GameObject Player;
 
     public enum CameraType
     {
@@ -39,26 +39,30 @@ public class Game : MonoBehaviour
         Platform_Smasher = 2
     }
 
-    void Start()
+    private void Awake()
     {
         mainCamera = FindObjectOfType<Camera>();
         platformRouteSpawner = new PlatformRouteSpawner();
         gamemodeManager = new GameModeManager();
         gamemodeManager.CheckIfFileValid();
         gamemodeManager = gamemodeManager.LoadGamemodeSettings((int)gameModes);
-        StartGame();
+        SetGameModeSettings();
     }
 
-    private void StartGame()
+    void Start()
+    {
+    }
+
+    public void StartGame()
     {
         SetGameModeSettings();
+        platformRouteSpawner.SpawnRoutes();
     }
     private void SetGameModeSettings()
     {
         GameSetup();
         CameraSettings();
         platformRouteSpawner.GameSettings(gamemodeManager);
-        platformRouteSpawner.SpawnRoutes();
     }
 
     private void GameSetup()
@@ -85,24 +89,13 @@ public class Game : MonoBehaviour
     {
         mainCamera.transform.position = newCameraPosition;
     }
-    private void EndGame()
-    {
-        var objects = GameObject.FindGameObjectsWithTag("Platform");
-        foreach (var obj in objects)
-        {
-            if (obj != null) Destroy(obj);
-        }
-    }
     private void Update()
     {
-        if(mainCamera != null && player != null)
+        if(mainCamera != null && Player != null && IsGamePlaying())
         {
-            if (player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
+            if (Player.transform.position.y < mainCamera.transform.position.y - falloffHeight)
             {
-                Destroy(player);
-                GameController.instance.PlayerDead();
-                EndGame();
-                StartGame();
+                GameController.instance.PlayerDead(Player);
                 return;
             }
             if (gamemodeManager.gamemodeID == (int)gameModes)
@@ -134,9 +127,9 @@ public class Game : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (player != null)
+        if (Player != null && IsGamePlaying())
         {
-            Vector3 playerPosition = player.transform.position;
+            Vector3 playerPosition = Player.transform.position;
             Vector3 cameraPosition = mainCamera.transform.position;
             Vector3 desiredPosition;
             cameraTimer = cameraPositioningTime;
@@ -203,7 +196,13 @@ public class Game : MonoBehaviour
         }
         else
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            Player = GameObject.FindGameObjectWithTag("Player");
         }
+    }
+
+    private static bool IsGamePlaying()
+    {
+        return GameController.instance.GetGameStatus() == GameController.GameStatus.Started ||
+            GameController.instance.GetGameStatus() == GameController.GameStatus.Resumed;
     }
 }

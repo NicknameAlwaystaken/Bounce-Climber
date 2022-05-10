@@ -10,9 +10,11 @@ public class GameController : StateMachine
 
     [SerializeField] private PlayerController playerController;
     [SerializeField] private UIController UIController;
-    [SerializeField] private Player player;
+    [SerializeField] private Game Game;
+    [SerializeField] private Player Player;
     [SerializeField] private ScoreType scoreType;
     [SerializeField] private GameStatus gameStatus;
+    [SerializeField] private float CurrentTimeScale;
 
     public static GameController instance;
 
@@ -21,6 +23,7 @@ public class GameController : StateMachine
     public event EventHandler<ScoreIncreaseEventArgs> ScoreIncrease;
     public event EventHandler<ScoreResetEventArgs> ScoreReset;
     public event EventHandler<PlayerDiedEventArgs> PlayerDied;
+    public event EventHandler<ToMainMenuEventArgs> ToMainMenu;
     public event EventHandler<GameStartEventArgs> GameStart;
     public event EventHandler<GamePauseEventArgs> GamePause;
     public event EventHandler<GameResumeEventArgs> GameResume;
@@ -38,7 +41,8 @@ public class GameController : StateMachine
         Stopped = 0,
         Started = 1,
         Paused = 2,
-        Unpaused = 3,
+        Resumed = 3,
+        MainMenu = 4,
     }
 
     private void Awake()
@@ -46,9 +50,9 @@ public class GameController : StateMachine
         instance = this;
     }
 
-    private void SetGameStatus(int newStatus)
+    private void SetGameStatus(GameStatus newStatus)
     {
-        gameStatus = (GameStatus)newStatus;
+        gameStatus = newStatus;
     }
     public GameStatus GetGameStatus()
     {
@@ -63,8 +67,9 @@ public class GameController : StateMachine
     {
         platformToDestroy.GetComponent<Platform>().DestroyBreakable();
     }
-    public void PlayerDead()
+    public void PlayerDead(GameObject _player)
     {
+        DestroyPlayer(_player);
         OnPlayerDying(0f);
     }
 
@@ -73,70 +78,116 @@ public class GameController : StateMachine
     {
         ScoreIncrease += (sender, args) => UIController.SetScore(args.Amount);
 
-        PlayerDied += (sender, args) => this.OnResetScore(args.Amount);
+        PlayerDied += (sender, args) => OnResetScore(args.Amount);
         PlayerDied += (sender, args) => UIController.SetResetScore(args.Amount);
-        PlayerDied += (sender, args) => UIController.GameEnded();
+        PlayerDied += (sender, args) => UIController.PlayerDied();
+        PlayerDied += (sender, args) => SetGameStatus(GameStatus.Stopped);
+        PlayerDied += (sender, args) => SetTimeScale(0f);
 
+        GameEnd += (sender, args) => SetGameStatus(GameStatus.Stopped);
         GameEnd += (sender, args) => SetGameState(new EndGame(this));
-        GameEnd += (sender, args) => UIController.GameEnded();
-        GameEnd += (sender, args) => SetGameStatus(0);
+        GameEnd += (sender, args) => DestroyAllPlatforms();
+        GameEnd += (sender, args) => DestroyIfPlayerFound();
 
+
+        ToMainMenu += (sender, args) => SetGameStatus(GameStatus.MainMenu);
+        ToMainMenu += (sender, args) => OnGameEnd();
+        ToMainMenu += (sender, args) => SetGameState(new MainMenu(this));
+        ToMainMenu += (sender, args) => UIController.BackToMainMenu();
+
+
+        GameStart += (sender, args) => SetGameStatus(GameStatus.Started);
+        GameStart += (sender, args) => SetTimeScale(1f);
+        GameStart += (sender, args) => Game.StartGame();
         GameStart += (sender, args) => SetGameState(new StartGame(this));
         GameStart += (sender, args) => UIController.GameStarted();
-        GameStart += (sender, args) => SetGameStatus(1);
 
+
+        GamePause += (sender, args) => SetGameStatus(GameStatus.Paused);
+        GamePause += (sender, args) => SetTimeScale(0f);
         GamePause += (sender, args) => SetGameState(new PauseGame(this));
         GamePause += (sender, args) => UIController.GamePaused();
-        GamePause += (sender, args) => SetGameStatus(2);
 
+
+        GameResume += (sender, args) => SetGameStatus(GameStatus.Resumed);
+        GameResume += (sender, args) => SetTimeScale(1f);
         GameResume += (sender, args) => SetGameState(new ResumeGame(this));
         GameResume += (sender, args) => UIController.GameResumed();
-        GameResume += (sender, args) => SetGameStatus(3);
 
-        SetGameStatus(0);
+        OnToMainMenu();
+    }
+
+    private void DestroyIfPlayerFound()
+    {
+        if (Player != null) Destroy(Player);
+    }
+
+    private void DestroyPlayer(GameObject _player)
+    {
+        if (_player != null) Destroy(_player);
+    }
+
+    private void SetTimeScale(float amount)
+    {
+        CurrentTimeScale = amount;
+        Time.timeScale = amount;
     }
 
     private void GetPlayer()
     {
-        player = playerController.GetPlayer();
+        Player = playerController.GetPlayer();
     }
 
     public void SpawnPlayer()
     {
-        player = playerController.SpawnPlayer();
+        Player = playerController.SpawnPlayer();
+    }
+    private void DestroyAllPlatforms()
+    {
+        var objects = GameObject.FindGameObjectsWithTag("Platform");
+        foreach (var obj in objects)
+        {
+            if (obj != null) Destroy(obj);
+        }
     }
 
     private void Update()
     {
+        if(GameState == null) return;
+        if (Input.GetKeyDown(KeyCode.R) && gameStatus == GameStatus.Stopped) RestartGame();
         if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Pause"))
         {
-            if(GameState != null)
+            if (gameStatus == GameStatus.Stopped)
             {
-                if (gameStatus == GameStatus.Stopped)
-                {
-                    OnQuitGame();
-                }
-                if (gameStatus == GameStatus.Started)
-                {
-                    OnPauseGame();
-                }
-                if (gameStatus == GameStatus.Paused)
-                {
-                    OnResumeGame();
-                }
-                if (gameStatus == GameStatus.Unpaused)
-                {
-                    OnPauseGame();
-                }
+                OnQuitGame();
+            }
+            else if (gameStatus == GameStatus.Started)
+            {
+                OnPauseGame();
+            }
+            else if (gameStatus == GameStatus.Paused)
+            {
+                OnResumeGame();
+            }
+            else if (gameStatus == GameStatus.Resumed)
+            {
+                OnPauseGame();
             }
         }
         if (gameStatus == GameStatus.Stopped) return;
-        if (GameState != null) StartCoroutine(GameState.Update());
-        if (GameState != null && Input.GetKeyDown(KeyCode.R)) OnStartGame();
-        if (scoreType == ScoreType.Height && player != null && currentScore < player.transform.position.y)
+
+        StartCoroutine(GameState.Update());
+
+        if (scoreType == ScoreType.Height && Player != null && currentScore < Player.transform.position.y)
         {
-            OnScoreIncrease(player.transform.position.y - currentScore);
+            OnScoreIncrease(Player.transform.position.y - currentScore);
         }
+    }
+
+    public void RestartGame()
+    {
+        OnGameEnd();
+        OnStartGame();
     }
 
     public void OnQuitGame()
@@ -146,6 +197,17 @@ public class GameController : StateMachine
 #else
             Application.Quit();
 #endif
+    }
+
+    #region Eventhandlers
+
+    public void OnToMainMenu()
+    {
+        ToMainMenu?.Invoke(this, new ToMainMenuEventArgs());
+    }
+    public class ToMainMenuEventArgs : EventArgs
+    {
+
     }
     public void OnResumeGame()
     {
@@ -226,5 +288,7 @@ public class GameController : StateMachine
 
         public float Amount { get; private set; }
     }
+
+    #endregion
 
 }

@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private GameObject StartScreen;
+    [SerializeField] private GameObject MainScreen;
     [SerializeField] private GameObject GameScreen;
     [SerializeField] private GameObject PauseScreen;
-    [SerializeField] private GameObject EndScreen;
+    [SerializeField] private GameObject RestartScreen;
 
     [SerializeField] private Text score;
     [SerializeField] private Text endScore;
@@ -15,14 +15,6 @@ public class UIController : MonoBehaviour
     private float currentScore;
     private float bestRunScore;
     private float topOfAllTimeScore;
-
-    public enum GameStatus
-    {
-        Stopped = 0,
-        Started = 1,
-        Paused = 2,
-        Unpaused = 3,
-    }
 
     public void SetScore(float amount)
     {
@@ -48,6 +40,11 @@ public class UIController : MonoBehaviour
         if (topOfAllTimeScore < bestRunScore) topOfAllTimeScore = bestRunScore;
         endScore.text = "Best Run Score: " + bestRunScore.ToString("0.00") + distanceType + "\nAll Time Top Score: " + topOfAllTimeScore.ToString("0.00") + distanceType;
     }
+    public void BackToMainMenu()
+    {
+        score.color = Color.black;
+        ActivateCanvas(MainScreen);
+    }
     public void GameStarted()
     {
         score.color = Color.black;
@@ -56,24 +53,22 @@ public class UIController : MonoBehaviour
     public void GamePaused()
     {
         ActivateCanvas(PauseScreen);
-        Time.timeScale = 0f;
     }
     public void GameResumed()
     {
         ActivateCanvas(GameScreen);
-        Time.timeScale = 1f;
     }
-    public void GameEnded()
+    public void PlayerDied()
     {
-        ActivateCanvas(EndScreen);
+        ActivateCanvas(RestartScreen);
         SetEndScreen();
     }
 
     private void ActivateCanvas(GameObject chosenCanvas)
     {
         GameScreen.SetActive(false);
-        EndScreen.SetActive(false);
-        StartScreen.SetActive(false);
+        RestartScreen.SetActive(false);
+        MainScreen.SetActive(false);
         PauseScreen.SetActive(false);
 
         chosenCanvas.SetActive(true);
