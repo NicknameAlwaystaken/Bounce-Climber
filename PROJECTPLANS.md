@@ -17,7 +17,7 @@
 
 - ### Class Diagram
 
-    - Diagram where it's showing structure and dependancies of classes.
+    - Diagram where it's showing structure and dependancies of classes. (Inaccurate, outdated)
 
 ```mermaid
 classDiagram
@@ -78,7 +78,7 @@ classDiagram
 
 - ### Sequence Diagram
 
-    - Diagram where it's showing interactions between classes, it goes from starting the game to spawning ball and at the end showing loop how the ball behaves.
+    - Diagram where it's showing interactions between classes, it goes from starting the game to spawning ball and at the end showing loop how the ball behaves. (Inaccurate, outdated)
 
 ```mermaid
 sequenceDiagram

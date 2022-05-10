@@ -13,8 +13,7 @@
 
 # Game Manual
 
-<details>
-<summary><h2>Game Modes</h2></summary>
+<h2>Game Modes</h2>
 
 ### No Breaks
 
@@ -56,11 +55,9 @@
 
         - No GIF yet.
 
-</details>
 
 
-<details>
-<summary><h2>Player Mechanics</h2></summary>
+<h2>Player Mechanics</h2>
 
 ### Behavior
 
@@ -85,5 +82,3 @@
 -   #### Charge Jump ability
 
     - Player is able to reach greater heights using Charge Jump. It's used by holding down Down-key whlist you are ontop of a surface. It will pause [**Bouncing**](#bouncing) during, and the longer you hold the higher you can jump.
-
-</details>

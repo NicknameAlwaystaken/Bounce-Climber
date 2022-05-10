@@ -13,8 +13,7 @@
 
 # To-do list
 
-<details>
-<summary><h2>Game Structure</h2></summary>
+<h2>Game Structure</h2>
 
 I will gather here things that are mostly done in the side of creating a skeleton for the game to work with.
 
@@ -52,10 +51,8 @@ I will gather here things that are mostly done in the side of creating a skeleto
             - [ ] Eventually upgradeable (lower damage inflicted)
         - [ ] Based on speed on contact
 
-</details>
 
-<details>
-<summary><h2>Game Mechanics</h2></summary>
+<h2>Game Mechanics</h2>
 
 Here I am aiming to use the skeleton of the game
 
@@ -114,10 +111,8 @@ Here I am aiming to use the skeleton of the game
     - [ ] Close game loop (Start game --> play --> lose/win --> start game)
     - [ ] Cycle of Seasons with distance
 
-</details>
 
-<details>
-<summary><h2>Art</h2></summary>
+<h2>Art</h2>
 
 I aim to create very pleasing looking and sounding game with these effects
 
@@ -140,5 +135,3 @@ I aim to create very pleasing looking and sounding game with these effects
         - [ ] Unique animation on land
 
     - [ ] **Autumn**
-
-</details>
