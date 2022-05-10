@@ -8,6 +8,9 @@ public class GameController : StateMachine
 {
     private float currentScore;
 
+    public string GameTitle;
+    public string GameVersion;
+
     [SerializeField] private PlayerController playerController;
     [SerializeField] private UIController UIController;
     [SerializeField] private Game Game;
@@ -76,6 +79,8 @@ public class GameController : StateMachine
     // Start is called before the first frame update
     void Start()
     {
+        UIController.SetGameTitle(GameTitle, GameVersion);
+
         ScoreIncrease += (sender, args) => UIController.SetScore(args.Amount);
 
         PlayerDied += (sender, args) => OnResetScore(args.Amount);
@@ -90,8 +95,8 @@ public class GameController : StateMachine
         GameEnd += (sender, args) => DestroyIfPlayerFound();
 
 
-        ToMainMenu += (sender, args) => SetGameStatus(GameStatus.MainMenu);
         ToMainMenu += (sender, args) => OnGameEnd();
+        ToMainMenu += (sender, args) => SetGameStatus(GameStatus.MainMenu);
         ToMainMenu += (sender, args) => SetGameState(new MainMenu(this));
         ToMainMenu += (sender, args) => UIController.BackToMainMenu();
 
