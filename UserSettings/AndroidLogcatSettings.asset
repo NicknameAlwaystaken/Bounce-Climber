@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "90175ecb",
         "name": "com.NicknameAlwaysTaken.BounceClimber",
-        "processId": 10790,
+        "processId": 10793,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -24,6 +24,12 @@
             "deviceId": "90175ecb",
             "name": "com.NicknameAlwaysTaken.BounceClimber",
             "processId": 10790,
+            "exited": false
+        },
+        {
+            "deviceId": "90175ecb",
+            "name": "com.NicknameAlwaysTaken.BounceClimber",
+            "processId": 10793,
             "exited": false
         }
     ],

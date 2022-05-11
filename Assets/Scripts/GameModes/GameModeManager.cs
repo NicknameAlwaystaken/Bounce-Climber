@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
-/*
- * Gamemodemanager checks if file exists or creates it with default values of gamemodes. --DONE--
- * GameModeManager loads from GameModeSettings.txt and returns it to caller. --DONE--
- */
 public class GameModeManager
 {
     public PlatformSmasher platformSmasher;
@@ -58,6 +55,7 @@ public class GameModeManager
         platformRouteAmount,
         cameraMode;
 
+
     public bool CheckIfFileValid()
     {
         if(!File.Exists(Application.dataPath + "/GameModeSettings.txt"))
@@ -90,6 +88,24 @@ public class GameModeManager
         Debug.Log("File didn't exist. File written.");
     }
 
+    public GameModeManager LoadSettings(int id)
+    {
+        DirectLoad();
+        foreach (GameModeManager gamemode in gamemodeList)
+        {
+            if (gamemode != null)
+            {
+                if (gamemode.gamemodeID == id)
+                {
+                    var gamemodeSettings = gamemode;
+                    Debug.Log("Successful gamemode load: " + gamemode);
+                    return gamemodeSettings;
+                }
+            }
+        }
+        return new GameModeManager();
+    }
+
     public GameModeManager LoadGamemodeSettings(int id)
     {
         Load();
@@ -106,6 +122,13 @@ public class GameModeManager
             }
         }
         return new GameModeManager();
+    }
+    private void DirectLoad()
+    {
+        platformSmasher = new PlatformSmasher();
+        platformClimber = new PlatformClimber();
+        gamemodeList.Add(platformSmasher);
+        gamemodeList.Add(platformClimber);
     }
     private void Load()
     {

@@ -9,8 +9,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject PauseScreen;
     [SerializeField] private GameObject RestartScreen;
 
-    [SerializeField] private Image MoveStick;
-    [SerializeField] private Image JumpButton;
+    [SerializeField] private GameObject MoveStick;
+    [SerializeField] private GameObject JumpButton;
+    [SerializeField] private GameObject DashButton;
+    [SerializeField] private GameObject PauseButton;
+    [SerializeField] private GameObject ControlsText;
 
     [SerializeField] private Text score;
     [SerializeField] private Text endScore;
@@ -23,20 +26,22 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        MoveStick.enabled = true;
-        JumpButton.enabled = true;
-        /*
         if (Application.platform == RuntimePlatform.Android)
         {
-            Stick.enabled = true;
-            Button.enabled = true;
+            MoveStick.SetActive(true);
+            JumpButton.SetActive(true);
+            DashButton.SetActive(true);
+            PauseButton.SetActive(true);
+            ControlsText.SetActive(false);
         }
         else
         {
-            Stick.enabled = false;
-            Button.enabled = false;
+            MoveStick.SetActive(false);
+            JumpButton.SetActive(false);
+            DashButton.SetActive(false);
+            PauseButton.SetActive(false);
+            ControlsText.SetActive(true);
         }
-        */
         LoadGame();
     }
     public class TextForScore

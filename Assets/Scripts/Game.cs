@@ -44,8 +44,9 @@ public class Game : MonoBehaviour
         mainCamera = FindObjectOfType<Camera>();
         platformRouteSpawner = new PlatformRouteSpawner();
         gamemodeManager = new GameModeManager();
-        gamemodeManager.CheckIfFileValid();
-        gamemodeManager = gamemodeManager.LoadGamemodeSettings((int)gameModes);
+        //gamemodeManager.CheckIfFileValid();
+        //gamemodeManager = gamemodeManager.LoadGamemodeSettings((int)gameModes);
+        gamemodeManager = gamemodeManager.LoadSettings((int)gameModes);
         SetGameModeSettings();
     }
 
