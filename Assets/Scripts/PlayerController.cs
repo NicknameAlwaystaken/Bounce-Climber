@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerController : StateMachine
 {
-    private Player Player;
     [SerializeField] private PlayerSpawner playerSpawner;
+    [SerializeField] private Player userInputSystem;
 
     public Vector3 playerSpawnLocation;
     private int currentScore;
@@ -14,65 +14,69 @@ public class PlayerController : StateMachine
 
     public Player SpawnPlayer()
     {
-        Player = playerSpawner.SpawnPlayer(playerSpawnLocation).GetComponent<Player>();
+        //Player = playerSpawner.SpawnPlayer(playerSpawnLocation).GetComponent<Player>();
+        userInputSystem = playerSpawner.SpawnPlayer(playerSpawnLocation).GetComponent<Player>();
         SetPlayerActions();
         SetPlayerSettings();
-        return Player;
+        return userInputSystem;
     }
 
     private void SetPlayerActions()
     {
-        Player.JumpingAllowed = true;
-        Player.DashingAllowed = true;
-        Player.MovingAllowed = true;
-        Player.DoubleJumpingAllowed = true;
-        Player.enabled = true;
+        userInputSystem.JumpingAllowed = true;
+        userInputSystem.DashingAllowed = true;
+        userInputSystem.MovingAllowed = true;
+        userInputSystem.DoubleJumpingAllowed = true;
+        userInputSystem.enabled = true;
     }
 
     private void SetPlayerSettings()
     {
-        Player.MaxMovementSpeed = 30f;
-        Player.BounceVelocity = 30f;
-        Player.FirstJumpIncrement = 1.2f;
-        Player.DoubleJumpIncrement = 0.8f;
-        Player.AutoJumpBounceVelocity = 0.5f;
-        Player.DashingDistance = 20f;
-        Player.DashingHorizontalTimer = 5.0f;
-        Player.DashingVerticalTimer = 10.0f;
-        Player.DashingLift = 15f;
-        Player.DashFreeingDistance = 0.5f;
-        Player.CurrentScore = 0f;
+        userInputSystem.MaxMovementSpeed = 30f;
+        userInputSystem.MovementSpeed = 200f;
+        userInputSystem.SlowdownSpeed = 30f;
+        userInputSystem.BounceVelocity = 30f;
+        userInputSystem.FirstJumpIncrement = 1.2f;
+        userInputSystem.DoubleJumpIncrement = 0.8f;
+        userInputSystem.AutoJumpBounceVelocity = 0.5f;
+        userInputSystem.DashingDistance = 20f;
+        userInputSystem.DashingHorizontalTimer = 5.0f;
+        userInputSystem.DashingVerticalTimer = 10.0f;
+        userInputSystem.DashingLift = 15f;
+        userInputSystem.DashFreeingDistance = 0.5f;
+        userInputSystem.CurrentScore = 0f;
     }
 
     public Player GetPlayer()
     {
-        return Player;
+        return userInputSystem;
     }
 
     public void Update()
     {
         if (!IsGamePlaying())
         {
-            if(Player != null)
+            if(userInputSystem != null)
             {
-                Player.Paused = true;
+                userInputSystem.Paused = true;
             }
             return;
         }
         else
         {
-            if (Player != null) Player.Paused = false;
+            if (userInputSystem != null) userInputSystem.Paused = false;
         }
 
-        if (Player != null && IsGamePlaying())
+        if (userInputSystem != null && IsGamePlaying())
         {
-            if(Player.HasContact && Player.LastContact != null)
+            if(userInputSystem.HasContact && userInputSystem.LastContact != null)
             {
-                Player.HasContact = false;
-                GameController.instance.DestroyBreakable(Player.LastContact);
+                userInputSystem.HasContact = false;
+                GameController.instance.DestroyBreakable(userInputSystem.LastContact);
             }
+            /*
             if(PlayerState != null) StartCoroutine(PlayerState.Update());
-            if(Player.Dashing)
+            if(userInputSystem.Dashing)
             {
                 if (Input.GetKeyDown(KeyCode.W))
                 {
@@ -81,55 +85,58 @@ public class PlayerController : StateMachine
                 }
                 else return;
             }
-            if (Player.ToggleBounce)
+            if (userInputSystem.ToggleBounce)
             {
-                Player.BouncingAllowed = !Player.BouncingAllowed;
-                if(Player.BouncingAllowed && Player.Landed)
+                userInputSystem.BouncingAllowed = !userInputSystem.BouncingAllowed;
+                if(userInputSystem.BouncingAllowed && userInputSystem.Landed)
                 {
-                    SetPlayerState(new Bouncing(this, Player));
-                    Player.Landed = false;
+                    SetPlayerState(new Bouncing(this, userInputSystem));
+                    userInputSystem.Landed = false;
                 }
-                Player.ToggleBounce = false;
+                userInputSystem.ToggleBounce = false;
             }
-            if (Player.DoubleJumping)
+            if (userInputSystem.DoubleJumping)
             {
-                SetPlayerState(new DoubleJumping(this, Player));
+                SetPlayerState(new DoubleJumping(this, userInputSystem));
             }
-            if (Player.Moving)
+            if (userInputSystem.Moving)
             {
-                SetPlayerState(new Moving(this, Player));
+                SetPlayerState(new Moving(this, userInputSystem));
             }
-            if (Player.DashingConditions)
+            if (userInputSystem.DashingConditions)
             {
-                SetPlayerState(new Dashing(this, Player));
+                SetPlayerState(new Dashing(this, userInputSystem));
                 PlayerState.Start();
                 return;
             }
-            if (Player.Landed)
+            if (userInputSystem.Landed)
             {
-                Player.Jumping = Player.JumpingAllowed && Player.MovingUp;
-                Player.Bouncing = Player.BouncingAllowed;
+                userInputSystem.Jumping = userInputSystem.JumpingAllowed && userInputSystem.MovingUp;
+                userInputSystem.Bouncing = userInputSystem.BouncingAllowed;
 
-                if (Player.Jumping)
+                if (userInputSystem.Jumping)
                 {
-                    SetPlayerState(new Jumping(this, Player));
-                    Player.Landed = false;
+                    SetPlayerState(new Jumping(this, userInputSystem));
+                    userInputSystem.Landed = false;
                 }
-                else if (Player.Bouncing && !Player.BouncingDone)
+                else if (userInputSystem.Bouncing && !userInputSystem.BouncingDone)
                 {
-                    SetPlayerState(new Bouncing(this, Player));
-                    Player.BouncingDone = true;
+                    SetPlayerState(new Bouncing(this, userInputSystem));
+                    userInputSystem.BouncingDone = true;
                 }
             }
+            */
         }
     }
     public void FixedUpdate()
     {
+        /*
         if (PlayerState != null && IsGamePlaying())
         {
             StartCoroutine(PlayerState.FixedUpdate());
-            if (Player.Dashing) StartCoroutine(PlayerState.Dash());
+            if (userInputSystem.Dashing) StartCoroutine(PlayerState.Dash());
         }
+        */
     }
     private static bool IsGamePlaying()
     {

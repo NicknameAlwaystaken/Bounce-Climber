@@ -12,9 +12,9 @@ public class GameController : StateMachine
     public string GameVersion;
 
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private Player Player;
     [SerializeField] private UIController UIController;
     [SerializeField] private Game Game;
-    [SerializeField] private Player Player;
     [SerializeField] private ScoreType scoreType;
     [SerializeField] private GameStatus gameStatus;
     [SerializeField] private float CurrentTimeScale;
@@ -145,7 +145,7 @@ public class GameController : StateMachine
 
     public void SpawnPlayer()
     {
-        Player = playerController.SpawnPlayer();
+        Player = playerController.SpawnPlayer().GetComponent<Player>();
     }
     private void DestroyAllPlatforms()
     {
@@ -159,6 +159,13 @@ public class GameController : StateMachine
     private void Update()
     {
         if(GameState == null) return;
+        if(Player != null)
+        {
+            if (GameMenuOpened())
+                Player.playerInput.SwitchCurrentActionMap("UI");
+            else
+                Player.playerInput.SwitchCurrentActionMap("Player");
+        }
         if (Input.GetKeyDown(KeyCode.R) && gameStatus == GameStatus.Stopped) RestartGame();
         if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Pause"))
         {
@@ -187,6 +194,11 @@ public class GameController : StateMachine
         {
             OnScoreIncrease(Player.transform.position.y - currentScore);
         }
+    }
+
+    private bool GameMenuOpened()
+    {
+        return gameStatus == GameStatus.Stopped && gameStatus == GameStatus.Paused && gameStatus == GameStatus.MainMenu;
     }
 
     public void RestartGame()

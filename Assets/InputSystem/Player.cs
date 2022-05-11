@@ -1,9 +1,14 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 public class Player : MonoBehaviour
 {
+    [HideInInspector] public PlayerInput playerInput;
+    private BounceClimber playerInputActions;
+
 
     #region Variables
 
@@ -12,11 +17,15 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public string currentStateName;
 
+    private Vector2 inputVector;
+
     private float bounceVelocity,
         tempBounceVelocity,
         returnVelocity,
         returnHeight,
         maxMovementSpeed,
+        movementSpeed,
+        slowdownSpeed,
         gravityUpChange,
         gravityDownChange,
         maxDropSpeed,
@@ -65,6 +74,9 @@ public class Player : MonoBehaviour
     private bool dashingDone;
     private bool dashingConditions;
     private float dashFreeingDistance;
+    private Vector3 dashDesiredPosition;
+    private Vector3 dashSmootherPosition;
+    private float dashTimer;
 
     private bool inputVerticalZero;
 
@@ -124,60 +136,164 @@ public class Player : MonoBehaviour
     public bool HasContact { get => hasContact; set => hasContact = value; }
     public float CurrentScore { get => currentScore; set => currentScore = value; }
     public bool Paused { get => paused; set => paused = value; }
+    public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
+    public float SlowdownSpeed { get => slowdownSpeed; set => slowdownSpeed = value; }
 
     #endregion
 
-    public void Start()
+
+    private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
+
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+        playerInputActions = new BounceClimber();
+        playerInputActions.Player.Enable();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        if (Paused) return;
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-
-        if (Input.GetKeyDown(dashKey) && DashingAllowed && !DashingDone && HorizontalMovement()) // dashing
+        if (Dashing)
         {
-            DashingConditions = true;
-        }
-        if (!DoubleJumpingDone && Input.GetKeyDown(KeyCode.W) && Dashing) // Jump to cancel dash
-        {
-            DoubleJumping = true;
-        }
-        if (movingAllowed)
-        {
-            if (Input.GetKeyDown(bounceToggleKey)) ToggleBounce = true;
+            dashTimer += Time.deltaTime;
 
+            dashSmootherPosition.x = Vector3.Lerp(transform.position, dashDesiredPosition, dashTimer / dashingHorizontalTimer).x;
+            dashSmootherPosition.y = Vector3.Lerp(transform.position, dashDesiredPosition, dashTimer / dashingVerticalTimer).y;
 
-            Moving = false;
-            MovingUp = false;
-            MovingDown = false;
-            MovingLeft = false;
-            MovingRight = false;
-            MovingUp = verticalInput > 0;
-            MovingDown = verticalInput < 0;
-            MovingRight = horizontalInput > 0;
-            MovingLeft = horizontalInput < 0;
-            InputVerticalZero = verticalInput == 0;
-            Moving = MovingUp || MovingDown || MovingLeft || MovingRight;
-
-            if (DoubleJumpingConditions && Input.GetKeyDown(KeyCode.W))
+            transform.position = dashSmootherPosition;
+            if (Mathf.Abs(transform.position.x - dashDesiredPosition.x) < DashFreeingDistance)
             {
-                DoubleJumping = true;
+                StopDash();
             }
-            if (Input.GetKeyUp(KeyCode.W) && DoubleJumpingAllowed && JumpingDone)
+            return;
+        }
+        //if (Bounce())
+        if(!BouncingDone && Landed && Bouncing)
+        {
+            JumpWithoutEffects();
+            BouncingDone = true;
+        }
+        if (MovingAllowed)
+        {
+            Vector3 movement = inputVector.x * MovementSpeed * transform.right;
+
+            if (inputVector.x == 0)
+            {
+                if (rb.velocity.x > 0)
+                {
+                    rb.AddForce(transform.right * -1 * SlowdownSpeed);
+                }
+                else
+                {
+                    rb.AddForce(transform.right * SlowdownSpeed);
+                }
+            }
+
+            if (rb.velocity.x < MaxMovementSpeed && movement.x > 0)
+                rb.AddForce(movement);
+
+            else if (rb.velocity.x > -MaxMovementSpeed && movement.x < 0)
+                rb.AddForce(movement);
+        }
+    }
+    private void StartDash()
+    {
+        Dashing = true;
+        DashingDone = true;
+        rb.velocity = Vector3.zero;
+        transform.GetComponent<Collider>().enabled = false;
+        float distance = DashingDistance;
+        if (inputVector.x < 0) distance *= -1;
+        dashDesiredPosition = new Vector3
+        {
+            x = transform.position.x + distance,
+            y = transform.position.y + DashingLift,
+            z = transform.position.z,
+        };
+        dashTimer = 0f;
+    }
+    private void StopDash()
+    {
+        Dashing = false;
+        DashingConditions = false;
+        transform.GetComponent<Collider>().enabled = true;
+        rb.velocity = Vector3.zero;
+    }
+
+    private void Update()
+    {
+        inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+    }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (DoubleJumpingConditions && !DoubleJumpingDone)
+            {
+                if (Dashing)
+                    StopDash();
+                JumpWithEffects(BounceVelocity * DoubleJumpIncrement);
+                DoubleJumpingDone = true;
+            }
+            if (NormalJump())
+            {
+                if (Dashing)
+                    StopDash();
+                Landed = false;
+                JumpWithEffects(BounceVelocity * FirstJumpIncrement);
+                Jumping = false;
+                JumpingDone = true;
+                return;
+            }
+        }
+        if (context.canceled && JumpingDone)
+        {
+            if (DoubleJumpingAllowed && JumpingDone)
             {
                 DoubleJumpingConditions = true;
             }
         }
     }
 
-    private bool HorizontalMovement()
+    private bool Bounce()
     {
-        return MovingLeft || MovingRight;
+        return Bouncing && !BouncingDone && BouncingAllowed && Landed;
+    }
+
+    public void BounceToggle(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("madafakin bounce" + Bouncing);
+            Bouncing = !Bouncing;
+        }
+    }
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            if (DashingAllowed && !DashingDone && inputVector.x != 0)
+                StartDash();
+    }
+    private bool NormalJump()
+    {
+        return Landed && JumpingAllowed;
+    }
+
+    private void JumpWithEffects(float bounceVelocity)
+    {
+        AudioSource.Play();
+        Instantiate(particles, transform.position, new Quaternion());
+        Vector3 upVelocity = Vector3.up * bounceVelocity;
+        rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
+        Jumping = false;
+    }
+    private void JumpWithoutEffects()
+    {
+        Vector3 upVelocity = Vector3.up * BounceVelocity * AutoJumpBounceVelocity;
+        if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -188,24 +304,15 @@ public class Player : MonoBehaviour
             Landed = true;
             DashingDone = false;
             DoubleJumpingDone = false;
+            DoubleJumpingConditions = false;
             BouncingDone = false;
+            DashingConditions = true;
 
-            if(collidedObject.CompareTag("Platform"))
+            if (collidedObject.CompareTag("Platform"))
             {
                 LastContact = collidedObject;
                 HasContact = true;
             }
         }
     }
-
-    public string GetPlayerState()
-    {
-        return currentStateName;
-    }
-
-    public void SetPlayerState(string playerState)
-    {
-        currentStateName = playerState;
-    }
-
 }
