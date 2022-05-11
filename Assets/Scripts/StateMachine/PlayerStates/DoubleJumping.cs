@@ -6,10 +6,10 @@ public class DoubleJumping : PlayerState
 {
     public DoubleJumping(PlayerController controller, Player player) : base(controller, player)
     {
-        Player.currentStateName = "DoubleJumping";
-        JumpWithEffects("DoubleJumping", Player.BounceVelocity * Player.DoubleJumpIncrement);
-        Player.DoubleJumpingConditions = false;
-        Player.JumpingDone = false;
+        UserInputSystem.currentStateName = "DoubleJumping";
+        JumpWithEffects("DoubleJumping", UserInputSystem.BounceVelocity * UserInputSystem.DoubleJumpIncrement);
+        UserInputSystem.DoubleJumpingConditions = false;
+        UserInputSystem.JumpingDone = false;
     }
     public override IEnumerator Start()
     {
@@ -17,15 +17,15 @@ public class DoubleJumping : PlayerState
     }
     private void JumpWithEffects(string stateName, float bounceVelocity)
     {
-        Player.currentStateName = stateName;
-        Player.AudioSource.Play();
-        Object.Instantiate(Player.particles, Player.transform.position, new Quaternion());
-        Rigidbody rb = Player.GetComponent<Rigidbody>();
+        UserInputSystem.currentStateName = stateName;
+        UserInputSystem.AudioSource.Play();
+        Object.Instantiate((ParticleSystem)UserInputSystem.particles, UserInputSystem.transform.position, new Quaternion());
+        Rigidbody rb = UserInputSystem.GetComponent<Rigidbody>();
         Vector3 upVelocity = Vector3.up * bounceVelocity;
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
-        Player.Jumping = false;
-        Player.Bouncing = false;
-        Player.DoubleJumping = false;
+        UserInputSystem.Jumping = false;
+        UserInputSystem.Bouncing = false;
+        UserInputSystem.DoubleJumping = false;
     }
     public override IEnumerator CurrentState()
     {

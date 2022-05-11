@@ -14,7 +14,7 @@ public class Diving : PlayerState
     }
     public override IEnumerator Dive()
     {
-        Player.currentStateName = "Diving";
+        UserInputSystem.currentStateName = "Diving";
         yield break;
     }
     public override IEnumerator CurrentState()

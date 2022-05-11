@@ -13,7 +13,7 @@ public class Dying : PlayerState
     }
     public override IEnumerator Die()
     {
-        Player.currentStateName = "Dying";
+        UserInputSystem.currentStateName = "Dying";
         yield break;
 
     }

@@ -6,12 +6,12 @@ using UnityEngine;
 public abstract class PlayerState
 {
     protected PlayerController PlayerController;
-    protected Player Player;
+    protected Player UserInputSystem;
 
     protected PlayerState(PlayerController controller, Player player)
     {
         this.PlayerController = controller;
-        this.Player = player;
+        this.UserInputSystem = player;
     }
 
     public virtual IEnumerator Start()
@@ -20,7 +20,7 @@ public abstract class PlayerState
     }
     public virtual IEnumerator Exit()
     {
-        PlayerController.SetPlayerState(new Bouncing(PlayerController,Player));
+        PlayerController.SetPlayerState(new Bouncing(PlayerController,UserInputSystem));
         yield break;
     }
     public virtual IEnumerator Move()

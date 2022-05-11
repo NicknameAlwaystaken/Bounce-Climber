@@ -6,16 +6,16 @@ public class Bouncing : PlayerState
 {
     public Bouncing(PlayerController controller, Player player) : base(controller, player)
     {
-        Player.currentStateName = "Bouncing";
-        Player.BouncingDone = false;
+        UserInputSystem.currentStateName = "Bouncing";
+        UserInputSystem.BouncingDone = false;
         JumpWithoutEffects();
-        Player.Bouncing = false;
-        Player.BouncingDone = true;
+        UserInputSystem.Bouncing = false;
+        UserInputSystem.BouncingDone = true;
     }
     private void JumpWithoutEffects()
     {
-        Rigidbody rb = Player.GetComponent<Rigidbody>();
-        Vector3 upVelocity = Vector3.up * Player.BounceVelocity * Player.AutoJumpBounceVelocity;
+        Rigidbody rb = UserInputSystem.GetComponent<Rigidbody>();
+        Vector3 upVelocity = Vector3.up * UserInputSystem.BounceVelocity * UserInputSystem.AutoJumpBounceVelocity;
         if (rb != null) rb.velocity = new Vector3(rb.velocity.x, upVelocity.y);
     }
     public override IEnumerator CurrentState()

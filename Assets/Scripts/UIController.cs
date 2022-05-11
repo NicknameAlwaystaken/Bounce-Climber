@@ -9,6 +9,9 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject PauseScreen;
     [SerializeField] private GameObject RestartScreen;
 
+    [SerializeField] private Image MoveStick;
+    [SerializeField] private Image JumpButton;
+
     [SerializeField] private Text score;
     [SerializeField] private Text endScore;
     [SerializeField] private Text gameTitle;
@@ -18,8 +21,22 @@ public class UIController : MonoBehaviour
     private float bestRunScore;
     private float topScore;
 
-    private void Start()
+    private void Awake()
     {
+        MoveStick.enabled = true;
+        JumpButton.enabled = true;
+        /*
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Stick.enabled = true;
+            Button.enabled = true;
+        }
+        else
+        {
+            Stick.enabled = false;
+            Button.enabled = false;
+        }
+        */
         LoadGame();
     }
     public class TextForScore

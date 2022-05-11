@@ -4831,8 +4831,9 @@ GameObject:
   - component: {fileID: 6728209367372926303}
   - component: {fileID: 6728209367372926299}
   - component: {fileID: 6710888533890768973}
-  - component: {fileID: -7922485545453693738}
   - component: {fileID: 4717321487706394911}
+  - component: {fileID: -5702446383458847748}
+  - component: {fileID: 4798293901216622486}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -5029,7 +5030,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-7922485545453693738
+--- !u!65 &4717321487706394911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728209367372926302}
+  m_Material: {fileID: 13400000, guid: f76afd99a74af4049b493b57e5b02acf, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 1, z: 0.8}
+  m_Center: {x: 0, y: 0.06, z: 0}
+--- !u!114 &-5702446383458847748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5038,9 +5052,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6728209367372926302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a19f3ec12291e4084200a6ddc95613, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c7f895a04a0ff3408686c06296d7630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   particles: {fileID: 7945365061505629239, guid: 19b29f46121fff64dab7561c89a63cb0, type: 3}
   rb: {fileID: 0}
   currentStateName: 
@@ -5055,19 +5070,154 @@ MonoBehaviour:
   landed: 0
   dashingDistance: 0
   dashingLift: 0
-  bounceToggleKey: 115
-  dashKey: 304
+  bounceToggleKey: 0
+  dashKey: 0
   lastContact: {fileID: 0}
---- !u!65 &4717321487706394911
-BoxCollider:
+--- !u!114 &4798293901216622486
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6728209367372926302}
-  m_Material: {fileID: 13400000, guid: ae6da4f91e6bf834a862fc5ae1a5018c, type: 2}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1, y: 0.8, z: 0.8}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f04f2cf8005234541a5401f0036093e6, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5702446383458847748}
+        m_TargetAssemblyTypeName: TestingInputSystem, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 68f225df-75e1-4a72-9879-fbb67fdfc068
+    m_ActionName: Player/Jump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5702446383458847748}
+        m_TargetAssemblyTypeName: TestingInputSystem, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 96cd117d-1676-46ad-ac82-1f558cc5721e
+    m_ActionName: "Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow,/Sony
+      Interactive Entertainment DUALSHOCK\xAE4 USB Wireless Adaptor/stick]"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 559a8efe-914a-4f49-98af-abed828394b6
+    m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b86db76c-c4a7-4e27-85bc-2dc3800b2c68
+    m_ActionName: "Player/Fire[/Mouse/leftButton,/Sony Interactive Entertainment
+      DUALSHOCK\xAE4 USB Wireless Adaptor/trigger]"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 03f6e96c-3a3e-4cdf-b17a-28f153a29fcf
+    m_ActionName: "UI/Navigate[/Sony Interactive Entertainment DUALSHOCK\xAE4 USB
+      Wireless Adaptor/stick/up,/Sony Interactive Entertainment DUALSHOCK\xAE4 USB
+      Wireless Adaptor/stick/down,/Sony Interactive Entertainment DUALSHOCK\xAE4
+      USB Wireless Adaptor/stick/left,/Sony Interactive Entertainment DUALSHOCK\xAE4
+      USB Wireless Adaptor/stick/right,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f3e2095-afef-409d-aaf9-ca2b10ef9a0b
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7caea536-bb84-492d-82a1-fe30adee6d12
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 26a781af-2cb4-465e-a675-7736bb899efa
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 771e98bc-bc65-4556-9224-26002ff5e206
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e4b0a19-8afa-4414-a919-aff331267dd2
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7ac0b73d-e26e-4888-9e3c-106bdf70e437
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7dc9842-dff3-461c-8ddb-fd130898b124
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0c3eed3a-f919-4d9b-a376-6bfe79ae6fe5
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 72b92259-5b68-4b97-abd4-da118413fe57
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5702446383458847748}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e4dc1650-6357-45ce-8878-307c290e94a3
+    m_ActionName: Player/Dash[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5702446383458847748}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: BounceToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: be16f4c4-e808-4aaa-93bd-f546f7ddff3d
+    m_ActionName: Player/BounceToggle[/Keyboard/s,/Keyboard/downArrow]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Gamepad
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

@@ -6,8 +6,8 @@ public class Enable : PlayerState
 {
     public Enable(PlayerController controller, Player player) : base(controller, player)
     {
-        Player.currentStateName = "Enabling";
-        Player.enabled = true;
+        UserInputSystem.currentStateName = "Enabling";
+        UserInputSystem.enabled = true;
     }
     public override IEnumerator CurrentState()
     {

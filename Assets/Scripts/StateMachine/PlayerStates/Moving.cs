@@ -6,9 +6,9 @@ public class Moving : PlayerState
 {
     public Moving(PlayerController controller, Player player) : base(controller, player)
     {
-        Player.currentStateName = "Moving";
-        Vector3 movement = Player.HorizontalInput * Player.MaxMovementSpeed * Player.transform.right;
-        Rigidbody rb = Player.GetComponent<Rigidbody>();
+        UserInputSystem.currentStateName = "Moving";
+        Vector3 movement = UserInputSystem.HorizontalInput * UserInputSystem.MaxMovementSpeed * UserInputSystem.transform.right;
+        Rigidbody rb = UserInputSystem.GetComponent<Rigidbody>();
         rb.velocity = new Vector3(movement.x, rb.velocity.y);
     }
     public override IEnumerator CurrentState()
