@@ -84,7 +84,6 @@ public class GameController : StateMachine
         ScoreIncrease += (sender, args) => UIController.SetScore(args.Amount);
 
         PlayerDied += (sender, args) => OnResetScore(args.Amount);
-        PlayerDied += (sender, args) => UIController.SetResetScore(args.Amount);
         PlayerDied += (sender, args) => UIController.PlayerDied();
         PlayerDied += (sender, args) => SetGameStatus(GameStatus.Stopped);
         PlayerDied += (sender, args) => SetTimeScale(0f);

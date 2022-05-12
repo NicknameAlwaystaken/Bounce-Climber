@@ -79,29 +79,31 @@ public class UIController : MonoBehaviour
     {
         score.text = "Score: " + newScore.ToString("0.00") + distanceType + "\n" + scoreText;
     }
-    private void EndText(float newScore, float newBestScore)
+    private void EndText(float newCurrent, float newScore, float newBestScore)
     {
-        endScore.text = "Best Run Score: " + newScore.ToString("0.00") + distanceType + "\nAll Time Top Score: " + newBestScore.ToString("0.00") + distanceType;
+        endScore.text = "Your Score: " + newCurrent.ToString("0.00") + distanceType +
+            "\nBest Run Score: " + newScore.ToString("0.00") + distanceType + 
+            "\nAll Time Top Score: " + newBestScore.ToString("0.00") + distanceType;
     }
 
     public void SetGameTitle(string title, string version)
     {
         gameTitle.text = title + "\n " + version;
     }
-    public void SetResetScore(float amount)
+    private void SetResetScore()
     {
-        currentScore = amount;
+        currentScore = 0f;
         ScoreText(currentScore, TextForScore.None.Value);
     }
     public void SetEndScreen()
     {
         if (topScore < bestRunScore)
         {
-            currentScore = 0f;
             topScore = bestRunScore;
             SaveTopScore(topScore);
         }
-        EndText(bestRunScore, topScore);
+        EndText(currentScore, bestRunScore, topScore);
+        SetResetScore();
     }
     public void BackToMainMenu()
     {
